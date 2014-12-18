@@ -1,0 +1,9 @@
+{% extends 'objects/index.html' %}
+
+{% block body_contents %}
+<h1>{{ obj.name }}</h1>
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+{% for val in Setting.objects.filter(hardwareobject_id=pk) %}
+{% val.value %}
+{% endfor %}
+{% endblock body_contents %}
