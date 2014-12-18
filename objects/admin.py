@@ -17,7 +17,7 @@ class HardwareObjectAdmin(admin.ModelAdmin):
         ('Other', {'fields': ['primary_ip']})
     ]
     inlines = [SettingsInline]
-    list_display = ('name', 'serial', 'worksite')
+    list_display = ('name', 'serial', 'worksite', 'primary_ip')
     search_fields = ['name', 'serial']
 
 
