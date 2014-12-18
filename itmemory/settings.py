@@ -43,7 +43,10 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'customers',
-    'objects'
+    'objects',
+    'crispy_forms',
+    'djfrontend',
+    'djfrontend.skeleton',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -99,5 +102,13 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 )
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
-
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, "static"),
+)
 ADMIN_TOOLS_MENU = 'itmemory.menu.CustomMenu'
+
+LOGIN_URL = 'mysite_login'
+LOGOUT_URL = 'mysite_logout'
+LOGIN_REDIRECT_URL = '/'
+
+CRISPY_TEMPLATE_PACK = 'bootstrap3'

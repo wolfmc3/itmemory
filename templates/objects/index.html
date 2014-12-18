@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block title %}Lista Hardware{% endblock title %}
+{% block body_contents %}
+{% if objects_list %}
+<div class="row">
+    {% for obj in object_list %}
+    <div class="col-md-4">
+        <h2>{{ obj.name }}</h2>
+
+        <p>{{ obj.serial }}</p>
+
+        <p><a class="btn btn-default" href="{% url 'objects:detail' obj.id %}" role="button">Apri »</a></p>
+    </div>
+    {% endfor %}
+</div>
+{% else %}
+<p>Nessun Oggetto</p>
+{% endif %}
+{% endblock body_contents %}
+
+
