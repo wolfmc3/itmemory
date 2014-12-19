@@ -31,7 +31,7 @@ class SettingsType(models.Model):
 
 class Settings(models.Model):
     hardwareobject = models.ForeignKey(HardwareObject)
-    type = models.ForeignKey(SettingsType, related_name='settings')
+    type = models.ForeignKey(SettingsType, related_name='settingstype')
     value = models.TextField(max_length=5000)
 
     def __str__(self):
