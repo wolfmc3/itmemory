@@ -31,6 +31,8 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
+    'jquery',
+    'jquery_ui',
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',

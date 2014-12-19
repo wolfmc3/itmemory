@@ -3,16 +3,32 @@
 
 {% block body_contents %}
 <div class="row">
-    <div class="col-md-12 btn btn-info">
-        <p>{{ obj.name }}</p>
+    <div class="col-lg-6 round-box">
+        <h3>{{ obj.name }}</h3>
+
+        <p>S/N: {{ obj.serial }}</p>
+
+        <p>P/N: {{ obj.item }}</p>
+
+        <p>IP: {{ obj.primary_ip }}</p>
+    </div>
+    <div class="col-lg-6 round-box">
+        <h3>{{ obj.worksite.customer.name }}</h3>
+
+        <p>{{ obj.worksite.fulltext|linebreaksbr }}</p>
+
+        <p>{{ obj.location }}</p>
+    </div>
+    <div class="col-lg-12 text-center">
+        <h4>Dati</h4>
     </div>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% regroup obj.settings_set.all by type.group as setting_list %}
     {% for setitem in setting_list %}
-    <div class="col-md-4" style="border: 1px solid gray; border-radius: 5px; margin-top: 10px;">
-        <h2>{{ setitem.grouper }}</h2>
+    <div class="col-lg-4 round-box">
+        <h3>{{ setitem.grouper }}</h3>
         {% for val in setitem.list %}
-            <p>{{ val.type.name }} {{ val.value }}</p>
+        <p>{{ val.type.name }} <strong>{{ val.value }}</strong></p>
         {% endfor %}
     </div>
     {% endfor %}
