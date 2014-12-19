@@ -2,10 +2,19 @@
 {% from objects.models import Setting %]
 
 {% block body_contents %}
-<h1>{{ obj.name }}</h1>
+<div class="row">
+    <div class="col-md-12 btn btn-info">
+        <p>{{ obj.name }}</p>
+    </div>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-    {% for val in obj.settings_set.all %}
-        <h2>{{ val.type.group.name }}</h2>
-        <h3>{{ val.type.name }} {{ val.value }}</h3>
+    {% regroup obj.settings_set.all by type.group as setting_list %}
+    {% for setitem in setting_list %}
+    <div class="col-md-4" style="border: 1px solid gray; border-radius: 5px; margin-top: 10px;">
+        <h2>{{ setitem.grouper }}</h2>
+        {% for val in setitem.list %}
+            <p>{{ val.type.name }} {{ val.value }}</p>
+        {% endfor %}
+    </div>
     {% endfor %}
+</div>
 {% endblock body_contents %}
