@@ -1,3 +1,28 @@
 body {
     padding-top: 70px;
 }
+
+.round-box {
+    border-left: 5px solid #9999FF;
+    padding-left: 0px;
+    border-radius: 5px;
+}
+
+.round-box > p {
+    padding-left: 8px;
+}
+
+.round-box > h1,
+.round-box > h2,
+.round-box > h3,
+.round-box > h4,
+.round-box > h5 {
+    margin: 8px;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding: 5px;
+    border: 1px solid #9999FF;
+    background-color: #9999FF;
+    border-radius: 0px;
+    color: #FFFFFF
+}
