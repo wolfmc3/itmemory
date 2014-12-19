@@ -5,6 +5,7 @@
 <h1>{{ obj.name }}</h1>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
     {% for val in obj.settings_set.all %}
+        <h2>{{ val.type.group.name }}</h2>
         <h3>{{ val.type.name }} {{ val.value }}</h3>
     {% endfor %}
 {% endblock body_contents %}
