@@ -1,9 +1,10 @@
 {% extends 'objects/index.html' %}
+{% from objects.models import Setting %]
 
 {% block body_contents %}
 <h1>{{ obj.name }}</h1>
 {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
-{% for val in Setting.objects.filter(hardwareobject_id=pk) %}
-{% val.value %}
-{% endfor %}
+    {% for val in obj.settings_set.all %}
+        <h3>{{ val.type.name }} {{ val.value }}</h3>
+    {% endfor %}
 {% endblock body_contents %}
