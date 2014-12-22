@@ -1,5 +1,6 @@
 from django.db import models
 from objects.models import HardwareObject
+from datetime import datetime, timedelta
 
 
 class TaskTemplate(models.Model):
@@ -32,6 +33,19 @@ class Task(models.Model):
     hardwareobject = models.ForeignKey(HardwareObject, related_name='hardwareobjects')
 
     enabled = models.BooleanField(default=True)
+    done = models.BooleanField(default=False)
+    laststart = models.DateField(default="2013-01-01")
+
+    @property
+    def nextstart(self):
+        return ''.join(
+            [self.lastname, ' ,', self.firstname, ' ', self.middlename])
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        if not self.id:
+            d = timedelta(days=30)
+            self.laststart = datetime.now() - d
+        super(Task, self).save()
 
     def __str__(self):
         return self.hardwareobject.name + " -> " + self.template.name
