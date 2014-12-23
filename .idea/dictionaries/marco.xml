@@ -7,7 +7,9 @@
       <w>exectime</w>
       <w>hardwareobject</w>
       <w>laststart</w>
+      <w>nextstart</w>
       <w>settingstype</w>
+      <w>tmpl</w>
       <w>worksite</w>
     </words>
   </dictionary>
