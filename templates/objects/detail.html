@@ -25,7 +25,7 @@
         {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
         {% regroup obj.settings_set.all by type.group as setting_list %}
         {% for setitem in setting_list %}
-        <div class="col-lg-4 round-box">
+        <div class="col-lg-6 round-box">
             <h3>{{ setitem.grouper }}</h3>
             {% for val in setitem.list %}
             <p><strong>{{ val.type.name }}</strong>
@@ -40,30 +40,11 @@
 
         <div class="bg-info" style="min-height:450px;">
             <h4>Da eseguire</h4>
-            {% actiObject = %}
-            <p>Attività da fare 1
-                <small class="text-muted">12/12/2014 15.00</small>
-            </p>
-            <p>Attività da fare 2
-                <small class="text-muted">12/12/2014 15.01</small>
-            </p>
-            <p>Attività da fare 3
-                <small class="text-muted">12/12/2014 15.03</small>
-            </p>
-            <p>Attività da fare 4
-                <small class="text-muted">12/12/2014 15.04</small>
-            </p>
-            <p>Attività da fare 5
-                <small class="text-muted">12/12/2014 15.12</small>
-            </p>
+            {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
             <hr/>
             <h4>Eseguite</h4>
+            {% include "ittasks/tasklist.html" with tasks_toread=closedtasks %}
 
-            <p>Attività recente 1</p>
-
-            <p>Attività recente 2</p>
-
-            <p>Attività recente 3</p>
         </div>
     </div>
 
