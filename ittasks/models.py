@@ -37,20 +37,25 @@ class Task(models.Model):
 
     enabled = models.BooleanField(default=True)
     done = models.BooleanField(default=False)
-    laststart = models.DateTimeField(default="2013-01-01 00:00")
+    laststart = models.DateTimeField(null=True, blank=True)
 
-    @property
     def _nextstart(self):
         rd = relativedelta()
         tmpl = self.template
-        if tmpl.day != '*': rd += relativedelta(days=int(tmpl.day))
-        if tmpl.month != '*': rd += relativedelta(months=int(tmpl.month))
-        if tmpl.year != '*': rd += relativedelta(years=int(tmpl.year))
-        if tmpl.hour != '*': rd += relativedelta(hours=int(tmpl.hour))
-        if tmpl.minute != '*': rd += relativedelta(minutes=int(tmpl.minute))
+        if tmpl.day != '*':
+            rd += relativedelta(days=int(tmpl.day))
+        if tmpl.month != '*':
+            rd += relativedelta(months=int(tmpl.month))
+        if tmpl.year != '*':
+            rd += relativedelta(years=int(tmpl.year))
+        if tmpl.hour != '*':
+            rd += relativedelta(hours=int(tmpl.hour))
+        if tmpl.minute != '*':
+            rd += relativedelta(minutes=int(tmpl.minute))
         return self.laststart + rd
 
     nextstart = property(_nextstart)
+
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not self.id:
             d = timedelta(days=30)

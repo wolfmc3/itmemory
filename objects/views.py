@@ -15,5 +15,13 @@ class DetailView(generic.DetailView):
     template_name = 'objects/detail.html'
     context_object_name = 'obj'
 
+    def get_context_data(self, **kwargs):
+        context = super(DetailView, self).get_context_data(**kwargs)
+        from ittasks.models import Task
+
+        context['openedtasks'] = Task.objects.filter(hardwareobject_id=context['obj'].id, done=False)
+        context['closedtasks'] = Task.objects.filter(hardwareobject_id=context['obj'].id, done=True)
+        return context
+
     def get_queryset(self):
         return HardwareObject.objects.all()

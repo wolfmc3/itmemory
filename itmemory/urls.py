@@ -3,10 +3,9 @@ from django.contrib import admin
 from itmemory.views import Home
 
 urlpatterns = patterns('',
-                       # Examples:
                        url(r'^$', Home.as_view()),
-                       # url(r'^blog/', include('blog.urls')),
                        url(r'^objects/', include('objects.urls', namespace="objects")),
+                       url(r'^ittasks/', include('ittasks.urls', namespace="ittasks")),
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^grappelli/', include('grappelli.urls')),  # grappelli URLS
                        url(r'^admin_tools/', include('admin_tools.urls')),

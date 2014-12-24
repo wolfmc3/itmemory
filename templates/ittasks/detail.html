@@ -1,0 +1,17 @@
+{% extends 'objects/index.html' %}
+{% from objects.models import Setting %]
+
+{% block body_contents %}
+<div class="row">
+    <div class="row col-lg-9">
+        <div class="col-lg-6 round-box">
+            <h3>{{ obj.template.name }}</h3>
+
+            <p>{{ obj.hardwareobject.name }}</p>
+
+            <p>{{ obj.hardwareobject.worksite.customer.name }}</p>
+
+            <p>{{ obj.hardwareobject.worksite.name }}</p>
+        </div>
+    </div>
+    {% endblock body_contents %}
