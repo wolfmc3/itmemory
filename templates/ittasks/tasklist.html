@@ -1,8 +1,10 @@
 {% load humanize %}
-<ul>
+{{ now }}
     {% for taskop in tasks_toread %}
-    <li><a href="{% url 'ittasks:detail' taskop.id %}" {{ taskop.template.name }}
+<p>{% if taskop.to_past %}
+    {% include "icon.html" with iconname='alert' %}
+    {% endif %}
+    <a href="{% url 'ittasks:detail' taskop.id %}">{{ taskop.template.name }}</a>
         <small class="text-muted">{{ taskop.laststart|naturaltime }}</small>
-    </li>
+</p>
     {% endfor %}
-</ul>

@@ -1,11 +1,12 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
-from itmemory.views import Home
+
 
 urlpatterns = patterns('',
-                       url(r'^$', Home.as_view()),
+                       url(r'^$', include('home.urls', namespace="home")),
                        url(r'^objects/', include('objects.urls', namespace="objects")),
                        url(r'^ittasks/', include('ittasks.urls', namespace="ittasks")),
+                       url(r'^customers/', include('customers.urls', namespace="customers")),
                        url(r'^admin/', include(admin.site.urls)),
                        url(r'^grappelli/', include('grappelli.urls')),  # grappelli URLS
                        url(r'^admin_tools/', include('admin_tools.urls')),

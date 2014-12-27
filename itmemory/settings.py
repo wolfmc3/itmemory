@@ -49,6 +49,7 @@ INSTALLED_APPS = (
     'crispy_forms',
     'djfrontend',
     'djfrontend.skeleton',
+    'home',
     'customers',
     'objects',
     'ittasks',
