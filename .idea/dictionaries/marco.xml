@@ -1,7 +1,10 @@
 <component name="ProjectDictionaryState">
   <dictionary name="marco">
     <words>
+      <w>checkslist</w>
       <w>checktemplate</w>
+      <w>closetask</w>
+      <w>createnext</w>
       <w>dayly</w>
       <w>djfrontend</w>
       <w>endblock</w>
@@ -9,8 +12,14 @@
       <w>hardwareobject</w>
       <w>ittasks</w>
       <w>laststart</w>
+      <w>negativo</w>
+      <w>newtask</w>
       <w>nextstart</w>
+      <w>positivo</w>
+      <w>setenable</w>
+      <w>setenabledtask</w>
       <w>settingstype</w>
+      <w>taskcheckform</w>
       <w>tmpl</w>
       <w>worksite</w>
     </words>

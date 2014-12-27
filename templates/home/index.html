@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block body_contents %}
+<div class="row">
+    <div class="round-box col-md-4">
+        <h3>Operazioni da fare</h3>
+        {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
+    </div>
+    <div class="round-box col-md-4">
+        <h3>Operazioni assegnate a te</h3>
+        {% include "ittasks/tasklist.html" with tasks_toread=usertasks %}
+    </div>
+</div>
+{% endblock body_contents %}

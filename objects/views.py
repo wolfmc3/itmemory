@@ -1,5 +1,5 @@
 from django.views import generic
-from objects.models import HardwareObject, Settings
+from objects.models import HardwareObject
 
 
 class IndexView(generic.ListView):

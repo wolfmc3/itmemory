@@ -33,3 +33,11 @@ pre {
     border-radius: 5px;
     color: #FFFFFF
 }
+
+.btnyesno {
+    list-style-type: none;
+}
+
+.btnyesno > li {
+    list-style-type: none;
+}
