@@ -4,6 +4,18 @@
 {% block body_contents %}
 {% if objects_list %}
 <div class="row">
+    <div class="col-md-12 round-box">
+        <p>
+
+        <form action="" method="post">
+            {% csrf_token %}
+            Nome prodotto: <input type="text" name="obj_name" value="{{ request.POST.obj_name }}"/>
+            Seriale: <input type="text" name="obj_serial" value="{{ request.POST.obj_serial }}"/>
+            Cliente: <input type="text" name="cust_name" value="{{ request.POST.cust_name }}"/>
+            <input type="submit" value="Cerca">
+        </form>
+        </p>
+    </div>
     {% for obj in object_list %}
     <div class="col-md-4 round-box">
         <h2>{{ obj.name }}</h2>

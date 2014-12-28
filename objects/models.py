@@ -7,7 +7,7 @@ class HardwareObject(models.Model):
         verbose_name = "Dispositivo hardware"
         verbose_name_plural = "Dispositivi hardware"
 
-    worksite = models.ForeignKey(WorkSite, related_name='objects', verbose_name="Luogo di installazione")
+    worksite = models.ForeignKey(WorkSite, related_name='hardwareobjects', verbose_name="Luogo di installazione")
     name = models.CharField(max_length=300, verbose_name="Nome del prodotto")
     item = models.CharField(max_length=32, verbose_name="Codice del prodotto")
     serial = models.CharField(max_length=50, verbose_name="numero di serie")

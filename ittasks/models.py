@@ -111,13 +111,25 @@ class TaskCheck(models.Model):
 
     exectime = models.DateTimeField(verbose_name="Data di esecuzione")
     RESULT_VALUES = (
-        (0, 'non eseguito'),
-        (1, 'passato'),
-        (2, 'fallito')
+        (0, 'Non eseguito (NE)'),
+        (1, 'Passato (PASS)'),
+        (2, 'Fallito (NG)'),
+        (3, 'Non applicabile (NA)'),
     )
+    RESULT_VALUES_CLASS = {
+        0: 'warning',
+        1: 'primary',
+        2: 'danger',
+        3: 'info',
+    }
     result = models.IntegerField(default=0,
                                  choices=RESULT_VALUES,
                                  verbose_name="Risultato")
+
+    def _cssresult(self):
+        return self.RESULT_VALUES_CLASS[self.result]
+
+    cssresult = property(_cssresult)
     note = models.TextField(max_length=1000, null=True, blank=True, verbose_name="Note sul controllo")
 
     def __str__(self):
