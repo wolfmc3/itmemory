@@ -27,6 +27,7 @@
                 <li class="active"><a href="/">Home</a></li>
                 <li><a href="{% url 'objects:index'  %}">Hardware</a></li>
                 <li><a href="{% url 'customers:index'  %}">Clienti</a></li>
+                <li><a href="{% url 'admin:index'  %}">Amministrazione</a></li>
             </ul>
             {% block toggle_login %}
             {% include "toggle_login.html" %}
