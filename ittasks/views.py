@@ -6,6 +6,7 @@ from django.views import generic
 from django.forms.models import modelformset_factory
 from ittasks.models import Task
 from ittasks.models import TaskCheck, TaskCheckTemplate
+from django.contrib.auth.models import User
 from django.forms import HiddenInput, Textarea, RadioSelect
 from lib.booleanyesno import HorizRadioRenderer
 
@@ -35,6 +36,19 @@ def closetask(request, pk):
         else:
             newtask = tsk
         return JsonResponse({"redirect": reverse('ittasks:detail', args=(newtask.id,))})
+    else:
+        return HttpResponse("invalid data or error")
+
+
+def updateuser(request, pk):
+    if request.user.is_authenticated() and request.POST and request.is_ajax:
+        tsk = get_object_or_404(Task, id=pk)
+        if request.POST['new_user'].isdigit():
+            tsk.user = User.objects.get(id=request.POST['new_user'])
+        else:
+            tsk.user = None
+        tsk.save()
+        return JsonResponse({"success": True})
     else:
         return HttpResponse("invalid data or error")
 
@@ -83,7 +97,12 @@ class DetailView(generic.DetailView):
             'result': RadioSelect(renderer=HorizRadioRenderer, attrs={'class': 'btnyesno'},
                                   choices=((False, 'Positivo'), (True, 'Negativo')))
         }
-        # TODO: form per dati utente
+
+        taskcheckuser = modelformset_factory(Task, fields=['id', 'user'], can_delete=False, extra=0)
+        taskcheckuserform = taskcheckuser(queryset=Task.objects.filter(id=context['obj'].id))
+        # import pdb
+        #pdb.set_trace()
+        context['formsetuser'] = taskcheckuserform
         taskcheckform = modelformset_factory(TaskCheck, widgets=wdg, can_delete=False, extra=0)
         context['formset'] = taskcheckform(queryset=checkslist)
         return context

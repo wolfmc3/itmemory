@@ -6,7 +6,28 @@
                 $(document).ready(function() {
                     addenabledfunc($("#enabletask"))
                     addclosefunc($("#closebtn"))
+                    addchangeuserfunc($("#id_form-0-user"))
                 });
+                function addchangeuserfunc(ctl) {
+                    ctl.after("&nbsp;&nbsp;<span style='display: inline-block' id='id_form-0-user-icon' class='ui-icon ui-icon-check'></span>");
+                    ctl.change(function(event) {
+                        $("#id_form-0-user-icon").removeClass("ui-icon-check").addClass("ui-icon-pencil");
+                        $.post(
+                            '{% url 'ittasks:updateuser' obj.id %}',
+                             { 'csrfmiddlewaretoken': '{{ csrf_token }}' ,'new_user': this.value},
+                             function(data) {
+                                if (data.success) {
+                                    window.setTimeout(function() {
+                                        $("#id_form-0-user-icon").removeClass("ui-icon-pencil").addClass("ui-icon-check");
+                                    }, 1000);
+                                } else {
+                                    alert("aggiornamento non riuscito, provare a ricaricare la pagina")
+                                }
+                             }
+                        );
+                        event.preventDefault()
+                    });
+                }
                 function addenabledfunc(ctl) {
                     ctl.click(function(event) {
                         $.getJSON(
@@ -60,10 +81,14 @@
         <p>Completato: {{ obj.done|yesno:"si,no,mai" }}</p>
         {% if not obj.done %}
         <p>Prossima: {{ obj.nextstart }}</p>
-
+        {% for formuser in formsetuser %}
+        <p>Utente assegnato: {{ formuser.user }}</p>
+        {% endfor %}
         <p class="text-right">
             <button id="closebtn" class="btn btn-primary">Completa e chiudi</button>
         </p>
+        {% else %}
+        <p>Operatore: {{ obj.user.get_full_name }}</p>
         {% endif %}
     </div>
     </div>

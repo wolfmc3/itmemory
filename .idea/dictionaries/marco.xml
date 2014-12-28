@@ -9,6 +9,7 @@
       <w>djfrontend</w>
       <w>endblock</w>
       <w>exectime</w>
+      <w>formsetuser</w>
       <w>hardwareobject</w>
       <w>ittasks</w>
       <w>laststart</w>
@@ -20,7 +21,10 @@
       <w>setenabledtask</w>
       <w>settingstype</w>
       <w>taskcheckform</w>
+      <w>taskcheckuser</w>
+      <w>taskcheckuserform</w>
       <w>tmpl</w>
+      <w>updateuser</w>
       <w>worksite</w>
     </words>
   </dictionary>
