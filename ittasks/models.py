@@ -59,7 +59,6 @@ class Task(models.Model):
             template=self.template,
             hardwareobject=self.hardwareobject
         )
-        newtask.save()
         newtask.enabled = True
         newtask.done = False
         newtask.laststart = self.nextstart
@@ -84,15 +83,19 @@ class Task(models.Model):
     def _to_past(self):
         return (self.laststart < datetime.now()) and not self.done
 
+    def _updatechecks(self):
+        chkstmpl = TaskCheckTemplate.objects.filter(tasktemplate_id=self.template_id)
+        for checktmpl in chkstmpl:
+            if not TaskCheck.objects.filter(task_id=self.id, checktemplate_id=checktmpl.id):
+                ntaskcheck = TaskCheck(task=self, checktemplate=checktmpl)
+                ntaskcheck.exectime = datetime.now()
+                ntaskcheck.save()
+        return checktmpl
+
     to_past = property(_to_past)
     nextstart = property(_nextstart)
     createnext = property(_createnext)
-
-    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if not self.id:
-            d = timedelta(days=1)
-            self.laststart = datetime.now() - d
-        super(Task, self).save()
+    updatechecks = property(_updatechecks)
 
     def __str__(self):
         return self.hardwareobject.name + " -> " + self.template.name
@@ -107,8 +110,14 @@ class TaskCheck(models.Model):
     checktemplate = models.ForeignKey(TaskCheckTemplate, related_name='checktemplates', verbose_name="Modello di task")
 
     exectime = models.DateTimeField(verbose_name="Data di esecuzione")
-
-    result = models.BooleanField(default=False, verbose_name="Risultato")
+    RESULT_VALUES = (
+        (0, 'non eseguito'),
+        (1, 'passato'),
+        (2, 'fallito')
+    )
+    result = models.IntegerField(default=0,
+                                 choices=RESULT_VALUES,
+                                 verbose_name="Risultato")
     note = models.TextField(max_length=1000, null=True, blank=True, verbose_name="Note sul controllo")
 
     def __str__(self):

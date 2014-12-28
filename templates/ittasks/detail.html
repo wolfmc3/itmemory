@@ -50,7 +50,6 @@
                         $.getJSON(
                             '{% url 'ittasks:closetask' obj.id %}',
                              function(data) {
-                                alert("Questo task è stato chiuso, verrai rimandato al task successivo")
                                 document.location.href = data.redirect
                              }
                         );
@@ -65,16 +64,25 @@
 <div class="row">
         <div class="col-lg-6 round-box">
             <h3>{{ obj.template.name }}</h3>
-            <p>{{ obj.hardwareobject.name }}</p>
+
+            <p>
+                {{ obj.hardwareobject.name }}
+                &nbsp;&nbsp;&nbsp;
+                <a class="btn btn-xs btn-primary" target="_blank"
+                   href="{% url 'objects:detail' obj.hardwareobject.id %}">{% include "icon.html" with iconname='search'
+                    %}</a>
+            </p>
             <p>{{ obj.hardwareobject.worksite.customer.name }}</p>
             <p>{{ obj.hardwareobject.worksite.name }}</p>
         </div>
     <div class="col-lg-6 round-box">
         <h3>Dati attivit&agrave;</h3>
 
-        <p>Esecuzione: {{ obj.laststart }} {% if not obj.done %}(<span id="taskstatus">{{ obj.enabled|yesno:"abilitato,disabilitato,mai" }}</span>)
-            <button style="width:65px;" class="btn btn-info btn-xs" id="enabletask" class="button">{{
-                obj.enabled|yesno:"disabilita,abilita,mai" }}
+        <p>
+            Esecuzione: {{ obj.laststart }} {% if not obj.done %}
+            (<span id="taskstatus">{{ obj.enabled|yesno:"abilitato,disabilitato,mai" }}</span>)
+            <button style="width:65px;" class="btn btn-info btn-xs" id="enabletask" class="button">
+                {{ obj.enabled|yesno:"disabilita,abilita,mai" }}
             </button>
             {% endif %}
         </p>
@@ -94,9 +102,12 @@
     </div>
 <div class="row">
     <div class="col-lg-12 round-box">
-        <h3>Controlli da eseguire {% if not obj.done %}
+        {% if not obj.done %}
+        <h3>Controlli da eseguire
             <small><a class="btn btn-info" href="{% url 'ittasks:updatechecks' obj.id %}">Aggiorna i controlli</a>
             </small>
+            {% else %}
+            <h3>Controlli eseguiti
             {% endif %}
         </h3>
         <form method="post" action="">
@@ -112,17 +123,30 @@
                 {% for form in formset %}
                 <tr>
                     <td>{{ form.instance.checktemplate.name }}</td>
-                    <td>{{ form.instance.exectime }}{{ form.id }}{{ form.task }}{{ form.checktemplate }}{{ form.exectime
-                        }}
+                    <td>
+                        {{ form.instance.exectime }}
+                        {{ form.id }}
+                        {{ form.task }}
+                        {{ form.checktemplate }}
+                        {{ form.exectime }}
                     </td>
                     {% if not obj.done %}
-                    <td>{{ form.result }}</td>
-                    <td>{{ form.note }}</td>
-                    <td style="text-align:center;vertical-align: middle;"><input class="btn btn-primary" type="submit"
-                                                                                 value="Salva"/></td>
+                    <td>
+                        {{ form.result }}
+                    </td>
+                    <td>
+                        {{ form.note }}
+                    </td>
+                    <td style="text-align:center;vertical-align: middle;">
+                        <input class="btn btn-primary" type="submit" value="Salva"/>
+                    </td>
                     {% else %}
-                    <td>{{ form.result|yesno:"PASS,NG,mai" }}</td>
-                    <td colspan="2">{{ form.instance.note }}</td>
+                    <td>
+                        <p class="bg-info">{{ form.instance.get_result_display }}</p>
+                    </td>
+                    <td colspan="2">
+                        {{ form.instance.note }}
+                    </td>
                     {% endif %}
                 </tr>
                 {% empty %}
