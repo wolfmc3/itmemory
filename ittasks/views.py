@@ -14,12 +14,7 @@ from lib.booleanyesno import HorizRadioRenderer
 def updatechecks(request, pk):
     if request.user.is_authenticated() and request.is_ajax:
         tsk = get_object_or_404(Task, id=pk)
-        chkstmpl = TaskCheckTemplate.objects.filter(tasktemplate_id=tsk.template_id)
-        for checktmpl in chkstmpl:
-            if not TaskCheck.objects.filter(task_id=tsk.id, checktemplate_id=checktmpl.id):
-                ntaskcheck = TaskCheck(task=tsk, checktemplate=checktmpl)
-                ntaskcheck.exectime = datetime.now()
-                ntaskcheck.save()
+        tsk.updatechecks
         return HttpResponseRedirect(reverse('ittasks:detail', args=(tsk.id,)))
     else:
         return HttpResponse("invalid data or error")
@@ -33,9 +28,8 @@ def closetask(request, pk):
         tsk.save()
         if tsk.enabled:
             newtask = tsk.createnext
-        else:
-            newtask = tsk
-        return JsonResponse({"redirect": reverse('ittasks:detail', args=(newtask.id,))})
+            newtask.updatechecks
+        return JsonResponse({"redirect": reverse('ittasks:detail', args=(tsk.id,))})
     else:
         return HttpResponse("invalid data or error")
 
@@ -94,8 +88,6 @@ class DetailView(generic.DetailView):
             'task': HiddenInput,
             'exectime': HiddenInput,
             'checktemplate': HiddenInput,
-            'result': RadioSelect(renderer=HorizRadioRenderer, attrs={'class': 'btnyesno'},
-                                  choices=((False, 'Positivo'), (True, 'Negativo')))
         }
 
         taskcheckuser = modelformset_factory(Task, fields=['id', 'user'], can_delete=False, extra=0)
@@ -105,6 +97,11 @@ class DetailView(generic.DetailView):
         context['formsetuser'] = taskcheckuserform
         taskcheckform = modelformset_factory(TaskCheck, widgets=wdg, can_delete=False, extra=0)
         context['formset'] = taskcheckform(queryset=checkslist)
+        context['checkstatuscss'] = {
+            0: 'warning',
+            1: 'info',
+            2: 'danger'
+        }
         return context
 
     def get_queryset(self):

@@ -3,6 +3,8 @@
     <words>
       <w>checkslist</w>
       <w>checktemplate</w>
+      <w>checktmpl</w>
+      <w>chkstmpl</w>
       <w>closetask</w>
       <w>createnext</w>
       <w>dayly</w>
@@ -16,6 +18,7 @@
       <w>negativo</w>
       <w>newtask</w>
       <w>nextstart</w>
+      <w>ntaskcheck</w>
       <w>positivo</w>
       <w>setenable</w>
       <w>setenabledtask</w>
@@ -24,6 +27,7 @@
       <w>taskcheckuser</w>
       <w>taskcheckuserform</w>
       <w>tmpl</w>
+      <w>updatechecks</w>
       <w>updateuser</w>
       <w>worksite</w>
     </words>
