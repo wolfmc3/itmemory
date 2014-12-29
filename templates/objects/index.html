@@ -2,20 +2,26 @@
 {% load staticfiles %}
 {% block title %}Lista Hardware{% endblock title %}
 {% block body_contents %}
-{% if objects_list %}
 <div class="row">
-    <div class="col-md-12 round-box">
-        <p>
-
+    <div class="col-md-12 round-box bg-info">
         <form action="" method="post">
             {% csrf_token %}
-            Nome prodotto: <input type="text" name="obj_name" value="{{ request.POST.obj_name }}"/>
-            Seriale: <input type="text" name="obj_serial" value="{{ request.POST.obj_serial }}"/>
-            Cliente: <input type="text" name="cust_name" value="{{ request.POST.cust_name }}"/>
-            <input type="submit" value="Cerca">
-        </form>
-        </p>
+            <div class="col-md-4 text-center">
+                Nome prodotto: <input type="text" name="obj_name" value="{{ request.POST.obj_name }}"/>
+            </div>
+            <div class="col-md-3 text-center">
+                Seriale: <input type="text" name="obj_serial" value="{{ request.POST.obj_serial }}"/>
+            </div>
+            <div class="col-md-3 text-center">
+                Cliente: <input type="text" name="cust_name" value="{{ request.POST.cust_name }}"/>
+            </div>
+            <div class="col-md-2 text-right">
+                <input type="submit" value="Cerca">
+            </div>
     </div>
+        </form>
+    </div>
+<p></p>
     {% for obj in object_list %}
     <div class="col-md-4 round-box">
         <h2>{{ obj.name }}</h2>
@@ -25,11 +31,12 @@
 
         <p><a class="btn btn-default" href="{% url 'objects:detail' obj.id %}" role="button">Apri »</a></p>
     </div>
+{% empty %}
+<div class="col-md-4 round-box">
+    <p>Nessun Oggetto</p>
+</div>
     {% endfor %}
 </div>
-{% else %}
-<p>Nessun Oggetto</p>
-{% endif %}
 {% endblock body_contents %}
 
 
