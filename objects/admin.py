@@ -1,7 +1,7 @@
 from django.contrib import admin
 
 # Register your models here.
-from objects.models import HardwareObject, Settings, SettingsType, SettingGroup
+from objects.models import HardwareObject, Settings, SettingsType, SettingGroup, SoftwarePassword
 
 
 class SettingsInline(admin.TabularInline):
@@ -25,3 +25,5 @@ admin.site.register(HardwareObject, HardwareObjectAdmin)
 admin.site.register(Settings)
 admin.site.register(SettingsType)
 admin.site.register(SettingGroup)
+admin.site.register(SoftwarePassword)
+
