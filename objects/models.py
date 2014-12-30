@@ -68,11 +68,18 @@ class SoftwarePassword(models.Model):
     settingtype = models.ForeignKey(SettingsType, related_name='softwarepasswords', verbose_name="Tipo impostazione")
     url = models.URLField()
     username = models.CharField(max_length=100, null=True, blank=True)
+    password = models.CharField(max_length=50, null=True, blank=True)
     passwd = models.BinaryField(max_length=250, null=True, blank=True)
 
+    def _plainpassword(self):
+        return decrypt(django_setting.SECRET_KEY, self.passwd)
+
+    plainpassword = property(_plainpassword)
+
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
-        if not str(self.passwd).startswith("sc\x00"):
-            self.passwd = encrypt(django_setting.SECRET_KEY, self.passwd).decode('string_escape')
+        if not (self.password == "{encrypted}"):
+            self.passwd = encrypt(django_setting.SECRET_KEY, self.password)
+            self.password = "{encrypted}"
         super(SoftwarePassword, self).save(force_insert, force_update, using, update_fields)
 
     def __str__(self):
