@@ -1,6 +1,9 @@
 body {
     padding-top: 70px;
 }
+.navbar {
+    background-color: #DDDDDD;
+}
 .bg-primary, .bg-warning, .bg-info, .bg-danger {
     margin-right: 10px;
     padding: 10px;
@@ -41,3 +44,4 @@ pre {
 .btnyesno > li {
     list-style-type: none;
 }
+

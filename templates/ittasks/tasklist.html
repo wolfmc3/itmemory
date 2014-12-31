@@ -4,13 +4,14 @@
 <p>{% if taskop.to_past %}
     {% include "icon.html" with iconname='alert' %}
     {% endif %}
-    <a href="{% url 'ittasks:detail' taskop.id %}">{{ taskop.template.name }}</a>- {{ taskop.hardwareobject.name }}<br/>
+    <a href="{% url 'ittasks:detail' taskop.id %}">{{ taskop.template.name }}</a><br/>
+    {{ taskop.hardwareobject.name }}<br/>
     <small class="text-muted">
         <span title="{{ taskop.laststart }}">
             {% include "icon.html" with iconname='calendar' %}
             {{ taskop.laststart|naturaltime }}
         </span>
-        {% if taskop.user %}{% include "icon.html" with iconname='contact' %}{{ taskop.user }} {% endif %}
+        {% if taskop.user %}{% include "icon.html" with iconname='user' %} {{ taskop.user }} {% endif %}
     </small>
 
 </p>

@@ -64,7 +64,7 @@ class SoftwarePassword(models.Model):
         verbose_name = "Password"
         verbose_name_plural = "Passwords"
 
-    hardwareobject = models.ForeignKey(HardwareObject, verbose_name="Oggetto")
+    hardwareobject = models.ForeignKey(HardwareObject, related_name='softwarepasswords', verbose_name="Oggetto")
     settingtype = models.ForeignKey(SettingsType, related_name='softwarepasswords', verbose_name="Tipo impostazione")
     url = models.URLField()
     username = models.CharField(max_length=100, null=True, blank=True)
