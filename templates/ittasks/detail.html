@@ -3,22 +3,23 @@
 {% block head_css %}
 {{ block.super }}
 <script>
+                chusricon = null;
                 $(document).ready(function() {
                     addenabledfunc($("#enabletask"))
                     addclosefunc($("#closebtn"))
                     addchangeuserfunc($("#id_form-0-user"))
                 });
                 function addchangeuserfunc(ctl) {
-                    ctl.after("&nbsp;&nbsp;<span style='display: inline-block' id='id_form-0-user-icon' class='ui-icon ui-icon-check'></span>");
+                    ctl.after('&nbsp;&nbsp;{% include "icon.html" with iconname='ok' %}');
                     ctl.change(function(event) {
-                        $("#id_form-0-user-icon").removeClass("ui-icon-check").addClass("ui-icon-pencil");
+                        chusricon = $(this).next().removeClass("glyphicon-ok").addClass("glyphicon-transfer");
                         $.post(
                             '{% url 'ittasks:updateuser' obj.id %}',
                              { 'csrfmiddlewaretoken': '{{ csrf_token }}' ,'new_user': this.value},
                              function(data) {
                                 if (data.success) {
                                     window.setTimeout(function() {
-                                        $("#id_form-0-user-icon").removeClass("ui-icon-pencil").addClass("ui-icon-check");
+                                        chusricon.removeClass("glyphicon-transfer").addClass("glyphicon-ok");
                                     }, 1000);
                                 } else {
                                     alert("aggiornamento non riuscito, provare a ricaricare la pagina")
@@ -162,7 +163,8 @@
                 {% endfor %}
 
             </table>
-            <script> $("[id^=id_form-][id$=-result]").change(
+            <script>
+                    $("[id^=id_form-][id$=-result]").change(
                                 function() {
                                     $("form").submit()
                                 })

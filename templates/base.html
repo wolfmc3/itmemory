@@ -5,12 +5,13 @@
 {% block head_css %}
 {{ block.super }}
 <link rel="stylesheet" type="text/css" href="{% static 'theme.css' %}"/>
-<script type='text/javascript' src="{% static 'js/jquery.js' %}"></script>
-<script type='text/javascript' src="{% static 'js/jquery-ui.js' %}"></script>
-<link rel='stylesheet' type='text/css' href="{% static 'css/jquery-ui/smoothness/jquery-ui.css' %}"/>
+<script src="/static/js/jquery.js"></script>
+{% block custom_page_scripts %}
+{% endblock custom_page_scripts %}
 {% endblock head_css %}
 {% block body_content %}
-<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+{% block nav_bar %}
+<nav class="navbar navbar-fixed-top" role="navigation">
     <div class="container">
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar"
@@ -36,6 +37,7 @@
         <!--/.navbar-collapse -->
     </div>
 </nav>
+{% endblock nav_bar %}
 {% block body_container %}
 <div class="container">
     {% block body_contents %}

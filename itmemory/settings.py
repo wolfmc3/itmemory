@@ -24,7 +24,7 @@ SECRET_KEY = ')_cvtcgaa17)$*spo83$^ozn0j5j0g983ey3-)b_3xh5806ds%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = True
+TEMPLATE_DEBUG = False
 
 ALLOWED_HOSTS = []
 
@@ -32,8 +32,6 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = (
-    'jquery',
-    'jquery_ui',
     'admin_tools',
     'admin_tools.theming',
     'admin_tools.menu',
@@ -46,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'jquery',
     'crispy_forms',
     'djfrontend',
     'djfrontend.skeleton',

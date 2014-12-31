@@ -2,19 +2,35 @@
 {% load staticfiles %}
 {% block title %}Lista Clienti{% endblock title %}
 {% block body_contents %}
-{% if objects_list %}
-<div class="row">
+<div class="table-responsive">
+    <table class="table table-condensed">
+        <thead>
+        <tr>
+            <th colspan="2" scope="row">Oggetto</th>
+            <th>Nome</th>
+            <th>Seriale</th>
+        </tr>
+        </thead>
+        <tbody>
     {% for obj in object_list %}
-    <div class="col-md-4 round-box">
-        <h2>{{ obj.name }}</h2>
-
-        <p><a class="btn btn-default" href="{% url 'customers:detail' obj.id %}" role="button">Apri »</a></p>
-    </div>
+    <tr>
+        <td scope="row">
+            <a class="btn btn-default" href="{% url 'customers:detail' obj.id %}" role="button">Apri</a>
+        </td>
+        <td>{{ obj.name }}</td>
+        <td>{{ obj.telephone }}</td>
+        <td>{{ obj.email }}</td>
+    </tr>
+    {% empty %}
+    <tr>
+        <td scope="row" colspan="4">
+            Nessun risultato
+        </td>
+    </tr>
     {% endfor %}
+        </tbody>
+    </table>
 </div>
-{% else %}
-<p>Nessun Oggetto</p>
-{% endif %}
 {% endblock body_contents %}
 
 
