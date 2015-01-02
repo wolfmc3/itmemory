@@ -1,6 +1,12 @@
+import datetime
+from django.core.urlresolvers import reverse
+from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+from django.shortcuts import get_object_or_404
 from django.views import generic
-from objects.models import HardwareObject
+from objects.models import HardwareObject, SoftwarePassword
+from ittasks.models import TaskTemplate, Task
 from django.db.models import Q
+
 
 class IndexView(generic.ListView):
     template_name = 'objects/index.html'
@@ -25,6 +31,25 @@ class IndexView(generic.ListView):
                 Q(worksite__name__icontains=self.request.POST['cust_name'])
             )
         return items
+
+
+def createtask(request, pk, task):
+    if request.user.is_authenticated() and request.is_ajax:
+        hwobj = get_object_or_404(HardwareObject, id=pk)
+        taskobj = get_object_or_404(TaskTemplate, id=task)
+        newtask = Task(template=taskobj, hardwareobject=hwobj)
+        newtask.laststart = datetime.datetime.now()
+        newtask.laststart = newtask.nextstart
+        newtask.save()
+    return HttpResponseRedirect(reverse("objects:detail", kwargs={"pk": hwobj.id}))
+
+
+def getpassword(request, pk):
+    if request.user.is_authenticated() and request.is_ajax:
+        pwd = get_object_or_404(SoftwarePassword, id=pk)
+        return JsonResponse({"password": pwd.plainpassword})
+    else:
+        return HttpResponse("invalid data or error")
 
 
 class DetailView(generic.DetailView):

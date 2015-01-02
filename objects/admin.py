@@ -9,6 +9,11 @@ class SettingsInline(admin.TabularInline):
     extra = 1
 
 
+class PasswordsInline(admin.TabularInline):
+    model = SoftwarePassword
+    extra = 1
+
+
 class HardwareObjectAdmin(admin.ModelAdmin):
     short_description = 'Hardware objects'
     fieldsets = [
@@ -16,7 +21,7 @@ class HardwareObjectAdmin(admin.ModelAdmin):
         ('Installation place', {'fields': ['worksite', 'location']}),
         ('Other', {'fields': ['primary_ip']})
     ]
-    inlines = [SettingsInline]
+    inlines = [SettingsInline, PasswordsInline]
     list_display = ('name', 'serial', 'worksite', 'primary_ip')
     search_fields = ['name', 'serial']
 
