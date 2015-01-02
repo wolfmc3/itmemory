@@ -1,9 +1,15 @@
 {% extends 'objects/index.html' %}
 {% from objects.models import Setting %]
 {% load staticfiles %}
+{% load objects_tags %}
 
 {% block custom_page_scripts %}
 <script src="{% static 'objects-detail.js' %}"></script>
+<script>
+    pwd_req_url = '{% url 'objects:getpassword' 0 %}'
+    csrfmiddlewaretoken = '{{ csrf_token }}'
+
+</script>
 {% endblock custom_page_scripts %}
 
 {% block body_contents %}
@@ -17,12 +23,17 @@
         <div class="col-lg-6 round-box">
             <h4>{{ setitem.grouper }}</h4>
             {% for val in setitem.list %}
-            <p><strong>{{ val.username }}</strong>&nbsp;&nbsp;&nbsp;
-                <button type="button" class="btn btn-danger btn-xs">
+            <p>
+                <small><a href="{{ val.url }}" target="_blank">{{ val.url }}</a></small>
+                <br>
+                <strong>{{ val.username }}</strong>&nbsp;&nbsp;&nbsp;
+                <button type="button" data-target="pwd-{{ val.id }}" data-id="{{ val.id }}"
+                        class="btn btn-danger btn-xs btn-password">
                     {% include "icon.html" with iconname='eye-close' %} Vedi password
                 </button>
+                <input class="form-control" type="text" data-viewtimeout="15" value="" id="pwd-{{ val.id }}"
+                       style="display:none;" readonly="1"><span></span>
                 &nbsp;&nbsp;&nbsp;
-                <small><a href="{{ val.url }}" target="_blank">{{ val.url }}</a></small>
             </p>
             {% endfor %}
         </div>
@@ -30,7 +41,7 @@
         <div class="col-lg-12 text-center">
             <h4>Impostazioni</h4>
         </div>
-        {% regroup obj.settings_set.all by type.group as setting_list %}
+        {% regroup obj.settings.all by type.group as setting_list %}
         {% for setitem in setting_list %}
         <div class="col-lg-6 round-box">
             <h4>{{ setitem.grouper }}</h4>
@@ -47,11 +58,11 @@
             <h4>{{ obj.name }}</h4>
 
             <div>
-                <p><code>S/N: {{ obj.serial }}</code></p>
+                <p><strong>S/N:</strong> {{ obj.serial }}</p>
 
-                <p><code>P/N: {{ obj.item }}</code></p>
+                <p><strong>P/N:</strong> {{ obj.item }}</p>
 
-                <p><code>IP: {{ obj.primary_ip }}</code></p>
+                <p><strong>IP:</strong> {{ obj.primary_ip }}</p>
             </div>
         </div>
         <div class="col-lg-12 round-box coll_box">
@@ -65,6 +76,7 @@
             <h4>Attività</h4>
 
             <div class="bg-info" style="min-height:450px;">
+                {% toactivatetask obj %}
                 <h5>Da eseguire</h5>
                 {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
                 <hr/>

@@ -45,8 +45,8 @@ class Task(models.Model):
         verbose_name = "Attività"
         verbose_name_plural = "Attività"
 
-    template = models.ForeignKey(TaskTemplate, related_name='templates', verbose_name="Modello di task")
-    hardwareobject = models.ForeignKey(HardwareObject, related_name='hardwareobjects',
+    template = models.ForeignKey(TaskTemplate, related_name='tasks', verbose_name="Modello di task")
+    hardwareobject = models.ForeignKey(HardwareObject, related_name='tasks',
                                        verbose_name="Hardware associato")
 
     enabled = models.BooleanField(default=True, verbose_name="Abilitato")
@@ -90,7 +90,7 @@ class Task(models.Model):
                 ntaskcheck = TaskCheck(task=self, checktemplate=checktmpl)
                 ntaskcheck.exectime = datetime.now()
                 ntaskcheck.save()
-        return checktmpl
+        return chkstmpl
 
     to_past = property(_to_past)
     nextstart = property(_nextstart)

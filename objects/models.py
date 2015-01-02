@@ -5,7 +5,6 @@ from simplecrypt import encrypt, decrypt
 from itmemory import settings as django_setting
 
 
-
 class HardwareObject(models.Model):
     class Meta():
         verbose_name = "Dispositivo hardware"
@@ -24,23 +23,29 @@ class HardwareObject(models.Model):
 
 
 class SettingGroup(models.Model):
+    from ittasks.models import TaskTemplate
+
     class Meta():
         verbose_name = "Gruppo impostazioni"
         verbose_name_plural = "Gruppi impostazioni"
 
     name = models.CharField(max_length=255, verbose_name="Gruppo impostazioni")
+    activatetask = models.ForeignKey(TaskTemplate, null=True, blank=True, verbose_name="Task da attivare")
 
     def __str__(self):
         return self.name
 
 
 class SettingsType(models.Model):
+    from ittasks.models import TaskTemplate
+
     class Meta():
         verbose_name = "Tipo impostazione"
         verbose_name_plural = "Tipi impostazione"
 
     name = models.CharField(max_length=255, verbose_name="Tipo impostazione")
     group = models.ForeignKey(SettingGroup, related_name='settings', verbose_name="Gruppo impostazioni")
+    activatetask = models.ForeignKey(TaskTemplate, null=True, blank=True, verbose_name="Task da attivare")
 
     def __str__(self):
         return self.group.name + "/" + self.name
@@ -51,9 +56,14 @@ class Settings(models.Model):
         verbose_name = "Impostazione"
         verbose_name_plural = "Impostazioni"
 
-    hardwareobject = models.ForeignKey(HardwareObject, verbose_name="Oggetto")
-    type = models.ForeignKey(SettingsType, related_name='settingstype', verbose_name="Tipo impostazione")
+    hardwareobject = models.ForeignKey(HardwareObject, related_name="settings", verbose_name="Oggetto")
+    type = models.ForeignKey(SettingsType, related_name='settings', verbose_name="Tipo impostazione")
     value = models.TextField(max_length=5000, verbose_name="Valore impostato")
+
+    def _activatetask(self):
+        return [self.type.activatetask, self.type.group.activatetask]
+
+    activatetask = property(_activatetask)
 
     def __str__(self):
         return str(self.hardwareobject) + " - " + self.type.name + ": " + str(self.value)
@@ -66,15 +76,20 @@ class SoftwarePassword(models.Model):
 
     hardwareobject = models.ForeignKey(HardwareObject, related_name='softwarepasswords', verbose_name="Oggetto")
     settingtype = models.ForeignKey(SettingsType, related_name='softwarepasswords', verbose_name="Tipo impostazione")
-    url = models.URLField()
-    username = models.CharField(max_length=100, null=True, blank=True)
-    password = models.CharField(max_length=50, null=True, blank=True)
+    url = models.URLField(null=True, blank=True, verbose_name="Indirizzo web")
+    username = models.CharField(max_length=100, null=True, blank=True, verbose_name="Nome utente")
+    password = models.CharField(max_length=50, null=True, blank=True, verbose_name="Password")
     passwd = models.BinaryField(max_length=250, null=True, blank=True)
 
     def _plainpassword(self):
         return decrypt(django_setting.SECRET_KEY, self.passwd)
 
     plainpassword = property(_plainpassword)
+
+    def _activatetask(self):
+        return [self.settingtype.activatetask, self.settingtype.group.activatetask]
+
+    activatetask = property(_activatetask)
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
         if not (self.password == "{encrypted}"):

@@ -107,11 +107,12 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz"
 )
 
-TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+# TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "static"),
 )
-ADMIN_TOOLS_MENU = 'itmemory.menu.CustomMenu'
+
+# ADMIN_TOOLS_MENU = 'itmemory.menu.CustomMenu'
 
 LOGIN_URL = 'mysite_login'
 LOGOUT_URL = 'mysite_logout'

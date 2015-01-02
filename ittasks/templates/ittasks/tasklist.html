@@ -2,7 +2,7 @@
 {{ now }}
     {% for taskop in tasks_toread %}
 <p>{% if taskop.to_past %}
-    {% include "icon.html" with iconname='alert' %}
+    {% include "icon.html" with iconname='fire' %}
     {% endif %}
     <a href="{% url 'ittasks:detail' taskop.id %}">{{ taskop.template.name }}</a><br/>
     {{ taskop.hardwareobject.name }}<br/>
