@@ -13,7 +13,7 @@ pre {
     margin-right: 11px;
 }
 .round-box {
-    padding-left: 0px;
+
 }
 
 .round-box > p {
@@ -27,7 +27,7 @@ pre {
 .round-box > h3,
 .round-box > h4,
 .round-box > h5 {
-    margin: 8px;
+
     margin-left: 0px;
     margin-top: 0px;
     padding: 5px;
