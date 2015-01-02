@@ -1,71 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="60728673-1930-48c0-9944-ece1ae5c3472" name="Default" comment="Implements search in hardwareobjects">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/customers/migrations/0002_auto_20150101_2310.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/objects/templatetags/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/customers/templates/customers/detail.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/objects/templatetags/objects_tags.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/sample-data-settings.py" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/customers/migrations/0002_customer_telephone.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0002_task_laststart.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0003_auto_20141222_1228.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0004_auto_20141222_1229.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0005_auto_20141222_1230.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0006_task_done.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0007_auto_20141223_1123.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0008_auto_20141223_1123.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0009_auto_20141224_1658.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0010_auto_20141226_0321.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0011_auto_20141226_1738.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0012_auto_20141226_1746.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0013_task_user.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0014_auto_20141227_0237.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0015_auto_20141227_0245.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0016_auto_20141228_1550.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/ittasks/migrations/0017_auto_20141228_2357.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0002_hardwareobject_primary_ip.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0003_auto_20141217_2316.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0004_auto_20141219_2345.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0005_hardwareobject_know_name.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0006_auto_20141227_0237.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0007_auto_20141227_0240.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0008_auto_20141227_0241.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0009_auto_20141227_0245.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0010_auto_20141227_0247.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0011_auto_20141227_0247.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0012_auto_20141228_2357.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0013_softwarepassword.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0014_auto_20141229_2106.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0015_softwarepassword_password.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/objects/migrations/0016_auto_20141231_1915.py" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/templates/customers/detail.html" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/base.html" afterPath="$PROJECT_DIR$/home/templates/base.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/customers/index.html" afterPath="$PROJECT_DIR$/customers/templates/customers/index.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/home/index.html" afterPath="$PROJECT_DIR$/home/templates/home/index.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/icon.html" afterPath="$PROJECT_DIR$/home/templates/icon.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/ittasks/detail.html" afterPath="$PROJECT_DIR$/ittasks/templates/ittasks/detail.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/ittasks/index.html" afterPath="$PROJECT_DIR$/ittasks/templates/ittasks/index.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/ittasks/tasklist.html" afterPath="$PROJECT_DIR$/ittasks/templates/ittasks/tasklist.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/login.html" afterPath="$PROJECT_DIR$/home/templates/login.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/objects/detail.html" afterPath="$PROJECT_DIR$/objects/templates/objects/detail.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/objects/index.html" afterPath="$PROJECT_DIR$/objects/templates/objects/index.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/templates/toggle_login.html" afterPath="$PROJECT_DIR$/home/templates/toggle_login.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/customers/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/customers/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ittasks/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/ittasks/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/migrations/0001_initial.py" afterPath="$PROJECT_DIR$/objects/migrations/0001_initial.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/admin.py" afterPath="$PROJECT_DIR$/objects/admin.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dictionaries/marco.xml" afterPath="$PROJECT_DIR$/.idea/dictionaries/marco.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/customers/models.py" afterPath="$PROJECT_DIR$/customers/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ittasks/models.py" afterPath="$PROJECT_DIR$/ittasks/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/models.py" afterPath="$PROJECT_DIR$/objects/models.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/objects-detail.js" afterPath="$PROJECT_DIR$/static/objects-detail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/itmemory/settings.py" afterPath="$PROJECT_DIR$/itmemory/settings.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/urls.py" afterPath="$PROJECT_DIR$/objects/urls.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/objects/views.py" afterPath="$PROJECT_DIR$/objects/views.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+    <list default="true" id="60728673-1930-48c0-9944-ece1ae5c3472" name="Default" comment="Reconfigure Customers app&#10;&quot;Create Task&quot; link in HardwareObject&#10;">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/objects/migrations/0002_auto_20150101_2346.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ittasks/migrations/0002_auto_20150102_0149.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/objects/migrations/0003_auto_20150102_0106.py" />
     </list>
     <ignored path="itmemory.iws" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -91,7 +30,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="262" max-vertical-offset="1908">
+            <state vertical-scroll-proportion="0.0" vertical-offset="262" max-vertical-offset="1926">
               <caret line="59" column="65" selection-start-line="59" selection-start-column="65" selection-end-line="59" selection-end-column="65" />
               <folding>
                 <element signature="e#15#43#0" expanded="true" />
@@ -103,7 +42,7 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ittasks/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.68551236" vertical-offset="1178" max-vertical-offset="2448">
+            <state vertical-scroll-proportion="0.6247987" vertical-offset="1178" max-vertical-offset="2448">
               <caret line="92" column="23" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="23" />
               <folding />
             </state>
@@ -155,8 +94,8 @@
       <file leaf-file-name="detail.html" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/objects/templates/objects/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.333333" vertical-offset="972" max-vertical-offset="1620">
-              <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+            <state vertical-scroll-proportion="-13.333333" vertical-offset="1062" max-vertical-offset="1710">
+              <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -916,20 +855,27 @@
       <option name="project" value="LOCAL" />
       <updated>1420050695782</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Reconfigure Customers app&#10;&quot;Create Task&quot; link in HardwareObject&#10;">
+      <created>1420162250069</created>
+      <option name="number" value="00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1420162250069</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="1279" y="27" width="1922" height="1054" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.26599327" sideWeight="0.4996979" order="8" side_tool="false" content_ui="tabs" x="1292" y="435" width="1895" height="566" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32772166" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26599327" sideWeight="0.4996979" order="8" side_tool="false" content_ui="tabs" x="1292" y="435" width="1895" height="566" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32772166" sideWeight="0.5" order="13" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32972324" sideWeight="0.50030214" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16358839" sideWeight="0.50250417" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884398" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24954683" sideWeight="0.49910232" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
@@ -939,7 +885,6 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -967,7 +912,8 @@
     <MESSAGE value="Frontend (Tasks)" />
     <MESSAGE value="Password management for Hardware" />
     <MESSAGE value="Implements search in hardwareobjects" />
-    <option name="LAST_COMMIT_MESSAGE" value="Implements search in hardwareobjects" />
+    <MESSAGE value="Reconfigure Customers app&#10;&quot;Create Task&quot; link in HardwareObject&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Reconfigure Customers app&#10;&quot;Create Task&quot; link in HardwareObject&#10;" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REARRANGE_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
@@ -1303,8 +1249,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/objects/templates/objects/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.333333" vertical-offset="972" max-vertical-offset="1620">
-          <caret line="74" column="0" selection-start-line="74" selection-start-column="0" selection-end-line="74" selection-end-column="0" />
+        <state vertical-scroll-proportion="-13.333333" vertical-offset="1062" max-vertical-offset="1710">
+          <caret line="79" column="0" selection-start-line="79" selection-start-column="0" selection-end-line="79" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -1357,7 +1303,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ittasks/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.68551236" vertical-offset="1178" max-vertical-offset="2448">
+        <state vertical-scroll-proportion="0.6247987" vertical-offset="1178" max-vertical-offset="2448">
           <caret line="92" column="23" selection-start-line="92" selection-start-column="23" selection-end-line="92" selection-end-column="23" />
           <folding />
         </state>
