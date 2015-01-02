@@ -58,18 +58,23 @@
             <h4>{{ obj.name }}</h4>
 
             <div>
-                <p><strong>S/N:</strong> {{ obj.serial }}</p>
-
-                <p><strong>P/N:</strong> {{ obj.item }}</p>
-
-                <p><strong>IP:</strong> {{ obj.primary_ip }}</p>
+                {% if obj.image %}
+                <img src="{{ obj.image.url }}" alt="{{ obj.name }}" class="img-thumbnail">
+                {% endif %}
+                <p>
+                    <strong>S/N:</strong> {{ obj.serial }}<br/>
+                    <strong>P/N:</strong> {{ obj.item }}<br/>
+                    <strong>IP:</strong> {{ obj.primary_ip }}
+                </p>
             </div>
         </div>
         <div class="col-lg-12 round-box coll_box">
             <h4>{{ obj.worksite.customer.name }}</h4>
 
-            <p><code>{{ obj.worksite.fulltext|linebreaksbr }}
-                {{ obj.location }}</code></p>
+            <p>
+                {{ obj.worksite.fulltext|linebreaksbr }}
+                {{ obj.location }}
+            </p>
         </div>
 
         <div class="col-lg-12 round-box">

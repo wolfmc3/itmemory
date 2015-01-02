@@ -1,0 +1,47 @@
+body {
+    padding-top: 70px;
+}
+.navbar {
+    background-color: #DDDDDD;
+}
+.bg-primary, .bg-warning, .bg-info, .bg-danger {
+    margin-right: 10px;
+    padding: 10px;
+    border-radius: 5px;
+}
+pre {
+    margin-right: 11px;
+}
+.round-box {
+
+}
+
+.round-box > p {
+    padding-left: 8px;
+    padding-right: 8px;
+
+}
+
+.round-box > h1,
+.round-box > h2,
+.round-box > h3,
+.round-box > h4,
+.round-box > h5 {
+
+    margin-left: 0px;
+    margin-top: 0px;
+    padding: 5px;
+    border: 1px solid #9999FF;
+    background-color: #9999FF;
+    border-radius: 5px;
+    color: #FFFFFF
+}
+
+.btnyesno {
+    list-style-type: none;
+}
+
+.btnyesno > li {
+    list-style-type: none;
+}
+

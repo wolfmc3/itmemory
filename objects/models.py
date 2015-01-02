@@ -17,6 +17,7 @@ class HardwareObject(models.Model):
     location = models.CharField(max_length=250, verbose_name="Ubicazione")
     primary_ip = models.IPAddressField(default='0.0.0.0', verbose_name="Indirizzo IP primario")
     know_name = models.CharField(max_length=255, default='', verbose_name="Nome breve")
+    image = models.ImageField(null=True, blank=True)
 
     def __str__(self):
         return self.name + "  [" + self.serial + "]"
