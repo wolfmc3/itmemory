@@ -1,6 +1,6 @@
 {% extends 'objects/index.html' %}
 {% from objects.models import Setting %]
-
+{% load itmemory_tags %}
 {% block body_contents %}
 <div class="row">
     <div class="row col-lg-9">
@@ -34,7 +34,9 @@
                         {% for hwobj in branch.hardwareobjects.all %}
                         <tr>
                             <td>
-                                {{ hwobj.name }}
+                                {% css_icon "hdd" %}<a title="{{ hwobj.location }}"
+                                                       href="{% url 'objects:detail' hwobj.id %}" target="_blank">{{
+                                hwobj.name }}</a>
                             </td>
                             <td>
                                 {{ hwobj.serial }}
@@ -42,7 +44,7 @@
                         </tr>
                         {% empty %}
                         <tr>
-                            <td>
+                            <td colspan="2">
                                 Nessun hardware
                             </td>
                         </tr>

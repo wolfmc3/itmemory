@@ -1,5 +1,6 @@
 # coding=utf-8
 from django.db import models
+from django.utils.datetime_safe import datetime
 from customers.models import WorkSite
 from simplecrypt import encrypt, decrypt
 from itmemory import settings as django_setting
@@ -18,6 +19,11 @@ class HardwareObject(models.Model):
     primary_ip = models.IPAddressField(default='0.0.0.0', verbose_name="Indirizzo IP primario")
     know_name = models.CharField(max_length=255, default='', verbose_name="Nome breve")
     image = models.ImageField(null=True, blank=True)
+
+    def _taskstodo(self):
+        return self.tasks.filter(done=False, laststart__lte=datetime.now)
+
+    taskstodo = property(_taskstodo)
 
     def __str__(self):
         return self.name + "  [" + self.serial + "]"
@@ -100,3 +106,4 @@ class SoftwarePassword(models.Model):
 
     def __str__(self):
         return str(self.hardwareobject) + " - " + self.settingtype.name + ": " + str(self.username)
+
