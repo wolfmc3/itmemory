@@ -1,22 +1,25 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load itmemory_tags %}
 {% block title %}Lista Hardware{% endblock title %}
 {% block body_contents %}
-<div class="row" xmlns="http://www.w3.org/1999/html">
+<div class="row">
     <div class="col-md-12 round-box bg-info">
-        <form action="" method="post">
+        <form action="" method="post" class="form-inline">
             {% csrf_token %}
-            <div class="col-md-4 text-center">
-                Nome prodotto: <input type="text" name="obj_name" value="{{ request.POST.obj_name }}"/>
+            <div class="form-group">
+                <label class="sr-only" for="obj_name">Nome prodotto</label>
+                <input placeholder="Oggetto" class="form-control"
+                       id="obj_name" type="text" name="obj_name" value="{{ request.POST.obj_name }}"/>
+                <label class="sr-only" for="obj_serial">Seriale</label>
+                <input placeholder="Seriale" class="form-control"
+                       type="text" id="obj_serial" name="obj_serial" value="{{ request.POST.obj_serial }}"/>
+                <label class="sr-only" for="cust_name">Cliente</label>
+                <input placeholder="Cliente o sede" class="form-control"
+                       id="cust_name" type="text" name="cust_name" value="{{ request.POST.cust_name }}"/>
             </div>
-            <div class="col-md-3 text-center">
-                Seriale: <input type="text" name="obj_serial" value="{{ request.POST.obj_serial }}"/>
-            </div>
-            <div class="col-md-3 text-center">
-                Cliente: <input type="text" name="cust_name" value="{{ request.POST.cust_name }}"/>
-            </div>
-            <div class="col-md-2 text-right">
-                <input type="submit" value="Cerca">
+            <div class="form-group">
+                <input class="btn btn-default" type="submit" value="Cerca">
             </div>
         </form>
     </div>
@@ -28,6 +31,7 @@
             <th colspan="2" scope="row">Oggetto</th>
             <th>Nome</th>
             <th>Seriale</th>
+            <th>&nbsp;</th>
         </tr>
         </thead>
         <tbody>
@@ -39,6 +43,16 @@
             <td>{{ obj.name }}</td>
             <td>{{ obj.worksite|linebreaksbr }}</td>
             <td>{{ obj.serial }}</td>
+            <td>
+
+                {% if obj.tasks.count %}{% css_icon 'calendar' %}{{ obj.tasks.count }}
+                {% if obj.taskstodo.count %}
+                <span class="label label-danger">{% css_icon 'fire' %}{{ obj.taskstodo.count }}</span>
+                {% endif %}
+                {% endif %}
+                {% if obj.settings.count %}{% css_icon 'cog' %}{{ obj.settings.count }}{% endif %}
+                {% if obj.softwarepasswords.count %}{% css_icon 'lock' %}{{ obj.softwarepasswords.count }}{% endif %}
+            </td>
         </tr>
         {% empty %}
         <tr>

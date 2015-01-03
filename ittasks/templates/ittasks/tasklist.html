@@ -1,18 +1,23 @@
 {% load humanize %}
-{{ now }}
+{% load itmemory_tags %}
     {% for taskop in tasks_toread %}
-<p>{% if taskop.to_past %}
-    {% include "icon.html" with iconname='fire' %}
+<p style="border-bottom: solid 1px #DDDDDD; padding-bottom: 2px;padding-top: 2px; margin-bottom: 5px;">{% if
+    taskop.to_past %}
+    {% css_icon 'fire' %}
     {% endif %}
-    <a href="{% url 'ittasks:detail' taskop.id %}">{{ taskop.template.name }}</a><br/>
-    {{ taskop.hardwareobject.name }}<br/>
-    <small class="text-muted">
+    <a href="{% url 'ittasks:detail' taskop.id %}">{{ taskop.template.name }}</a>
+    <small class="text-muted pull-right">
         <span title="{{ taskop.laststart }}">
-            {% include "icon.html" with iconname='calendar' %}
-            {{ taskop.laststart|naturaltime }}
+            &nbsp;{% css_icon 'calendar' %} {{ taskop.laststart|naturaltime }}
         </span>
-        {% if taskop.user %}{% include "icon.html" with iconname='user' %} {{ taskop.user }} {% endif %}
     </small>
-
+    <br/>
+    {{ taskop.hardwareobject.name }}
+    {% if taskop.user %}
+    <small class="text-muted pull-right">
+        &nbsp;{% css_icon 'user' %} {{ taskop.user }}
+    </small>
+    {% endif %}
 </p>
     {% endfor %}
+<p>&nbsp;</p>

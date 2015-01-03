@@ -2,6 +2,7 @@
 {% from objects.models import Setting %]
 {% load staticfiles %}
 {% load objects_tags %}
+{% load itmemory_tags %}
 
 {% block custom_page_scripts %}
 <script src="{% static 'objects-detail.js' %}"></script>
@@ -14,46 +15,43 @@
 
 {% block body_contents %}
 <div class="row">
-    <div class="row col-lg-9">
-        <div class="col-lg-12 text-center">
-            <h4>Dati di accesso</h4>
-        </div>
+    <div class="row col-lg-8">
         {% regroup obj.softwarepasswords.all by settingtype.group as password_list %}
         {% for setitem in password_list %}
         <div class="col-lg-6 round-box">
-            <h4>{{ setitem.grouper }}</h4>
+            <h4>{% css_icon "lock" %} {{ setitem.grouper }} <a class="pull-right" href="#">{% css_icon "plus" %}</a>
+            </h4>
             {% for val in setitem.list %}
             <p>
-                <small><a href="{{ val.url }}" target="_blank">{{ val.url }}</a></small>
-                <br>
                 <strong>{{ val.username }}</strong>&nbsp;&nbsp;&nbsp;
                 <button type="button" data-target="pwd-{{ val.id }}" data-id="{{ val.id }}"
-                        class="btn btn-danger btn-xs btn-password">
-                    {% include "icon.html" with iconname='eye-close' %} Vedi password
+                        class="btn btn-warning btn-xs btn-password pull-right">
+                    {% css_icon 'eye-close' %} Vedi password
                 </button>
                 <input class="form-control" type="text" data-viewtimeout="15" value="" id="pwd-{{ val.id }}"
                        style="display:none;" readonly="1"><span></span>
                 &nbsp;&nbsp;&nbsp;
+                {% if val.url %}
+                <br/>
+                <small><a href="{{ val.url }}" target="_blank">{{ val.url }}</a></small>
+                {% endif %}
             </p>
             {% endfor %}
         </div>
         {% endfor %}
-        <div class="col-lg-12 text-center">
-            <h4>Impostazioni</h4>
-        </div>
         {% regroup obj.settings.all by type.group as setting_list %}
         {% for setitem in setting_list %}
         <div class="col-lg-6 round-box">
-            <h4>{{ setitem.grouper }}</h4>
+            <h4>{% css_icon "cog" %} {{ setitem.grouper }} <a class="pull-right" href="#">{% css_icon "plus" %}</a></h4>
             {% for val in setitem.list %}
             <p><strong>{{ val.type.name }}</strong>
-            <pre>{{ val.value }}</pre>
+                <span class="pull-right">{{ val.value }}</span>
             </p>
             {% endfor %}
         </div>
         {% endfor %}
     </div>
-    <div class="row col-lg-3 round-box">
+    <div class="row col-lg-4 round-box">
         <div class="col-lg-12 round-box coll_box">
             <h4>{{ obj.name }}</h4>
 
@@ -66,6 +64,13 @@
                     <strong>P/N:</strong> {{ obj.item }}<br/>
                     <strong>IP:</strong> {{ obj.primary_ip }}
                 </p>
+
+                <p>
+                    <a class="btn btn-success btn-xs" href="#">{% css_icon "cog" %} Aggiungi impostazione</a><br/></p>
+
+                <p>
+                    <a class="btn btn-success btn-xs" href="#">{% css_icon "lock" %} Aggiungi password</a>
+                </p>
             </div>
         </div>
         <div class="col-lg-12 round-box coll_box">
@@ -74,18 +79,38 @@
             <p>
                 {{ obj.worksite.fulltext|linebreaksbr }}
                 {{ obj.location }}
+            <table class="table">
+                {% for hwobj in obj.worksite.hardwareobjects.all %}
+                <tr {% if hwobj.id== obj.id %}class="success" {% endif %}>
+                    <td>
+                        {% css_icon "hdd" %}<a title="{{ hwobj.location }}"
+                                               href="{% url 'objects:detail' hwobj.id %}">{{ hwobj.name }}</a>
+                    </td>
+                    <td>
+                        {{ hwobj.serial }}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">
+                        Nessun hardware
+                    </td>
+                </tr>
+                {% endfor %}
+            </table>
+
             </p>
         </div>
 
         <div class="col-lg-12 round-box">
             <h4>Attività</h4>
 
-            <div class="bg-info" style="min-height:450px;">
+            <div class="" style="min-height:450px;">
                 {% toactivatetask obj %}
-                <h5>Da eseguire</h5>
+                <h4 class="well well-sm">Da eseguire</h4>
                 {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
-                <hr/>
-                <h4>Eseguite</h4>
+
+                <h4 class="well well-sm">Eseguite</h4>
                 {% include "ittasks/tasklist.html" with tasks_toread=closedtasks %}
             </div>
         </div>

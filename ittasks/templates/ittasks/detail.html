@@ -1,5 +1,6 @@
 {% extends 'objects/index.html' %}
 {% from objects.models import Setting %]
+{% load itmemory_tags %}
 {% block head_css %}
 {{ block.super }}
 <script>
@@ -10,7 +11,7 @@
                     addchangeuserfunc($("#id_form-0-user"))
                 });
                 function addchangeuserfunc(ctl) {
-                    ctl.after('&nbsp;&nbsp;{% include "icon.html" with iconname='ok' %}');
+                    ctl.after('&nbsp;&nbsp;{% css_icon 'ok' %}');
                     ctl.change(function(event) {
                         chusricon = $(this).next().removeClass("glyphicon-ok").addClass("glyphicon-transfer");
                         $.post(
@@ -71,7 +72,7 @@
                 &nbsp;&nbsp;&nbsp;
                 <a class="btn btn-xs btn-primary" target="_blank"
                    href="{% url 'objects:detail' obj.hardwareobject.id %}">
-                    {% include "icon.html" with iconname='search' %}</a>
+                    {% css_icon 'search' %}</a>
             </p>
             <p>{{ obj.hardwareobject.worksite.customer.name }}</p>
             <p>{{ obj.hardwareobject.worksite.name }}</p>
