@@ -1,0 +1,30 @@
+{% load itmemory_tags %}
+<div id="calendar">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>Lun</th>
+            <th>Mar</th>
+            <th>Mer</th>
+            <th>Gio</th>
+            <th>Ven</th>
+            <th>Sab</th>
+            <th>Dom</th>
+        </tr>
+        </thead>
+        <tbody>
+            {% for day in dates %}
+            {% if day.date.weekday == 0 %}<tr class="calendar_week">{% endif %}
+            <td class="calendar_day{% if day.overmonth %} overmonth{% endif %}">
+                <h1>{{ day.date.day }}</h1>
+                <div>
+                    {% for task in day.events %}
+                    <p>{% if task.done %}{% css_icon "ok" %}{% endif %}{{ task }}</p>
+                    {% endfor %}
+                </div>
+            </td>
+            {% if day.date.weekday == 6 %}</tr>{% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
