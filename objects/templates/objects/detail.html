@@ -62,12 +62,15 @@
         {% regroup obj.settings.all by type.group as setting_list %}
         {% for setitem in setting_list %}
         <div class="col-lg-6 round-box">
-            <h4>{% css_icon "cog" %} {{ setitem.grouper }} <a class="pull-right ajax_get"
-                                                              href="{% url 'objects:addsetting' obj.id %}?grp={{ setitem.grouper.firstsetting.id }}">{%
-                css_icon "plus" %}</a></h4>
+            <h4>{% css_icon "cog" %} {{ setitem.grouper }}
+                <a class="pull-right ajax_get"
+                      href="{% url 'objects:addsetting' obj.id %}?grp={{ setitem.grouper.firstsetting.id }}">
+                    {% css_icon "plus" %}</a></h4>
             {% for val in setitem.list %}
-            <p><a href="{% url 'objects:setting' obj.id val.id %}" class="btn btn-xs pull-right ajax_get">{% css_icon
-                "pencil" %}</a><strong>{{ val.type.name }}</strong>
+            <p><a href="{% url 'objects:setting' obj.id val.id %}"
+                  class="btn btn-xs pull-right ajax_get">
+                {% css_icon "pencil" %}
+            </a><strong>{{ val.type.name }}</strong>
                 <span class="pull-right">{{ val.value }}</span>
             </p>
             {% endfor %}
@@ -89,12 +92,15 @@
                 </p>
 
                 <p>
-                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addsetting' obj.id %}">{% css_icon
-                        "cog" %} Aggiungi impostazione</a><br/></p>
+                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addsetting' obj.id %}">
+                        {% css_icon "cog" %} Aggiungi impostazione
+                    </a><br/>
+                </p>
 
                 <p>
-                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addpassword' obj.id %}">{% css_icon
-                        "lock" %} Aggiungi password</a>
+                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addpassword' obj.id %}">
+                        {% css_icon "lock" %} Aggiungi password
+                    </a>
                 </p>
             </div>
         </div>
