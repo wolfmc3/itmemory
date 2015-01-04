@@ -34,9 +34,11 @@
                         {% for hwobj in branch.hardwareobjects.all %}
                         <tr>
                             <td>
-                                {% css_icon "hdd" %}<a title="{{ hwobj.location }}"
-                                                       href="{% url 'objects:detail' hwobj.id %}" target="_blank">{{
-                                hwobj.name }}</a>
+                                {% css_icon "hdd" %}
+                                <a title="{{ hwobj.location }}"
+                                   href="{% url 'objects:detail' hwobj.id %}" target="_blank">
+                                    {{ hwobj.name }}
+                                </a>
                             </td>
                             <td>
                                 {{ hwobj.serial }}

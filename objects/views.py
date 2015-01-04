@@ -1,9 +1,11 @@
 import datetime
 from django.core.urlresolvers import reverse
+from django.forms import HiddenInput
 from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
 from django.views import generic
-from objects.models import HardwareObject, SoftwarePassword
+from django.views.generic import UpdateView, CreateView
+from objects.models import HardwareObject, SoftwarePassword, Settings
 from ittasks.models import TaskTemplate, Task
 from django.db.models import Q
 
@@ -67,3 +69,92 @@ class DetailView(generic.DetailView):
 
     def get_queryset(self):
         return HardwareObject.objects.all()
+
+
+class PasswordCreate(CreateView):
+    template_name = "objects/password.html"
+    model = SoftwarePassword
+
+    def get_initial(self):
+        initial = {'hardwareobject': self.kwargs.get('objid')}
+        if self.request.GET.get('grp'):
+            initial["settingtype"] = self.request.GET.get('grp')
+        return initial
+
+    def get_success_url(self):
+        return reverse("objects:detail", kwargs={"pk": self.kwargs.get('objid')})
+
+    def get_form(self, form_class):
+        form = super(PasswordCreate, self).get_form(form_class=form_class)
+        # form.fields['hardwareobject'].widget.attrs['readonly'] = True
+        form.fields['hardwareobject'].widget.attrs['disabled'] = True
+
+        # import pdb
+        # pdb.set_trace()
+        return form
+
+
+class PasswordUpdate(UpdateView):
+    template_name = "objects/password.html"
+    model = SoftwarePassword
+
+    def get_initial(self):
+        initial = {'hardwareobject': self.kwargs.get('objid')}
+        return initial
+
+    def get_success_url(self):
+        return reverse("objects:detail", kwargs={"pk": self.kwargs.get('objid')})
+
+    def get_form(self, form_class):
+        form = super(PasswordUpdate, self).get_form(form_class=form_class)
+        form.fields['hardwareobject'].widget.attrs['readonly'] = True
+        form.fields['hardwareobject'].widget.attrs['disabled'] = True
+
+        # import pdb
+        # pdb.set_trace()
+        return form
+
+
+class SettingCreate(CreateView):
+    template_name = "objects/password.html"
+    model = Settings
+
+    def get_initial(self):
+        initial = {'hardwareobject': self.kwargs.get('objid')}
+        if self.request.GET.get('grp'):
+            initial["type"] = self.request.GET.get('grp')
+        return initial
+
+    def get_success_url(self):
+        return reverse("objects:detail", kwargs={"pk": self.kwargs.get('objid')})
+
+    def get_form(self, form_class):
+        form = super(SettingCreate, self).get_form(form_class=form_class)
+        form.fields['hardwareobject'].widget.attrs['readonly'] = True
+        form.fields['hardwareobject'].widget.attrs['disabled'] = True
+
+        # import pdb
+        # pdb.set_trace()
+        return form
+
+
+class SettingUpdate(UpdateView):
+    template_name = "objects/password.html"
+    model = Settings
+
+    def get_initial(self):
+        initial = {'hardwareobject': self.kwargs.get('objid')}
+        return initial
+
+    def get_success_url(self):
+        return reverse("objects:detail", kwargs={"pk": self.kwargs.get('objid')})
+
+    def get_form(self, form_class):
+        form = super(SettingUpdate, self).get_form(form_class=form_class)
+        form.fields['hardwareobject'].widget.attrs['readonly'] = True
+        form.fields['hardwareobject'].widget.attrs['disabled'] = True
+
+        # import pdb
+        # pdb.set_trace()
+        return form
+

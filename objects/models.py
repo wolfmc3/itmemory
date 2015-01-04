@@ -10,6 +10,7 @@ class HardwareObject(models.Model):
     class Meta():
         verbose_name = "Dispositivo hardware"
         verbose_name_plural = "Dispositivi hardware"
+        ordering = ['worksite']
 
     worksite = models.ForeignKey(WorkSite, related_name='hardwareobjects', verbose_name="Luogo di installazione")
     name = models.CharField(max_length=300, verbose_name="Nome del prodotto")
@@ -35,9 +36,15 @@ class SettingGroup(models.Model):
     class Meta():
         verbose_name = "Gruppo impostazioni"
         verbose_name_plural = "Gruppi impostazioni"
+        ordering = ['name']
 
     name = models.CharField(max_length=255, verbose_name="Gruppo impostazioni")
     activatetask = models.ForeignKey(TaskTemplate, null=True, blank=True, verbose_name="Task da attivare")
+
+    def _firstsetting(self):
+        return self.settings.first()
+
+    firstsetting = property(_firstsetting)
 
     def __str__(self):
         return self.name
@@ -49,6 +56,7 @@ class SettingsType(models.Model):
     class Meta():
         verbose_name = "Tipo impostazione"
         verbose_name_plural = "Tipi impostazione"
+        ordering = ['group']
 
     name = models.CharField(max_length=255, verbose_name="Tipo impostazione")
     group = models.ForeignKey(SettingGroup, related_name='settings', verbose_name="Gruppo impostazioni")
@@ -62,6 +70,7 @@ class Settings(models.Model):
     class Meta():
         verbose_name = "Impostazione"
         verbose_name_plural = "Impostazioni"
+        ordering = ['type']
 
     hardwareobject = models.ForeignKey(HardwareObject, related_name="settings", verbose_name="Oggetto")
     type = models.ForeignKey(SettingsType, related_name='settings', verbose_name="Tipo impostazione")
@@ -80,6 +89,7 @@ class SoftwarePassword(models.Model):
     class Meta():
         verbose_name = "Password"
         verbose_name_plural = "Passwords"
+        ordering = ['settingtype']
 
     hardwareobject = models.ForeignKey(HardwareObject, related_name='softwarepasswords', verbose_name="Oggetto")
     settingtype = models.ForeignKey(SettingsType, related_name='softwarepasswords', verbose_name="Tipo impostazione")

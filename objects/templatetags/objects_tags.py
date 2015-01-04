@@ -20,7 +20,6 @@ def toactivatetask(context, hwobject):
             tasktoactivate[tsktype.id] = tsktype
         if tskgroup:
             tasktoactivate[tskgroup.id] = tskgroup
-
     html = ""
     for stask in tasktoactivate.itervalues():
         if stask.tasks.filter(hardwareobject=hwobject).count() == 0:
@@ -29,4 +28,6 @@ def toactivatetask(context, hwobject):
                 str(stask),
                 render_to_string("icon.html", {'iconname': "plus-sign"})
             )
+    if not html:
+        html = "<p>" + render_to_string("icon.html", {'iconname': "info-sign"}) + "Nessun controllo da attivare</p>"
     return html
