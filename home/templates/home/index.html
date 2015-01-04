@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load tasks_calendar %}
 
 {% block body_contents %}
 <div class="row">
@@ -13,6 +14,10 @@
     <div class="round-box col-md-4">
         <h3>Ultimi report</h3>
         {% include "ittasks/tasklist.html" with tasks_toread=recentclosedtasks %}
+    </div>
+    <div class="round-box col-md-12">
+        <h3>Calendario</h3>
+        {% taskcalendar %}
     </div>
 </div>
 {% endblock body_contents %}
