@@ -25,12 +25,14 @@ class Customer(CustomerBase):
     class Meta():
         verbose_name = "Cliente"
         verbose_name_plural = "Clienti"
+        ordering = ['name']
 
 
 class WorkSite(CustomerBase):
     class Meta():
         verbose_name = "Sede"
         verbose_name_plural = "Sedi"
+        ordering = ['name']
 
     customer = models.ForeignKey(Customer, related_name="Worksites")
 
@@ -43,4 +45,4 @@ class WorkSite(CustomerBase):
                self.email
 
     def __str__(self):
-        return self.customer.name + "\n" + self.name
+        return "{0} ({1})".format(self.name, self.customer.name)

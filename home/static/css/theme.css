@@ -16,17 +16,14 @@ pre {
 
 }
 
-.round-box > p {
-    padding-left: 8px;
-    padding-right: 8px;
-
+.round-box > .input-group {
+    padding: 0 15px 0px 15px;
 }
 
 .round-box > h1,
 .round-box > h2,
 .round-box > h3,
-.round-box > h4,
-.round-box > h5 {
+.round-box > h4 {
 
     margin-left: 0px;
     margin-top: 0px;
@@ -36,6 +33,26 @@ pre {
     border-radius: 5px;
     color: #FFFFFF
 }
+
+.round-box > h5,
+.round-box > h6 {
+    margin: 0 0 10px 10px;
+    margin-left: 0px;
+    margin-top: 0px;
+    padding: 5px;
+    border: 1px solid #9999FF;
+    border-radius: 5px;
+    font-weight: bold;
+    text-align: center;
+    color: #999999;
+}
+
+.round-box > p {
+    margin: 0 10px 0 10px;
+    padding-bottom: 10px;
+}
+
+
 
 .btnyesno {
     list-style-type: none;

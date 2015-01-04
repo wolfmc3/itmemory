@@ -1,5 +1,4 @@
 {% extends 'objects/index.html' %}
-{% from objects.models import Setting %]
 {% load staticfiles %}
 {% load objects_tags %}
 {% load itmemory_tags %}
@@ -16,35 +15,59 @@
 {% block body_contents %}
 <div class="row">
     <div class="row col-lg-8">
-        {% regroup obj.softwarepasswords.all by settingtype.group as password_list %}
-        {% for setitem in password_list %}
+        {% regroup obj.softwarepasswords.all by settingtype.group as group_list %}
+        {% for groupitem in group_list %}
         <div class="col-lg-6 round-box">
-            <h4>{% css_icon "lock" %} {{ setitem.grouper }} <a class="pull-right" href="#">{% css_icon "plus" %}</a>
+            <h4>{% css_icon "lock" %} {{ groupitem.grouper }}
+                <a class="pull-right ajax_get"
+                   href="{% url 'objects:addpassword' obj.id %}?grp={{ groupitem.grouper.firstsetting.id }}">
+                    {% css_icon "plus" %}
+                </a>
             </h4>
+            {% regroup groupitem.list by settingtype as type_list %}
+            {% for setitem in type_list %}
+            <h5>
+                {{ setitem.grouper.name }}
+                <a class="pull-right ajax_get"
+                   href="{% url 'objects:addpassword' obj.id %}?grp={{ setitem.grouper.id }}">
+                    {% css_icon "plus-sign" %}
+                </a>
+
+            </h5>
             {% for val in setitem.list %}
             <p>
+                <a href="{% url 'objects:password' obj.id val.id %}" class="btn btn-xs pull-right ajax_get">
+                    {% css_icon "pencil" %}</a>
+                {% if val.url %}
+                <a href="{{ val.url }}" target="_blank">{% css_icon "link" %}</a>
+                {% endif %}
                 <strong>{{ val.username }}</strong>&nbsp;&nbsp;&nbsp;
                 <button type="button" data-target="pwd-{{ val.id }}" data-id="{{ val.id }}"
                         class="btn btn-warning btn-xs btn-password pull-right">
                     {% css_icon 'eye-close' %} Vedi password
                 </button>
-                <input class="form-control" type="text" data-viewtimeout="15" value="" id="pwd-{{ val.id }}"
-                       style="display:none;" readonly="1"><span></span>
-                &nbsp;&nbsp;&nbsp;
-                {% if val.url %}
-                <br/>
-                <small><a href="{{ val.url }}" target="_blank">{{ val.url }}</a></small>
-                {% endif %}
+            <div class="input-group input-sm" style="display:none;">
+                <div class="input-group-addon"><a class="copyclipboard" href="#">{% css_icon "paperclip" %}</a></div>
+                <input class="form-control " type="text" data-viewtimeout="15" value="" id="pwd-{{ val.id }}"
+                       readonly="1">
+
+                <div class="input-group-addon">...</div>
+            </div>
+
             </p>
+            {% endfor %}
             {% endfor %}
         </div>
         {% endfor %}
         {% regroup obj.settings.all by type.group as setting_list %}
         {% for setitem in setting_list %}
         <div class="col-lg-6 round-box">
-            <h4>{% css_icon "cog" %} {{ setitem.grouper }} <a class="pull-right" href="#">{% css_icon "plus" %}</a></h4>
+            <h4>{% css_icon "cog" %} {{ setitem.grouper }} <a class="pull-right ajax_get"
+                                                              href="{% url 'objects:addsetting' obj.id %}?grp={{ setitem.grouper.firstsetting.id }}">{%
+                css_icon "plus" %}</a></h4>
             {% for val in setitem.list %}
-            <p><strong>{{ val.type.name }}</strong>
+            <p><a href="{% url 'objects:setting' obj.id val.id %}" class="btn btn-xs pull-right ajax_get">{% css_icon
+                "pencil" %}</a><strong>{{ val.type.name }}</strong>
                 <span class="pull-right">{{ val.value }}</span>
             </p>
             {% endfor %}
@@ -66,10 +89,12 @@
                 </p>
 
                 <p>
-                    <a class="btn btn-success btn-xs" href="#">{% css_icon "cog" %} Aggiungi impostazione</a><br/></p>
+                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addsetting' obj.id %}">{% css_icon
+                        "cog" %} Aggiungi impostazione</a><br/></p>
 
                 <p>
-                    <a class="btn btn-success btn-xs" href="#">{% css_icon "lock" %} Aggiungi password</a>
+                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addpassword' obj.id %}">{% css_icon
+                        "lock" %} Aggiungi password</a>
                 </p>
             </div>
         </div>
@@ -81,7 +106,7 @@
                 {{ obj.location }}
             <table class="table">
                 {% for hwobj in obj.worksite.hardwareobjects.all %}
-                <tr {% if hwobj.id== obj.id %}class="success" {% endif %}>
+            <tr class='{% ifequal obj.id hwobj.id %}success{% endifequal %}'>
                     <td>
                         {% css_icon "hdd" %}<a title="{{ hwobj.location }}"
                                                href="{% url 'objects:detail' hwobj.id %}">{{ hwobj.name }}</a>
@@ -116,5 +141,19 @@
         </div>
     </div>
 
+</div>
+<!-- Modal -->
+<div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+                        aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="modalFormTitle">Modal title</h4>
+            </div>
+            <div class="modal-body">
+            </div>
+        </div>
+    </div>
 </div>
 {% endblock body_contents %}

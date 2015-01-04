@@ -1,8 +1,8 @@
 {% load humanize %}
 {% load itmemory_tags %}
     {% for taskop in tasks_toread %}
-<p style="border-bottom: solid 1px #DDDDDD; padding-bottom: 2px;padding-top: 2px; margin-bottom: 5px;">{% if
-    taskop.to_past %}
+<p style="border-bottom: solid 1px #DDDDDD; padding-bottom: 2px;padding-top: 2px; margin-bottom: 5px;">
+    {% if taskop.to_past %}
     {% css_icon 'fire' %}
     {% endif %}
     <a href="{% url 'ittasks:detail' taskop.id %}">{{ taskop.template.name }}</a>

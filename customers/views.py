@@ -8,8 +8,6 @@ class IndexView(generic.ListView):
     context_object_name = 'objects_list'
 
     def post(self, request, *args, **kwargs):
-
-        # kwargs['obj_name'] = request.POST['obj_name']
         return self.get(self, request, *args, **kwargs)
 
     def get_queryset(self):
