@@ -10,7 +10,7 @@ class IndexView(generic.ListView):
         context = super(IndexView, self).get_context_data(**kwargs)
         from ittasks.models import Task
 
-        context['openedtasks'] = Task.objects.filter(done=False).order_by("laststart")
+        context['openedtasks'] = Task.objects.filter(done=False).exclude(user=self.request.user).order_by("laststart")
         context['usertasks'] = Task.objects.filter(user=self.request.user, done=False).order_by("laststart")
         context['recentclosedtasks'] = Task.objects.filter(done=True).order_by("laststart")[:10]
         return context
