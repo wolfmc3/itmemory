@@ -1,6 +1,7 @@
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.template.response import TemplateResponse
 from django.utils.datetime_safe import datetime
 from django.views import generic
 from django.forms.models import modelformset_factory
@@ -53,6 +54,12 @@ def setenabledtask(request, pk):
         tsk.enabled = not tsk.enabled
         tsk.save()
         return JsonResponse({"enabled": tsk.enabled})
+    else:
+        return HttpResponse("invalid data or error")
+
+def calendar(request, month, year):
+    if request.user.is_authenticated() :
+        return TemplateResponse(request,"ajax_calendar.html",{'month':month,'year': year})
     else:
         return HttpResponse("invalid data or error")
 

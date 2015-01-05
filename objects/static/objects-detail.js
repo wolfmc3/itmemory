@@ -21,7 +21,7 @@ $(function() {
         }
     }
 
-    $(".ajax_get").click(function() {
+    $(".ajax_get").click(function(event) {
         $('#modalForm .modal-body').load(
             this.href,
             function(){

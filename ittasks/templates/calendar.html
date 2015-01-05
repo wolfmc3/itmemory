@@ -3,6 +3,24 @@
     <table class="table table-bordered">
         <thead>
         <tr>
+            <td colspan="1">
+                <a class="pull-left ajax_calendar" href="javascript:void(0)"
+                   onclick="$('#calendar').load('{% url 'ittasks:calendar' start_day.month start_day.year %}')"
+                   >{% css_icon "chevron-left" %}
+                </a>
+            </td>
+            <td colspan="5" class="text-center">
+                {{ month_name }}
+            </td>
+            <td colspan="1">
+                <a class="pull-right ajax_calendar" href="javascript:void(0)"
+                   onclick="javascript:$('#calendar').load('{% url 'ittasks:calendar' end_day.month end_day.year %}')"
+                   >
+                    {% css_icon "chevron-right" %}
+                </a>
+            </td>
+        </tr>
+        <tr>
             <th>Lun</th>
             <th>Mar</th>
             <th>Mer</th>
@@ -19,12 +37,35 @@
                 <h1>{{ day.date.day }}</h1>
                 <div>
                     {% for task in day.events %}
-                    <p>{% if task.done %}{% css_icon "ok" %}{% endif %}{{ task }}</p>
+                    <p>
+                        {% if task.done %}{% css_icon "ok" %}{% endif %}
+                        <a href="{% url 'ittasks:detail' task.id %}">
+                        {{ task }}
+                        </a>
+                    </p>
                     {% endfor %}
                 </div>
             </td>
             {% if day.date.weekday == 6 %}</tr>{% endif %}
             {% endfor %}
+        <tr>
+            <td colspan="1">
+                <a class="pull-left ajax_calendar" href="javascript:void(0)"
+                   onclick="$('#calendar').load('{% url 'ittasks:calendar' start_day.month start_day.year %}')"
+                   >{% css_icon "chevron-left" %}
+                </a>
+            </td>
+            <td colspan="5" class="text-center">
+                {{ month_name }}
+            </td>
+            <td colspan="1">
+                <a class="pull-right ajax_calendar" href="javascript:void(0)"
+                   onclick="javascript:$('#calendar').load('{% url 'ittasks:calendar' end_day.month end_day.year %}')"
+                   >
+                    {% css_icon "chevron-right" %}
+                </a>
+            </td>
+        </tr>
         </tbody>
     </table>
 </div>
