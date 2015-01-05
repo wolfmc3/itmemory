@@ -1,168 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="60728673-1930-48c0-9944-ece1ae5c3472" name="Default" comment="Calendar templatetag creation">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/FontAwesome.otf" afterPath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/FontAwesome.otf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/Sorting icons.psd" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/Sorting icons.psd" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/images/admin-tools.png" afterPath="$PROJECT_DIR$/static/admin_tools/images/admin-tools.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/animated-overlay.gif" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/animated-overlay.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/back_disabled.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/back_disabled.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/back_enabled.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/back_enabled.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/back_enabled_hover.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/back_enabled_hover.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/changelist-bg.gif" afterPath="$PROJECT_DIR$/static/admin/img/changelist-bg.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/changelist-bg_rtl.gif" afterPath="$PROJECT_DIR$/static/admin/img/changelist-bg_rtl.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/default-bg-reverse.gif" afterPath="$PROJECT_DIR$/static/admin/img/default-bg-reverse.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/default-bg.gif" afterPath="$PROJECT_DIR$/static/admin/img/default-bg.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/deleted-overlay.gif" afterPath="$PROJECT_DIR$/static/admin/img/deleted-overlay.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/images/django.png" afterPath="$PROJECT_DIR$/static/admin_tools/images/django.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/fontawesome-webfont.eot" afterPath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/fontawesome-webfont.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/fontawesome-webfont.ttf" afterPath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/fontawesome-webfont.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/fontawesome-webfont.woff" afterPath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/fontawesome-webfont.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/forward_disabled.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/forward_disabled.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/forward_enabled.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/forward_enabled.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/forward_enabled_hover.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/forward_enabled_hover.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/fonts/twbs/3.2.0/glyphicons-halflings-regular.eot" afterPath="$PROJECT_DIR$/static/djfrontend/fonts/twbs/3.2.0/glyphicons-halflings-regular.eot" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/fonts/twbs/3.2.0/glyphicons-halflings-regular.ttf" afterPath="$PROJECT_DIR$/static/djfrontend/fonts/twbs/3.2.0/glyphicons-halflings-regular.ttf" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/fonts/twbs/3.2.0/glyphicons-halflings-regular.woff" afterPath="$PROJECT_DIR$/static/djfrontend/fonts/twbs/3.2.0/glyphicons-halflings-regular.woff" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon-no.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon-no.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon-unknown.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon-unknown.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon-yes.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon-yes.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon_addlink.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon_addlink.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon_alert.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon_alert.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon_calendar.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon_calendar.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon_changelink.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon_changelink.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon_clock.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon_clock.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon_deletelink.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon_deletelink.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon_error.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon_error.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon_searchbox.png" afterPath="$PROJECT_DIR$/static/admin/img/icon_searchbox.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/icon_success.gif" afterPath="$PROJECT_DIR$/static/admin/img/icon_success.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/inline-delete-8bit.png" afterPath="$PROJECT_DIR$/static/admin/img/inline-delete-8bit.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/inline-delete.png" afterPath="$PROJECT_DIR$/static/admin/img/inline-delete.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/inline-restore-8bit.png" afterPath="$PROJECT_DIR$/static/admin/img/inline-restore-8bit.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/inline-restore.png" afterPath="$PROJECT_DIR$/static/admin/img/inline-restore.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/inline-splitter-bg.gif" afterPath="$PROJECT_DIR$/static/admin/img/inline-splitter-bg.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/gis/move_vertex_off.png" afterPath="$PROJECT_DIR$/static/admin/img/gis/move_vertex_off.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/gis/move_vertex_on.png" afterPath="$PROJECT_DIR$/static/admin/img/gis/move_vertex_on.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/nav-bg-grabber.gif" afterPath="$PROJECT_DIR$/static/admin/img/nav-bg-grabber.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/nav-bg-reverse.gif" afterPath="$PROJECT_DIR$/static/admin/img/nav-bg-reverse.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/nav-bg-selected.gif" afterPath="$PROJECT_DIR$/static/admin/img/nav-bg-selected.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/nav-bg.gif" afterPath="$PROJECT_DIR$/static/admin/img/nav-bg.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/selector-icons.gif" afterPath="$PROJECT_DIR$/static/admin/img/selector-icons.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/selector-search.gif" afterPath="$PROJECT_DIR$/static/admin/img/selector-search.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_asc.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_asc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_asc_disabled.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_asc_disabled.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_both.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_both.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_desc.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_desc.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_desc_disabled.png" afterPath="$PROJECT_DIR$/static/djfrontend/img/jquery/jquery.dataTables/1.10.2/sort_desc_disabled.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/sorting-icons.gif" afterPath="$PROJECT_DIR$/static/admin/img/sorting-icons.gif" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/tooltag-add.png" afterPath="$PROJECT_DIR$/static/admin/img/tooltag-add.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/img/tooltag-arrowright.png" afterPath="$PROJECT_DIR$/static/admin/img/tooltag-arrowright.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_flat_0_aaaaaa_40x100.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_flat_0_aaaaaa_40x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_flat_75_ffffff_40x100.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_flat_75_ffffff_40x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_55_fbf9ee_1x400.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_55_fbf9ee_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_65_ffffff_1x400.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_65_ffffff_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_75_dadada_1x400.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_75_dadada_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_75_e6e6e6_1x400.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_75_e6e6e6_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_95_fef1ec_1x400.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_glass_95_fef1ec_1x400.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_highlight-soft_75_cccccc_1x100.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-bg_highlight-soft_75_cccccc_1x100.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_222222_256x240.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_222222_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_2e83ff_256x240.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_2e83ff_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_454545_256x240.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_454545_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_888888_256x240.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_888888_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_cd0a0a_256x240.png" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/images/ui-icons_cd0a0a_256x240.png" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/admin/DateTimeShortcuts.js" afterPath="$PROJECT_DIR$/static/admin/js/admin/DateTimeShortcuts.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/LICENSE-JQUERY.txt" afterPath="$PROJECT_DIR$/static/admin/js/LICENSE-JQUERY.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/admin/RelatedObjectLookups.js" afterPath="$PROJECT_DIR$/static/admin/js/admin/RelatedObjectLookups.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/SelectBox.js" afterPath="$PROJECT_DIR$/static/admin/js/SelectBox.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/SelectFilter2.js" afterPath="$PROJECT_DIR$/static/admin/js/SelectFilter2.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/actions.js" afterPath="$PROJECT_DIR$/static/admin/js/actions.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/actions.min.js" afterPath="$PROJECT_DIR$/static/admin/js/actions.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/affix.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/affix.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/alert.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/alert.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/css/base.css" afterPath="$PROJECT_DIR$/static/admin/css/base.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap-theme.css.map" afterPath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap-theme.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap-theme.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap-theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap-theme.min.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap-theme.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap.css.map" afterPath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/bootstrap.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/bootstrap.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap.min.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/twbs/3.2.0/bootstrap.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/bootstrap.min.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/bootstrap.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/button.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/button.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/calendar.js" afterPath="$PROJECT_DIR$/static/admin/js/calendar.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/carousel.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/carousel.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/css/changelists.css" afterPath="$PROJECT_DIR$/static/admin/css/changelists.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/collapse.js" afterPath="$PROJECT_DIR$/static/admin/js/collapse.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/collapse.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/collapse.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/collapse.min.js" afterPath="$PROJECT_DIR$/static/admin/js/collapse.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/core.js" afterPath="$PROJECT_DIR$/static/admin/js/core.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/dashboard-ie.css" afterPath="$PROJECT_DIR$/static/admin_tools/css/dashboard-ie.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/css/dashboard.css" afterPath="$PROJECT_DIR$/static/admin/css/dashboard.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/dashboard.css" afterPath="$PROJECT_DIR$/static/admin_tools/css/dashboard.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/js/dashboard.js" afterPath="$PROJECT_DIR$/static/admin_tools/js/dashboard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/dropdown.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/dropdown.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/fontawesome/4.2.0/font-awesome.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/fontawesome/4.2.0/font-awesome.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/fontawesome/4.2.0/font-awesome.min.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/fontawesome/4.2.0/font-awesome.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/fontawesome-webfont.svg" afterPath="$PROJECT_DIR$/static/djfrontend/fonts/fontawesome/4.2.0/fontawesome-webfont.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/css/forms.css" afterPath="$PROJECT_DIR$/static/admin/css/forms.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/fonts/twbs/3.2.0/glyphicons-halflings-regular.svg" afterPath="$PROJECT_DIR$/static/djfrontend/fonts/twbs/3.2.0/glyphicons-halflings-regular.svg" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/h5bp/4.3.0/h5bp.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/h5bp/4.3.0/h5bp.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/css/ie.css" afterPath="$PROJECT_DIR$/static/admin/css/ie.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/inlines.js" afterPath="$PROJECT_DIR$/static/admin/js/inlines.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/inlines.min.js" afterPath="$PROJECT_DIR$/static/admin/js/inlines.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/jquery/jquery-ui.css" afterPath="$PROJECT_DIR$/static/admin_tools/css/jquery/jquery-ui.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jqueryui/1.11.1/jquery-ui.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jqueryui/1.11.1/jquery-ui.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/js/jquery/jquery-ui.min.js" afterPath="$PROJECT_DIR$/static/admin_tools/js/jquery/jquery-ui.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jqueryui/1.11.1/jquery-ui.min.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jqueryui/1.11.1/jquery-ui.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/js/jquery/jquery.cookie.min.js" afterPath="$PROJECT_DIR$/static/admin_tools/js/jquery/jquery.cookie.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/js/jquery/jquery.dashboard.js" afterPath="$PROJECT_DIR$/static/admin_tools/js/jquery/jquery.dashboard.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/jquery/jquery.dataTables/1.10.2/jquery.dataTables.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/jquery/jquery.dataTables/1.10.2/jquery.dataTables.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.dataTables/1.10.2/jquery.dataTables.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.dataTables/1.10.2/jquery.dataTables.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/jquery/jquery.dataTables/1.10.2/jquery.dataTables.min.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/jquery/jquery.dataTables/1.10.2/jquery.dataTables.min.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.dataTables/1.10.2/jquery.dataTables.min.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.dataTables/1.10.2/jquery.dataTables.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/jquery/jquery.dataTables/1.10.2/jquery.dataTables_themeroller.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/jquery/jquery.dataTables/1.10.2/jquery.dataTables_themeroller.css" />
+    <list default="true" id="60728673-1930-48c0-9944-ece1ae5c3472" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.formset/1.2/jquery.formset.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.formset/1.2/jquery.formset.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.formset/1.2/jquery.formset.min.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.formset/1.2/jquery.formset.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/jquery.init.js" afterPath="$PROJECT_DIR$/static/admin/js/jquery.init.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/jquery.js" afterPath="$PROJECT_DIR$/static/admin/js/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/1.11.1/jquery.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/1.11.1/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/2.1.1/jquery.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/2.1.1/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/js/jquery.js" afterPath="$PROJECT_DIR$/static/js/jquery.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/jquery.min.js" afterPath="$PROJECT_DIR$/static/admin/js/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/js/jquery/jquery.min.js" afterPath="$PROJECT_DIR$/static/admin_tools/js/jquery/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/1.11.1/jquery.min.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/1.11.1/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/2.1.1/jquery.min.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/2.1.1/jquery.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/1.11.1/jquery.min.map" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/1.11.1/jquery.min.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/2.1.1/jquery.min.map" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/2.1.1/jquery.min.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.scrollTo/1.4.13/jquery.scrollTo.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.scrollTo/1.4.13/jquery.scrollTo.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.scrollTo/1.4.13/jquery.scrollTo.min.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.scrollTo/1.4.13/jquery.scrollTo.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.smooth-scroll/1.5.0/jquery.smooth-scroll.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.smooth-scroll/1.5.0/jquery.smooth-scroll.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.smooth-scroll/1.5.0/jquery.smooth-scroll.min.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/jquery/jquery.smooth-scroll/1.5.0/jquery.smooth-scroll.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/js/json.min.js" afterPath="$PROJECT_DIR$/static/admin_tools/js/json.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/css/login.css" afterPath="$PROJECT_DIR$/static/admin/css/login.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/menu-ie.css" afterPath="$PROJECT_DIR$/static/admin_tools/css/menu-ie.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/menu.css" afterPath="$PROJECT_DIR$/static/admin_tools/css/menu.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/js/menu.js" afterPath="$PROJECT_DIR$/static/admin_tools/js/menu.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/modal.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/modal.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/modernizr/2.8.3/modernizr.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/modernizr/2.8.3/modernizr.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/modernizr/2.8.3/modernizr.min.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/modernizr/2.8.3/modernizr.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/css/normalize/3.0.1/normalize.css" afterPath="$PROJECT_DIR$/static/djfrontend/css/normalize/3.0.1/normalize.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/objects-detail.js" afterPath="$PROJECT_DIR$/static/objects-detail.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/popover.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/popover.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/prepopulate.js" afterPath="$PROJECT_DIR$/static/admin/js/prepopulate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/prepopulate.min.js" afterPath="$PROJECT_DIR$/static/admin/js/prepopulate.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/css/rtl.css" afterPath="$PROJECT_DIR$/static/admin/css/rtl.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/scrollspy.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/scrollspy.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/tab.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/tab.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/css/theme.css" afterPath="$PROJECT_DIR$/static/css/theme.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/css/theming.css" afterPath="$PROJECT_DIR$/static/admin_tools/css/theming.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/timeparse.js" afterPath="$PROJECT_DIR$/static/admin/js/timeparse.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/tooltip.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/tooltip.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/transition.js" afterPath="$PROJECT_DIR$/static/djfrontend/js/twbs/3.2.0/transition.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/js/urlify.js" afterPath="$PROJECT_DIR$/static/admin/js/urlify.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin_tools/js/utils.js" afterPath="$PROJECT_DIR$/static/admin_tools/js/utils.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/static/admin/css/widgets.css" afterPath="$PROJECT_DIR$/static/admin/css/widgets.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="itmemory.iws" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -977,7 +819,13 @@
       <option name="project" value="LOCAL" />
       <updated>1420416041143</updated>
     </task>
-    <option name="localTasksCounter" value="35" />
+    <task id="LOCAL-00035" summary="Collected static files">
+      <created>1420416353646</created>
+      <option name="number" value="00035" />
+      <option name="project" value="LOCAL" />
+      <updated>1420416353646</updated>
+    </task>
+    <option name="localTasksCounter" value="36" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1034,7 +882,8 @@
     <MESSAGE value="Objects frontend styling" />
     <MESSAGE value="Objects ajax implementation" />
     <MESSAGE value="Calendar templatetag creation" />
-    <option name="LAST_COMMIT_MESSAGE" value="Calendar templatetag creation" />
+    <MESSAGE value="Collected static files" />
+    <option name="LAST_COMMIT_MESSAGE" value="Collected static files" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
