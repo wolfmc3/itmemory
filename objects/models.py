@@ -20,6 +20,7 @@ class HardwareObject(models.Model):
     primary_ip = models.IPAddressField(default='0.0.0.0', verbose_name="Indirizzo IP primario")
     know_name = models.CharField(max_length=255, default='', verbose_name="Nome breve")
     image = models.ImageField(null=True, blank=True)
+    parentobject = models.ForeignKey('self',null=True,blank=True)
 
     def _taskstodo(self):
         return self.tasks.filter(done=False, laststart__lte=datetime.now)
