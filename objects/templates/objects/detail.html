@@ -63,7 +63,7 @@
         {% for setitem in setting_list %}
         <div class="col-lg-6 round-box">
             <h4>{% css_icon "cog" %} {{ setitem.grouper }}
-                <a class="ajax_get"
+                <a class="ajax_get pull-right"
                       href="{% url 'objects:addsetting' obj.id %}?grp={{ setitem.grouper.firstsetting.id }}">
                     {% css_icon "plus" %}</a></h4>
             {% for val in setitem.list %}
@@ -95,9 +95,15 @@
                 <img src="{{ obj.image.url }}" alt="{{ obj.name }}" class="img-thumbnail">
                 {% endif %}
                 <p>
-                    <strong>S/N:</strong> {{ obj.serial }}<br/>
-                    <strong>P/N:</strong> {{ obj.item }}<br/>
-                    <strong>IP:</strong> {{ obj.primary_ip }}
+                    <strong>S/N:</strong> {{ obj.serial }}<br />
+                    <strong>P/N:</strong> {{ obj.item }}<br />
+                    <strong>IP:</strong> {{ obj.primary_ip }}<br />
+                    {% if obj.parentobject %}
+                    <strong>Dipende da:</strong>
+                    <a href="{% url 'objects:detail' obj.parentobject.id %}">
+                        {{ obj.parentobject.name }}
+                    </a>
+                    {% endif %}
                 </p>
 
                 <p>
