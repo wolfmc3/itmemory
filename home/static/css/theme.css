@@ -2,11 +2,7 @@ body {
     padding-top: 70px;
 }
 .navbar {
-    background-color: #FF890A;
-}
-
-.navbar > a {
-    color: #FFFFFF;
+    background-color: #efefef;
 }
 
 .bg-primary, .bg-warning, .bg-info, .bg-danger {
@@ -14,6 +10,7 @@ body {
     padding: 10px;
     border-radius: 5px;
 }
+
 pre {
     margin-right: 11px;
 }
