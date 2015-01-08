@@ -83,7 +83,7 @@ class Settings(models.Model):
     activatetask = property(_activatetask)
 
     def __str__(self):
-        return str(self.hardwareobject) + " - " + self.type.name + ": " + str(self.value)
+        return str(self.hardwareobject) + " - " + self.type.name
 
 
 class SoftwarePassword(models.Model):
