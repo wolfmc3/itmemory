@@ -60,6 +60,7 @@ def taskcalendar(month=None, year=None):
     # import pdb; pdb.set_trace()
 
     return {
+        'now': datetime.now(),
         'dates': days,
         'month_name': MONTHS[month] + ' ' + str(year),
         'start_day': start_day - timedelta(days=1),

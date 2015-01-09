@@ -2,8 +2,9 @@
 <ul class="nav navbar-nav navbar-right">
     <li class="dropdown">
         <a class="dropdown-toggle" id="dropuser" data-toggle="dropdown"
-           href="#">{{ user.username }} <b class="caret"></b></a>
+           href="#">{{ user.get_full_name|default:user.username }} <b class="caret"></b></a>
         <ul class="dropdown-menu" role="menu" aria-labelledby="dropuser">
+            <li><a href="/admin/password_change/">Cambia password</a></li>
             <li><a href="{% url "mysite_logout" %}">Logout</a></li>
         </ul>
     </li>
