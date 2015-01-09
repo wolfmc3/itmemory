@@ -36,7 +36,7 @@ pre {
 }
 
 .calendar_day > div {
-    height: 90px;
+    height: 80px;
     float: right;
     margin-right: 7px;
     width: 90%;

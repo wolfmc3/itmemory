@@ -16,11 +16,11 @@ class PasswordsInline(admin.TabularInline):
 
 class HardwareObjectAdmin(admin.ModelAdmin):
     short_description = 'Hardware objects'
-    fieldsets = [
-        (None, {'fields': ['name', 'item', 'serial', 'image']}),
-        ('Installation place', {'fields': ['worksite', 'location']}),
-        ('Other', {'fields': ['primary_ip', 'parentobject']})
-    ]
+#    fieldsets = [
+#        (None, {'fields': ['name', 'item', 'serial', 'image']}),
+#        ('Installation place', {'fields': ['worksite', 'location']}),
+#        ('Other', {'fields': ['primary_ip', 'parentobject']})
+#    ]
     inlines = [SettingsInline, PasswordsInline]
     list_display = ('name', 'serial', 'worksite', 'primary_ip')
     search_fields = ['name', 'serial']
