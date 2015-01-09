@@ -113,6 +113,7 @@ class TaskCheck(models.Model):
     RESULT_VALUES = (
         (0, 'Non eseguito (NE)'),
         (1, 'Passato (PASS)'),
+        (4, 'Passato con errori (WARN)'),
         (2, 'Fallito (NG)'),
         (3, 'Non applicabile (NA)'),
     )
@@ -121,6 +122,7 @@ class TaskCheck(models.Model):
         1: 'primary',
         2: 'danger',
         3: 'info',
+        4: 'warning',
     }
     result = models.IntegerField(default=0,
                                  choices=RESULT_VALUES,
@@ -133,4 +135,4 @@ class TaskCheck(models.Model):
     note = models.TextField(max_length=1000, null=True, blank=True, verbose_name="Note sul controllo")
 
     def __str__(self):
-        return str(self.task) + " " + self.checktemplate.name + " " + ("OK" if self.result else "NG")
+        return str(self.task) + " " + self.checktemplate.name + " " + (self.get_result_display())

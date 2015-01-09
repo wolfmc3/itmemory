@@ -92,7 +92,9 @@
 
             <div>
                 {% if obj.image %}
-                <img src="{{ obj.image.url }}" alt="{{ obj.name }}" class="img-thumbnail">
+                <p class="text-center">
+                <img style="max-height: 150px;" src="{{ obj.image.url }}" alt="{{ obj.name }}" class="img-thumbnail">
+                </p>
                 {% endif %}
                 <p>
                     <strong>S/N:</strong> {{ obj.serial }}<br />
