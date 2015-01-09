@@ -32,10 +32,11 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = (
     'admin_tools',
-    'admin_tools.theming',
-    'admin_tools.menu',
-    'admin_tools.dashboard',
-    # 'grappelli',
+    #'admin_tools.theming',
+    #'admin_tools.menu',
+    #'admin_tools.dashboard',
+    'grappelli.dashboard',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -110,7 +111,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.tz"
 )
 
-# TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
+TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 # STATICFILES_DIRS = (
 #    os.path.join(BASE_DIR, "static"),
 #)
@@ -124,3 +125,5 @@ LOGIN_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
+GRAPPELLI_INDEX_DASHBOARD = 'custom_dashboard.CustomIndexDashboard'
+GRAPPELLI_ADMIN_TITLE = "It Memory Administration"
