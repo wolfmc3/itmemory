@@ -17,7 +17,10 @@ pre {
 
 .calendar_day {
     vertical-align: top;
-    overflow: auto;
+}
+
+.calendar_now {
+    background-color: lightblue;
 }
 
 .overmonth {
@@ -36,8 +39,9 @@ pre {
     height: 90px;
     float: right;
     margin-right: 7px;
-    width: 95px;
+    width: 90%;
     font-size: 70%;
+    overflow: auto;
 }
 
 .calendar_week {

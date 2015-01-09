@@ -21,19 +21,19 @@
             </td>
         </tr>
         <tr>
-            <th>Lun</th>
-            <th>Mar</th>
-            <th>Mer</th>
-            <th>Gio</th>
-            <th>Ven</th>
-            <th>Sab</th>
-            <th>Dom</th>
+            <th width="15%">Lun</th>
+            <th width="14%">Mar</th>
+            <th width="14%">Mer</th>
+            <th width="14%">Gio</th>
+            <th width="14%">Ven</th>
+            <th width="14%">Sab</th>
+            <th width="15%">Dom</th>
         </tr>
         </thead>
         <tbody>
             {% for day in dates %}
             {% if day.date.weekday == 0 %}<tr class="calendar_week">{% endif %}
-            <td class="calendar_day{% if day.overmonth %} overmonth{% endif %}">
+            <td class="calendar_day{% if day.overmonth %} overmonth{% endif %}{% if day.date == now.date %} calendar_now{% endif %}">
                 <h1>{{ day.date.day }}</h1>
                 <div>
                     {% for task in day.events %}
