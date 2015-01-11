@@ -37,7 +37,7 @@ class WorkSite(CustomerBase):
     customer = models.ForeignKey(Customer, related_name="Worksites")
 
     def fulltext(self):
-        return self.customer.name + "-" + self.name + "\n" + \
+        return self.name + "\n" + \
             self.address + "\n" + \
             self.city + "\n" + \
             self.telephone + "\n" + \

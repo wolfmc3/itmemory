@@ -23,7 +23,7 @@ SECRET_KEY = ')_cvtcgaa17)$*spo83$^ozn0j5j0g983ey3-)b_3xh5806ds%'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-TEMPLATE_DEBUG = False
+TEMPLATE_DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
@@ -116,6 +116,7 @@ TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 #    os.path.join(BASE_DIR, "static"),
 #)
 
+DJFRONTEND_STATIC_URL = '/static/'
 
 # ADMIN_TOOLS_MENU = 'itmemory.menu.CustomMenu'
 
