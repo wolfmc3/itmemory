@@ -60,6 +60,9 @@
             <h3>Attivit&agrave;</h3>
 
             <div class="bg-info" style="min-height:450px;">
+                <a class="btn btn-success btn-xs" href="{% url 'admin:customers_worksite_add'  %}">
+                    {% css_icon "plus" %} Aggiungi sede
+                </a>
                 <h4>Da eseguire</h4>
                 {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
                 <hr/>

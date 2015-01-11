@@ -38,11 +38,11 @@ class WorkSite(CustomerBase):
 
     def fulltext(self):
         return self.customer.name + "-" + self.name + "\n" + \
-               self.address + "\n" + \
-               self.city + "\n" + \
-               self.telephone + "\n" + \
-               self.reference_person + "\n" + \
-               self.email
+            self.address + "\n" + \
+            self.city + "\n" + \
+            self.telephone + "\n" + \
+            self.reference_person + "\n" + \
+            self.email + "\n"
 
     def __str__(self):
         return "{0} ({1})".format(self.name, self.customer.name)

@@ -26,9 +26,14 @@ class HardwareObjectAdmin(admin.ModelAdmin):
     search_fields = ['name', 'serial']
 
 
+class SettingTypeInline(admin.TabularInline):
+    model = SettingsType
+    extra = 1
+
+
+class SettingGroupAdmin(admin.ModelAdmin):
+    inlines = [SettingTypeInline]
+
 admin.site.register(HardwareObject, HardwareObjectAdmin)
-admin.site.register(Settings)
-admin.site.register(SettingsType)
-admin.site.register(SettingGroup)
-admin.site.register(SoftwarePassword)
+admin.site.register(SettingGroup, SettingGroupAdmin)
 
