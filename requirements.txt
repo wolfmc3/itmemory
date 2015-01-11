@@ -24,3 +24,4 @@ simple-crypt>=3.0.2
 South>=1.0.1
 web.py>=0.37
 wstools>=0.4.3
+django-mssql

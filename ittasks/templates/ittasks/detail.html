@@ -69,13 +69,24 @@
 
             <p>
                 {{ obj.hardwareobject.name }}
-                &nbsp;&nbsp;&nbsp;
-                <a class="btn btn-xs btn-primary" target="_blank"
+                 <a class="btn btn-xs btn-primary"
                    href="{% url 'objects:detail' obj.hardwareobject.id %}">
-                    {% css_icon 'search' %}</a>
+                    {% css_icon 'search' %}
+                 </a>
             </p>
-            <p>{{ obj.hardwareobject.worksite.customer.name }}</p>
-            <p>{{ obj.hardwareobject.worksite.name }}</p>
+            <p>{{ obj.hardwareobject.worksite.customer.name }}
+                <a class="btn btn-xs btn-primary"
+                   href="{% url 'customers:detail' obj.hardwareobject.worksite.customer.id %}">
+                    {% css_icon 'search' %}
+                </a>
+            </p>
+            <p>{{ obj.hardwareobject.worksite.name }}
+                <a class="btn btn-xs btn-primary"
+                   href="{% url 'customers:detail' obj.hardwareobject.worksite.customer.id %}#worksite{{ obj.hardwareobject.worksite.id }} ">
+                    {% css_icon 'search' %}
+                </a>
+
+            </p>
         </div>
     <div class="col-lg-6 round-box">
         <h3>Dati attivit&agrave;</h3>
