@@ -6,6 +6,7 @@ from ittasks.models import Task
 
 register = template.Library()
 
+
 @register.inclusion_tag("ctl_calendar.html")
 def ctl_calendar():
     pass
@@ -25,6 +26,7 @@ MONTHS = [
     "Novembre",
     "Dicembre"
 ]
+
 
 @register.inclusion_tag("calendar.html")
 def taskcalendar(month=None, year=None):
