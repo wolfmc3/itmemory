@@ -19,7 +19,7 @@
         {% for groupitem in group_list %}
         <div class="col-lg-6 round-box">
             <h4>{% css_icon "lock" %} {{ groupitem.grouper }}
-                <a class="pull-right ajax_get"
+                <a class="ajax_get btn btn-xs btn-primary pull-right"
                    href="{% url 'objects:addpassword' obj.id %}?grp={{ groupitem.grouper.firstsetting.id }}">
                     {% css_icon "plus" %}
                 </a>

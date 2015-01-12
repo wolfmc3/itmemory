@@ -1,5 +1,6 @@
 # coding=utf-8
 from django.db import models
+from django.forms.models import model_to_dict
 
 
 class CustomerBase(models.Model):
@@ -15,7 +16,12 @@ class CustomerBase(models.Model):
     reference_person = models.CharField("Persona di riferimento", max_length=255, null=True, blank=True)
 
     def fulltext(self):
-        return self.name + "\n" + self.address + "\n" + self.city + "\n" + self.telephone + "\n" + self.reference_person + "\n" + self.email
+        return self.name + "\n" + \
+            self.address + "\n" + \
+            self.city + "\n" + \
+            self.telephone + "\n" + \
+            self.reference_person + "\n" + \
+            self.email
 
     def __str__(self):
         return self.name
@@ -27,6 +33,20 @@ class Customer(CustomerBase):
         verbose_name_plural = "Clienti"
         ordering = ['name']
 
+    onlylegal = models.BooleanField(verbose_name="Solo sede legale", default=False)
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        isnew = self.id is None
+        super(Customer, self).save(force_insert, force_update, using, update_fields)
+        if isnew and not self.onlylegal:
+            newworksite = WorkSite(customer=self)
+            newworksite.name = "Sede principale"
+            newworksite.address = self.address
+            newworksite.city = self.city
+            newworksite.email = self.email
+            newworksite.telephone = self.telephone
+            newworksite.reference_person = self.reference_person
+            newworksite.save()
 
 class WorkSite(CustomerBase):
     class Meta():

@@ -1,5 +1,4 @@
 {% extends 'objects/index.html' %}
-{% from objects.models import Setting %]
 {% load itmemory_tags %}
 {% block body_contents %}
 <div class="row">
@@ -24,7 +23,7 @@
             {% for branch in obj.Worksites.all %}
             <div class="col-lg-offset-1 col-lg-11 round-box">
                 <h4>
-                    <a name="worksite{{ branch.it }}"></a>{{ branch.name }}
+                    <a name="worksite{{ branch.id }}" id="anchor_worksite{{ branch.id }}"></a>{{ branch.name }}
                     <a target="_blank" class="btn btn-info btn-xs pull-right" href="{% url 'admin:objects_hardwareobject_add'  %}?worksite={{ branch.id }}">
                         {% css_icon "plus" %} Aggiungi dispositivo
                     </a>
@@ -80,4 +79,12 @@
         </div>
 
     </div>
+    <script>
+        var url = document.location.href;
+        var hash = url.substring(url.indexOf("#")+1);
+        var obj = $("#anchor_"+ hash )
+        if (obj) {
+            obj.parent().prepend('{% css_icon "arrow-right"|escape %}')
+        }
+    </script>
     {% endblock body_contents %}
