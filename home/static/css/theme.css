@@ -5,6 +5,11 @@ body {
     background-color: #efefef;
 }
 
+.alert > h1 {
+    font-size: 40px;
+    margin: 0px;
+}
+
 .bg-primary, .bg-warning, .bg-info, .bg-danger {
     margin-right: 10px;
     padding: 10px;
