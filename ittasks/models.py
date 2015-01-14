@@ -2,9 +2,10 @@
 from datetime import datetime, timedelta
 from django.contrib.auth.models import User
 from django.db import models
-
+from templated_email import send_templated_mail
 from objects.models import HardwareObject
 from dateutil.relativedelta import relativedelta
+from django.db.models.signals import pre_save
 
 
 class TaskTemplate(models.Model):
@@ -97,6 +98,18 @@ class Task(models.Model):
     createnext = property(_createnext)
     updatechecks = property(_updatechecks)
 
+    def has_changed(instance, field):
+        if not instance.pk:
+            return False
+        old_value = instance.__class__._default_manager.filter(pk=instance.pk).values(field).get()[field]
+        return not getattr(instance, field) == old_value
+
+    def get_original(instance, field):
+        if not instance.pk:
+            return getattr(instance, field)
+        old_value = instance.__class__._default_manager.filter(pk=instance.pk).values(field).get()[field]
+        return old_value
+
     def __str__(self):
         return self.hardwareobject.name + " -> " + self.template.name
 
@@ -136,3 +149,45 @@ class TaskCheck(models.Model):
 
     def __str__(self):
         return str(self.task) + " " + self.checktemplate.name + " " + (self.get_result_display())
+
+def send_mail_user(task, user, template):
+    send_templated_mail(
+        template_name=template,
+        from_email='itmemory@globit.it',
+        recipient_list=[user.email],
+        context={
+            'username':user.username,
+            'full_name':user.get_full_name(),
+            'task': task
+        },
+    )
+
+
+def pre_save_task(sender, **kwargs):
+    task = kwargs['instance']
+    if task.has_changed('user'):
+        origUserId = task.get_original('user')
+        print "Task change from {0} to {1} ".format(task.get_original('user'),task.user)
+        if kwargs['instance'].user is not None:
+            try:
+                send_mail_user(task, task.user, "assign_task")
+            except ValueError:
+                print ValueError.message
+            print("Assign task: send mail to user: {0} ({1})".format(
+                task.user,
+                task.user.email
+            ))
+        elif origUserId is not None:
+            old_tasks = Task.objects.filter(user_id=origUserId)
+            if old_tasks.count > 0:
+                old_task = old_tasks[0]
+                print("Assign task: send cancellation mail to user: {0} ({1})".format(
+                    old_task.user,
+                    old_task.user.email
+                ))
+                try:
+                    send_mail_user(old_task, old_task.user, "cancel_task")
+                except ValueError:
+                    print ValueError.message
+
+pre_save.connect(pre_save_task, sender=Task)

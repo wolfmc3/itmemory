@@ -1,0 +1,23 @@
+{% block subject %}Assegnazione task per {{username}}{% endblock %}
+{% block plain %}
+Ciao {{full_name}},
+
+Hai un nuovo task assegnato:
+{{ task }}
+
+Buon Lavoro
+{% endblock %}
+
+{% block html %}
+<p>Ciao <strong>{{full_name}}</strong>,</p>
+
+<p>Hai un nuovo task assegnato:
+<dl>
+    <dt>
+    {{ task }}
+    </dt>
+<dl>
+</p>
+
+<p>Buon Lavoro</p>
+{% endblock %}
