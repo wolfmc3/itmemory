@@ -6,6 +6,8 @@ from simplecrypt import encrypt, decrypt
 from itmemory import settings as django_setting
 
 
+
+
 class HardwareObject(models.Model):
     class Meta():
         verbose_name = "Dispositivo hardware"
