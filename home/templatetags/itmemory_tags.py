@@ -18,3 +18,4 @@ def active_page(request, view_name):
         return "active" if resolve(request.path_info).namespace == view_name else ""
     except Resolver404:
         return ""
+

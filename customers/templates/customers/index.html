@@ -4,7 +4,7 @@
 {% block body_contents %}
 
 <div class="row">
-    <div class="col-md-12 round-box bg-info">
+    <div class="col-md-12 text-center round-box bg-info">
         <form action="" method="post" class="form-inline">
             {% csrf_token %}
             <div class="form-group">
@@ -25,7 +25,10 @@
                        value="{{ request.POST.obj_serial }}" />
             </div>
             <div class="form-group">
-                <input class="btn btn-default" type="submit" value="Cerca">
+                <input class="btn btn-success" type="submit" value="Cerca">
+            </div>
+            <div class="form-group">
+                <a class="btn btn-default btn-xs pull-right" href="{% url 'customers:import' %}">Importa da magonet..</a>
             </div>
         </form>
     </div>
