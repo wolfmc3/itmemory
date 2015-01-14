@@ -128,3 +128,19 @@ CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
 GRAPPELLI_INDEX_DASHBOARD = 'custom_dashboard.CustomIndexDashboard'
 GRAPPELLI_ADMIN_TITLE = "It Memory Administration"
+
+#MAGONET IMPORTER
+
+MAGONETDB = {
+    'server': '192.168.5.22',
+    'port': '1433',
+    'user': 'sa',
+    'password': 'sa',
+    'db': 'ITALPAD_NET',
+}
+
+#MAIL TEPLATED
+TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
+
+EMAIL_HOST = '192.168.5.248'
+EMAIL_PORT = 25
