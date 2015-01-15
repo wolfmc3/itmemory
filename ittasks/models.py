@@ -1,11 +1,13 @@
 # coding=utf-8
 from datetime import datetime, timedelta
+from django.conf import settings
 from django.contrib.auth.models import User
 from django.db import models
 from templated_email import send_templated_mail
 from objects.models import HardwareObject
 from dateutil.relativedelta import relativedelta
 from django.db.models.signals import pre_save
+
 
 
 class TaskTemplate(models.Model):
@@ -22,6 +24,9 @@ class TaskTemplate(models.Model):
     hour = models.CharField(max_length=2, verbose_name="Ore")
     minute = models.CharField(max_length=2, verbose_name="Minuti")
     enabled = models.BooleanField(default=True, verbose_name="Abilitato")
+
+    send_reminder = models.BooleanField(default=True, verbose_name="Invia promemoria")
+    send_expiration = models.BooleanField(default=True, verbose_name="Invia promemoria scadenza")
 
     def __str__(self):
         return self.name
@@ -53,7 +58,32 @@ class Task(models.Model):
     enabled = models.BooleanField(default=True, verbose_name="Abilitato")
     done = models.BooleanField(default=False, verbose_name="Completato")
     laststart = models.DateTimeField(null=True, blank=True, verbose_name="Ultimo avvio/esecuzione")
-    user = models.ForeignKey(User, null=True, blank=True, verbose_name="Utente assegnato")
+    user = models.ForeignKey(User, null=True, blank=True,related_name="assigned_tasks", verbose_name="Utente assegnato")
+    reminder_send_date = models.DateTimeField(null=True, blank=True, verbose_name="Ultimo invio promemoria")
+    expired_send_date = models.DateTimeField(null=True, blank=True, verbose_name="Ultimo invio scadenza")
+
+    def _send_reminder(self, check_date=datetime.now().date()):
+        if self.done:
+            return False
+        r_date = (self.laststart - relativedelta(days=settings.TASK_REMIND_DAYS)).date()
+        if not self.reminder_send_date is None:
+            if check_date <= self.reminder_send_date.date():
+                return False
+        print( "r_date " + str(r_date))
+        print( "check_date " + str(check_date))
+        return r_date < check_date
+
+
+    def _send_expiration(self, check_date=datetime.now().date()):
+        if self.done:
+            return False
+        e_date = (self.laststart + relativedelta(days=settings.TASK_EXPIRED_DAYS)).date()
+        if not self.expired_send_date is None:
+            if check_date <= self.expired_send_date.date():
+                return False
+        print( "r_date " + str(e_date))
+        print( "check_date " + str(check_date))
+        return e_date < check_date
 
     def _createnext(self):
         newtask = Task(
@@ -93,10 +123,13 @@ class Task(models.Model):
                 ntaskcheck.save()
         return chkstmpl
 
+
     to_past = property(_to_past)
     nextstart = property(_nextstart)
     createnext = property(_createnext)
     updatechecks = property(_updatechecks)
+    send_reminder = property(_send_reminder)
+    send_expiration = property(_send_expiration)
 
     def has_changed(instance, field):
         if not instance.pk:
@@ -168,7 +201,7 @@ def pre_save_task(sender, **kwargs):
     if task.has_changed('user'):
         origUserId = task.get_original('user')
         print "Task change from {0} to {1} ".format(task.get_original('user'),task.user)
-        if kwargs['instance'].user is not None:
+        if task.user is not None:
             try:
                 send_mail_user(task, task.user, "assign_task")
             except ValueError:
@@ -177,7 +210,7 @@ def pre_save_task(sender, **kwargs):
                 task.user,
                 task.user.email
             ))
-        elif origUserId is not None:
+        if origUserId is not None:
             old_tasks = Task.objects.filter(user_id=origUserId)
             if old_tasks.count > 0:
                 old_task = old_tasks[0]
