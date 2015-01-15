@@ -4,6 +4,9 @@ Ciao {{full_name}},
 
 Hai un nuovo task assegnato:
 {{ task }}
+Presso: {{ task.hardwareobject.worksite }}
+Scadenza: {{ task.laststart }}
+http://remote.globit.it:8081{% url "ittasks:detail" task.id %}
 
 Buon Lavoro
 {% endblock %}
@@ -14,7 +17,10 @@ Buon Lavoro
 <p>Hai un nuovo task assegnato:
 <dl>
     <dt>
-    {{ task }}
+        <strong>{{ task|escape }}</strong><br />
+        <strong>Presso:</strong> {{ task.hardwareobject.worksite|escape }}<br />
+        <strong>Scadenza:</strong> {{ task.laststart|date:"d/m/Y" }}<br />
+        <a href="http://remote.globit.it:8081{% url "ittasks:detail" task.id %}">Dettagli</a>
     </dt>
 <dl>
 </p>
