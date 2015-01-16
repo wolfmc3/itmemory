@@ -21,9 +21,11 @@ class Command(BaseCommand):
             if task.send_reminder:
                 # TODO: Send mail reminder
                 user_list = []
-                user_list.extend(task.template.send_reminder_group.user_set.all())
-                if task.user is not None and task.user not in user_list:
+
+                if task.user is not None:
                     user_list.append(task.user)
+                elif task.template.send_reminder_group is not None:
+                    user_list.extend(task.template.send_reminder_group.user_set.all())
                 for mail_user in user_list:
                     self.stdout.write("\tSended reminder to " + mail_user.email)
                     send_mail_user(task, mail_user, "reminder_task")
@@ -32,7 +34,8 @@ class Command(BaseCommand):
                 task.save()
             if task.send_expiration:
                 user_list = []
-                user_list.extend(task.template.send_reminder_group.user_set.all())
+                if task.template.send_reminder_group is not None:
+                    user_list.extend(task.template.send_reminder_group.user_set.all())
                 if task.user is not None and task.user not in user_list:
                     user_list.append(task.user)
                 for mail_user in user_list:
