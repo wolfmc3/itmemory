@@ -2,11 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60728673-1930-48c0-9944-ece1ae5c3472" name="Default" comment="Send Email Task Status implementation">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ittasks/management/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ittasks/management/commands/__init__.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ittasks/management/commands/cron.py" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/templated_email/assign_task.email" afterPath="$PROJECT_DIR$/templates/templated_email/assign_task.email" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/templates/templated_email/cancel_task.email" afterPath="$PROJECT_DIR$/templates/templated_email/cancel_task.email" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ittasks/migrations/0005_auto_20150116_0054.py" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/templated_email/expired_task.email" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/templates/templated_email/reminder_task.email" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ittasks/management/commands/resetnotify.py" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ittasks/management/commands/cron.py" afterPath="$PROJECT_DIR$/ittasks/management/commands/cron.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ittasks/models.py" afterPath="$PROJECT_DIR$/ittasks/models.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/itmemory/settings.py" afterPath="$PROJECT_DIR$/itmemory/settings.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
@@ -37,8 +37,8 @@
       <file leaf-file-name="models.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ittasks/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.7305389" vertical-offset="909" max-vertical-offset="3465">
-              <caret line="85" column="34" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.42201835" vertical-offset="3542" max-vertical-offset="4500">
+              <caret line="207" column="23" selection-start-line="207" selection-start-column="23" selection-end-line="207" selection-end-column="23" />
               <folding>
                 <element signature="e#15#55#0" expanded="true" />
               </folding>
@@ -49,8 +49,8 @@
       <file leaf-file-name="cancel_task.email" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/templated_email/cancel_task.email">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="570">
-              <caret line="24" column="68" selection-start-line="24" selection-start-column="68" selection-end-line="24" selection-end-column="74" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="248" max-vertical-offset="684">
+              <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="8" />
               <folding />
             </state>
           </provider>
@@ -59,8 +59,8 @@
       <file leaf-file-name="settings.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/itmemory/settings.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="1824" max-vertical-offset="2325">
-              <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="17" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="2219" max-vertical-offset="2790">
+              <caret line="143" column="23" selection-start-line="143" selection-start-column="23" selection-end-line="143" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -69,7 +69,7 @@
       <file leaf-file-name="assign_task.email" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/templates/templated_email/assign_task.email">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="510">
+            <state vertical-scroll-proportion="0.0" vertical-offset="378" max-vertical-offset="612">
               <caret line="21" column="74" selection-start-line="21" selection-start-column="74" selection-end-line="21" selection-end-column="74" />
               <folding />
             </state>
@@ -79,10 +79,42 @@
       <file leaf-file-name="cron.py" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ittasks/management/commands/cron.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="122" max-vertical-offset="918">
+              <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
               <folding>
-                <element signature="e#0#65#0" expanded="true" />
+                <element signature="e#0#29#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="reminder_task.email" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/templated_email/reminder_task.email">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="212" max-vertical-offset="648">
+              <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="expired_task.email" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/templates/templated_email/expired_task.email">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="630">
+              <caret line="23" column="94" selection-start-line="23" selection-start-column="94" selection-end-line="23" selection-end-column="94" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="resetnotify.py" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/ittasks/management/commands/resetnotify.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+              <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+              <folding>
+                <element signature="e#0#51#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -102,9 +134,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/itmemory/urls.py" />
-        <option value="$PROJECT_DIR$/itmemory/templatetags/itmemory_tags.py" />
-        <option value="$PROJECT_DIR$/objects/urls.py" />
         <option value="$PROJECT_DIR$/home/templates/base_popup.html" />
         <option value="$PROJECT_DIR$/objects/templates/objects/password.html" />
         <option value="$PROJECT_DIR$/objects/templatetags/objects_tags.py" />
@@ -151,16 +180,19 @@
         <option value="$PROJECT_DIR$/templates/templated_email/cancel_task.email" />
         <option value="$PROJECT_DIR$/templates/templated_email/assign_task.email" />
         <option value="$PROJECT_DIR$/itmemory/settings.py" />
+        <option value="$PROJECT_DIR$/ittasks/management/commands/resetnotify.py" />
+        <option value="$PROJECT_DIR$/templates/templated_email/expired_task.email" />
+        <option value="$PROJECT_DIR$/templates/templated_email/reminder_task.email" />
         <option value="$PROJECT_DIR$/ittasks/management/commands/cron.py" />
         <option value="$PROJECT_DIR$/ittasks/models.py" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-1" />
-    <option name="y" value="26" />
-    <option name="width" value="1682" />
-    <option name="height" value="902" />
+    <option name="x" value="1279" />
+    <option name="y" value="27" />
+    <option name="width" value="1922" />
+    <option name="height" value="1054" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <OptionsSetting value="true" id="Add" />
@@ -353,7 +385,18 @@
       <recent name="$PROJECT_DIR$/home" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.RUNSERVER">
+  <component name="RunManager" selected="Python.RUNSERVER (local)">
+    <configuration default="true" type="BashConfigurationType" factoryName="Bash">
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="INTERPRETER_PATH" value="/bin/bash" />
+      <option name="WORKING_DIRECTORY" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SCRIPT_NAME" value="" />
+      <option name="PARAMETERS" value="" />
+      <module name="" />
+      <envs />
+      <method />
+    </configuration>
     <configuration default="true" type="tests" factoryName="py.test">
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -850,29 +893,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-1" y="26" width="1682" height="902" extended-state="6" />
+    <frame x="1279" y="27" width="1922" height="1054" extended-state="6" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3092643" sideWeight="0.4996979" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27247956" sideWeight="0.4996979" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.47362515" sideWeight="0.49920845" order="13" side_tool="false" content_ui="tabs" x="1211" y="207" width="1895" height="235" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32884398" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39918256" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2704826" sideWeight="0.50079155" order="10" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16374622" sideWeight="0.5030426" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32561308" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24954683" sideWeight="0.49910232" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.163142" sideWeight="0.4969574" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39918256" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32833788" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32288828" sideWeight="0.4996979" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16374622" sideWeight="0.5030426" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.27247956" sideWeight="0.50030214" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32561308" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16306068" sideWeight="0.4969574" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Python Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32833788" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32211" sideWeight="0.4996979" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32970026" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32996634" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1162,13 +1205,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.virtualenvs/itmemory/lib/python2.7/site-packages/templated_email/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="747" max-vertical-offset="1155">
-          <caret line="71" column="0" selection-start-line="71" selection-start-column="0" selection-end-line="71" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.virtualenvs/itmemory/lib/python2.7/site-packages/django/db/models/fields/related.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="8239" max-vertical-offset="34545">
@@ -1204,20 +1240,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$USER_HOME$/.virtualenvs/itmemory/local/lib/python2.7/site-packages/templated_email/__init__.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="719" max-vertical-offset="1155">
-          <caret line="71" column="24" selection-start-line="71" selection-start-column="24" selection-end-line="71" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$USER_HOME$/.virtualenvs/itmemory/lib/python2.7/site-packages/templated_email/backends/vanilla_django.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="2412" max-vertical-offset="2820">
-          <caret line="183" column="16" selection-start-line="183" selection-start-column="16" selection-end-line="183" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$USER_HOME$/.virtualenvs/itmemory/local/lib/python2.7/site-packages/django/core/mail/message.py">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="3749" max-vertical-offset="6090">
@@ -1246,14 +1268,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/templated_email/cancel_task.email">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="570">
-          <caret line="24" column="68" selection-start-line="24" selection-start-column="68" selection-end-line="24" selection-end-column="74" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/templates/templated_email/assign_task.email">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="45" max-vertical-offset="510">
@@ -1266,34 +1280,65 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.13081396" vertical-offset="90" max-vertical-offset="1920">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding>
-            <element signature="e#15#43#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/itmemory/settings.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="1824" max-vertical-offset="2325">
-          <caret line="148" column="0" selection-start-line="148" selection-start-column="0" selection-end-line="148" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="2219" max-vertical-offset="2790">
+          <caret line="143" column="23" selection-start-line="143" selection-start-column="23" selection-end-line="143" selection-end-column="23" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/ittasks/management/commands/resetnotify.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/templated_email/cancel_task.email">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="248" max-vertical-offset="684">
+          <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="8" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/templated_email/expired_task.email">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="108" max-vertical-offset="630">
+          <caret line="23" column="94" selection-start-line="23" selection-start-column="94" selection-end-line="23" selection-end-column="94" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/templated_email/reminder_task.email">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="212" max-vertical-offset="648">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="4" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ittasks/management/commands/cron.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="255">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="122" max-vertical-offset="918">
+          <caret line="28" column="66" selection-start-line="28" selection-start-column="66" selection-end-line="28" selection-end-column="66" />
           <folding>
-            <element signature="e#0#65#0" expanded="true" />
+            <element signature="e#0#29#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/ittasks/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.7305389" vertical-offset="909" max-vertical-offset="3465">
-          <caret line="85" column="34" selection-start-line="85" selection-start-column="34" selection-end-line="85" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.42201835" vertical-offset="3542" max-vertical-offset="4500">
+          <caret line="207" column="23" selection-start-line="207" selection-start-column="23" selection-end-line="207" selection-end-column="23" />
           <folding>
             <element signature="e#15#55#0" expanded="true" />
           </folding>

@@ -141,7 +141,7 @@ MAGONETDB = {
 
 #MAIL TEPLATED
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
-EMAIL_HOST = '192.168.5.248'
+EMAIL_HOST = 'localhost'
 EMAIL_PORT = 25
 
 #IMPOSTAZIONI NOTIFICA TASK

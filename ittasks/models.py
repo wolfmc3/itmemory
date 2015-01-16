@@ -1,13 +1,12 @@
 # coding=utf-8
 from datetime import datetime, timedelta
 from django.conf import settings
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.db import models
 from templated_email import send_templated_mail
 from objects.models import HardwareObject
 from dateutil.relativedelta import relativedelta
 from django.db.models.signals import pre_save
-
 
 
 class TaskTemplate(models.Model):
@@ -26,7 +25,14 @@ class TaskTemplate(models.Model):
     enabled = models.BooleanField(default=True, verbose_name="Abilitato")
 
     send_reminder = models.BooleanField(default=True, verbose_name="Invia promemoria")
+    send_reminder_group = models.ForeignKey(Group, null=True, blank=True,
+                                            related_name="template_to_notify",
+                                            verbose_name="Gruppo notifiche")
+
     send_expiration = models.BooleanField(default=True, verbose_name="Invia promemoria scadenza")
+    send_expiration_group = models.ForeignKey(Group, null=True, blank=True,
+                                              related_name="template_exp_to_notify",
+                                              verbose_name="Gruppo notifiche scadenze")
 
     def __str__(self):
         return self.name
@@ -58,31 +64,39 @@ class Task(models.Model):
     enabled = models.BooleanField(default=True, verbose_name="Abilitato")
     done = models.BooleanField(default=False, verbose_name="Completato")
     laststart = models.DateTimeField(null=True, blank=True, verbose_name="Ultimo avvio/esecuzione")
-    user = models.ForeignKey(User, null=True, blank=True,related_name="assigned_tasks", verbose_name="Utente assegnato")
+    user = models.ForeignKey(User, null=True, blank=True, related_name="assigned_tasks", verbose_name="Utente assegnato")
     reminder_send_date = models.DateTimeField(null=True, blank=True, verbose_name="Ultimo invio promemoria")
     expired_send_date = models.DateTimeField(null=True, blank=True, verbose_name="Ultimo invio scadenza")
 
-    def _send_reminder(self, check_date=datetime.now().date()):
-        if self.done:
+    def _send_reminder(self):
+        check_date = datetime.now().date()
+        # print("l_date " + str(self.laststart))
+
+        if self.done or not self.template.send_reminder:
             return False
+
+        e_date = (self.laststart + relativedelta(days=settings.TASK_EXPIRED_DAYS)).date()
+
+        if e_date < check_date:
+            return False
+
         r_date = (self.laststart - relativedelta(days=settings.TASK_REMIND_DAYS)).date()
-        if not self.reminder_send_date is None:
+        if self.reminder_send_date is not None:
             if check_date <= self.reminder_send_date.date():
                 return False
-        print( "r_date " + str(r_date))
-        print( "check_date " + str(check_date))
+        # print("r_date " + str(r_date))
         return r_date < check_date
 
-
-    def _send_expiration(self, check_date=datetime.now().date()):
-        if self.done:
+    def _send_expiration(self):
+        check_date = datetime.now().date()
+        # print("l_date " + str(self.laststart))
+        if self.done or not self.template.send_expiration:
             return False
         e_date = (self.laststart + relativedelta(days=settings.TASK_EXPIRED_DAYS)).date()
-        if not self.expired_send_date is None:
+        if self.expired_send_date is not None:
             if check_date <= self.expired_send_date.date():
                 return False
-        print( "r_date " + str(e_date))
-        print( "check_date " + str(check_date))
+        # print("e_date " + str(e_date))
         return e_date < check_date
 
     def _createnext(self):
@@ -123,7 +137,6 @@ class Task(models.Model):
                 ntaskcheck.save()
         return chkstmpl
 
-
     to_past = property(_to_past)
     nextstart = property(_nextstart)
     createnext = property(_createnext)
@@ -131,16 +144,19 @@ class Task(models.Model):
     send_reminder = property(_send_reminder)
     send_expiration = property(_send_expiration)
 
-    def has_changed(instance, field):
-        if not instance.pk:
+    def has_changed(self, field):
+        if not self.pk:
             return False
-        old_value = instance.__class__._default_manager.filter(pk=instance.pk).values(field).get()[field]
-        return not getattr(instance, field) == old_value
+        old_value = self.__class__._default_manager.filter(pk=self.pk).values(field).get()[field]
+        value = getattr(self, field)
+        if value is not None:
+            value = value.id
+        return not value == old_value
 
-    def get_original(instance, field):
-        if not instance.pk:
+    def get_original(self, field):
+        if not self.pk:
             return getattr(instance, field)
-        old_value = instance.__class__._default_manager.filter(pk=instance.pk).values(field).get()[field]
+        old_value = self.__class__._default_manager.filter(pk=self.pk).values(field).get()[field]
         return old_value
 
     def __str__(self):
@@ -175,7 +191,7 @@ class TaskCheck(models.Model):
                                  verbose_name="Risultato")
 
     def _cssresult(self):
-        return self.RESULT_VALUES_CLASS[self.result]
+        return self.RESULT_VALUES_CLASS[int(self.result)]
 
     cssresult = property(_cssresult)
     note = models.TextField(max_length=1000, null=True, blank=True, verbose_name="Note sul controllo")
@@ -183,14 +199,17 @@ class TaskCheck(models.Model):
     def __str__(self):
         return str(self.task) + " " + self.checktemplate.name + " " + (self.get_result_display())
 
+
 def send_mail_user(task, user, template):
-    send_templated_mail(
+    if user.email is None:
+        return
+    return send_templated_mail(
         template_name=template,
-        from_email='itmemory@globit.it',
+        from_email='ced@globit.it',
         recipient_list=[user.email],
         context={
-            'username':user.username,
-            'full_name':user.get_full_name(),
+            'username': user.username,
+            'full_name': user.get_full_name(),
             'task': task
         },
     )
@@ -199,8 +218,8 @@ def send_mail_user(task, user, template):
 def pre_save_task(sender, **kwargs):
     task = kwargs['instance']
     if task.has_changed('user'):
-        origUserId = task.get_original('user')
-        print "Task change from {0} to {1} ".format(task.get_original('user'),task.user)
+        origuserid = task.get_original('user')
+        print "Task change from {0} to {1} ".format(task.get_original('user'), task.user)
         if task.user is not None:
             try:
                 send_mail_user(task, task.user, "assign_task")
@@ -210,8 +229,8 @@ def pre_save_task(sender, **kwargs):
                 task.user,
                 task.user.email
             ))
-        if origUserId is not None:
-            old_tasks = Task.objects.filter(user_id=origUserId)
+        if origuserid is not None:
+            old_tasks = Task.objects.filter(user_id=origuserid)
             if old_tasks.count > 0:
                 old_task = old_tasks[0]
                 print("Assign task: send cancellation mail to user: {0} ({1})".format(
