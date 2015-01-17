@@ -136,7 +136,7 @@ MAGONETDB = {
     'port': '1433',
     'user': 'sa',
     'password': 'sa',
-    'db': 'ITALPAD_NET',
+    'db': 'DB_NET',
 }
 
 #MAIL TEPLATED
