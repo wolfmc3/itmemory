@@ -35,7 +35,7 @@
     </tr>
     {% for row in rows %}
     <tr>
-        <td><a href="{% url 'customers:add' row.CustSupp %}" class="btn btn-info btn-xs">Importa</a> </td>
+        <td><a href="{% url 'customers:add' %}?code={{ row.CustSupp }}" class="btn btn-info btn-xs">Importa</a> </td>
         <td>{{ row.CustSupp }}</td>
         <td>{{ row.CompanyName }}</td>
         <td>{{ row.TaxIdNumber }}</td>
