@@ -132,7 +132,7 @@ GRAPPELLI_ADMIN_TITLE = "It Memory Administration"
 #MAGONET IMPORTER
 
 MAGONETDB = {
-    'server': '192.168.5.22',
+    'server': 'SQLSERVERHOST.domain.local',
     'port': '1433',
     'user': 'sa',
     'password': 'sa',
