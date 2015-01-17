@@ -73,19 +73,23 @@ class ImportCustomer(generic.TemplateView):
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
 
-def import_add(request, code):
+def import_add(request):
     from magonet.connector import MagoNet
     conn = MagoNet()
     conn.connect()
-    rows = conn.getcustomer_byid(str(code))
+    rows = conn.getcustomer_byid(str(request.GET['code']))
     conn.disconnect()
     row = rows[0]
-    newcust = Customer()
+    cust_list = Customer.objects.filter(origin_code=row['CustSupp'])
+    if cust_list:
+        newcust = cust_list[0]
+    else:
+        newcust = Customer()
     newcust.address = row['Address']
     newcust.city = row['City']
     newcust.email = row['EMail']
     newcust.name = row['CompanyName']
-    newcust.origin_code = code
+    newcust.origin_code = row['CustSupp']
     newcust.telephone = row['Telephone1'] + " " + row['Telephone2'] + " " + row['Fax']
     newcust.save()
     return HttpResponseRedirect(reverse("customers:detail", kwargs={"pk": newcust.id}))
