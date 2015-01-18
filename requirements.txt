@@ -26,3 +26,4 @@ wstools>=0.4.3
 mysql-python
 pymssql # apt-get install freetds-dev
 django-templated-email
+django_mailbox
