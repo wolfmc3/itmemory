@@ -1,8 +1,9 @@
 from django.core.urlresolvers import reverse
 from django.db.models import Q
 from django.views import generic
+from django.http import HttpResponseRedirect
 from customers.models import Customer
-from django.http import JsonResponse, HttpResponse, HttpResponseRedirect
+
 
 class IndexView(generic.ListView):
     template_name = 'customers/index.html'
@@ -49,6 +50,7 @@ class DetailView(generic.DetailView):
         )
         return context
 
+
 class ImportCustomer(generic.TemplateView):
     template_name = "customers/import.html"
 
@@ -72,6 +74,7 @@ class ImportCustomer(generic.TemplateView):
 
     def post(self, request, *args, **kwargs):
         return self.get(request, *args, **kwargs)
+
 
 def import_add(request):
     from magonet.connector import MagoNet

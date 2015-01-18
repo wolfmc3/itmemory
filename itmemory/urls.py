@@ -12,6 +12,7 @@ urlpatterns = patterns(
     url(r'^objects/', include('objects.urls', namespace="objects")),
     url(r'^ittasks/', include('ittasks.urls', namespace="ittasks")),
     url(r'^customers/', include('customers.urls', namespace="customers")),
+    url(r'^hwlogs/', include('hwlogs.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^grappelli/', include('grappelli.urls')),  # grappelli URLS
     url(r'^admin_tools/', include('admin_tools.urls')),
