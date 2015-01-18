@@ -52,6 +52,7 @@ INSTALLED_APPS = (
     'customers',
     'objects',
     'ittasks',
+    'hwlogs',
 )
 
 MIDDLEWARE_CLASSES = (
