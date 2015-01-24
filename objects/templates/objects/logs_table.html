@@ -1,0 +1,30 @@
+{% load itmemory_tags %}
+<table class="table table-condensed">
+    <thead>
+    <tr>
+        <th>Level</th>
+        <th>Time</th>
+        <th>Log</th>
+        <th>Message</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for log in logs %}
+    <tr>
+        <td>
+            {% css_icon log.level_icon %} {{ log.get_level_display }}
+        </td>
+        <td>
+            {{ log.time }}
+        </td>
+        <td>
+            {{ log.log_name }}
+        </td>
+        <td>
+            {{ log.short_message }}
+        </td>
+    </tr>
+    {% endfor %}
+    </tbody>
+
+</table>

@@ -31,3 +31,8 @@ def toactivatetask(context, hwobject):
     if not html:
         html = "<p>" + render_to_string("icon.html", {'iconname': "info-sign"}) + "Nessun controllo da attivare</p>"
     return html
+
+
+@register.inclusion_tag("objects/logs_table.html")
+def hwlogs(hwobject, limit=10):
+    return {'logs': hwobject.systemlogs.order_by("-time").all()[:limit]}
