@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'objects',
     'ittasks',
     'hwlogs',
+    'django_ftpserver',
 )
 
 MIDDLEWARE_CLASSES = (

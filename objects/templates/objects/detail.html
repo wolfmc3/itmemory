@@ -85,6 +85,12 @@
             {% endfor %}
         </div>
         {% endfor %}
+        <div class="row col-lg-12 round-box">
+            <h4>{% css_icon "list" %} System Log</h4>
+            <div class="col-lg-12">
+            {% hwlogs obj 10 %}
+            </div>
+        </div>
     </div>
     <div class="row col-lg-4 round-box">
         <div class="col-lg-12 round-box coll_box">
