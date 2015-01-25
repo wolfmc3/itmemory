@@ -6,6 +6,11 @@ from objects.models import HardwareObject
 
 
 class HwLog(models.Model):
+    class Meta():
+        verbose_name = "Log dispositivo"
+        verbose_name_plural = "Logs dispositivo"
+        ordering = ['-time']
+
     ERROR_LEVELS = [
         ('0',	'Emergency'),
         ('1',	'Alert'),
