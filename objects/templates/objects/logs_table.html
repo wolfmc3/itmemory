@@ -1,4 +1,19 @@
 {% load itmemory_tags %}
+<div>
+    {% if group_logs %}
+        <div>
+            <ul class="nav nav-pills" role="tablist">
+                <li role="presentation" class="{% if active_filter == -1 %}active{% endif %}">
+                    <a class="btn" href=".">Tutti</a>
+                </li>
+                {% for slog in group_logs %}
+                <li role="presentation" class="{% if slog.active %}active{% endif %}">
+                    <a class="btn" href="?filter_log={{ slog.id }}">{{ slog.name }} <span class="badge">{{ slog.count }}</span></a>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    {% endif %}
 <table class="table table-condensed">
     <thead>
     <tr>
@@ -21,10 +36,11 @@
             {{ log.log_name }}
         </td>
         <td>
-            {{ log.short_message }}
+            <span title="{{ log.message }}">{{ log.short_message }}</span>
         </td>
     </tr>
     {% endfor %}
     </tbody>
 
 </table>
+</div>
