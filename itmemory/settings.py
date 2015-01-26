@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'django.contrib.humanize',
+    'django_ftpserver',
     'django_mailbox',
     'jquery',
     'crispy_forms',
@@ -54,7 +55,6 @@ INSTALLED_APPS = (
     'objects',
     'ittasks',
     'hwlogs',
-    'django_ftpserver',
 )
 
 MIDDLEWARE_CLASSES = (
@@ -78,7 +78,7 @@ WSGI_APPLICATION = 'itmemory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'itmemory',
+        'NAME': 'itmemory_devel',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
