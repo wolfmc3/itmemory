@@ -17,6 +17,10 @@ class Command(ftpserver.Command):
             host_port,
             file_access_user=None, **handler_options
     ):
+        directory = "/tmp/receiver/"
+        if not os.path.exists(directory):
+            os.makedirs(directory)
+
         handler_class = FtpHandler
         return utils.make_server(
             server_class,

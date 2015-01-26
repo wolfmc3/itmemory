@@ -1,7 +1,12 @@
 from django.contrib import admin
 
 # Register your models here.
-from hwlogs.models import HwLog
+from hwlogs.models import HwLog, LogFilter, LogFilterValues
+
+
+class LogFilterValuesAdmin(admin.TabularInline):
+    model = LogFilterValues
+    extra = 0
 
 
 class HwLogAdmin(admin.ModelAdmin):
@@ -15,4 +20,16 @@ class HwLogAdmin(admin.ModelAdmin):
     )
     search_fields = ['message']
 
+
+class LogFilterAdmin(admin.ModelAdmin):
+    short_description = 'Filtri log'
+    list_display = (
+        'name',
+        'operation',
+    )
+    search_fields = ['name']
+    inlines = [LogFilterValuesAdmin]
+
 admin.site.register(HwLog, HwLogAdmin)
+admin.site.register(LogFilter, LogFilterAdmin)
+

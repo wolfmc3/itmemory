@@ -68,30 +68,30 @@
                     {% css_icon "plus" %}</a></h4>
             {% for val in setitem.list %}
             <div class="col-lg-12" style="border-bottom: 1px solid #DDDDDD">
-            <div class="col-lg-1">
-                <a href="{% url 'objects:setting' obj.id val.id %}"
-                  class="btn btn-xs ajax_get">
-                {% css_icon "pencil" %}
-                </a>&nbsp;
+                <div class="col-lg-1">
+                    <a href="{% url 'objects:setting' obj.id val.id %}"
+                      class="btn btn-xs ajax_get">
+                    {% css_icon "pencil" %}
+                    </a>&nbsp;
+                </div>
+                <div class="col-lg-4">
+                    <strong>{{ val.type.name }}</strong>
+                </div>
+                <div class="col-lg-6">
+                    {{ val.value|linebreaksbr }}
+                </div>
             </div>
-            <div class="col-lg-4">
-                <strong>{{ val.type.name }}</strong>
-            </div>
-            <div class="col-lg-6">
-                {{ val.value|linebreaksbr }}
-            </div>
-            </div>
-
             {% endfor %}
         </div>
         {% endfor %}
-        <div class="row col-lg-12 round-box">
+        <div class="col-lg-12 round-box">
             <h4>{% css_icon "list" %} System Log</h4>
             <div class="col-lg-12">
-            {% hwlogs obj 10 %}
+            {% hwlogs obj 25 %}
             </div>
         </div>
     </div>
+
     <div class="row col-lg-4 round-box">
         <div class="col-lg-12 round-box coll_box">
             <h4>

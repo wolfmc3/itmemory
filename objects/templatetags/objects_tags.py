@@ -1,5 +1,6 @@
 from django import template
 from django.template.loader import render_to_string
+from hwlogs.models import LogFilter
 
 
 register = template.Library()
@@ -33,6 +34,27 @@ def toactivatetask(context, hwobject):
     return html
 
 
-@register.inclusion_tag("objects/logs_table.html")
-def hwlogs(hwobject, limit=10):
-    return {'logs': hwobject.systemlogs.order_by("-time").all()[:limit]}
+@register.inclusion_tag("objects/logs_table.html", takes_context=True)
+def hwlogs(context, hwobject, limit=10):
+    active = int(context['request'].GET.get("filter_log", -1))
+    mainqueryset = hwobject.systemlogs.order_by("-time")
+    if active != -1:
+        flt = LogFilter.objects.get(id=active)
+        mainqueryset = flt.apply_filter(mainqueryset)
+        limit = 50
+    retcontext = {
+        'logs': mainqueryset.all()[:limit],
+        'group_logs': [],
+        'active_filter': active
+    }
+    for flt in LogFilter.objects.filter(operation=0):
+        retcontext['group_logs'].append(
+            {
+                'id': flt.id,
+                'name': flt.name,
+                'active': flt.id == active,
+                'logs': flt.apply_filter(hwobject.systemlogs.order_by("-time")),
+                'count': flt.apply_filter(hwobject.systemlogs.order_by("-time")).count
+            }
+        )
+    return retcontext
