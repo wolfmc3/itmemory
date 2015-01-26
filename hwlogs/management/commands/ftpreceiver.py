@@ -58,7 +58,7 @@ class FtpHandler(FTPHandler):
                     log.event_id = row[colindex["Id"]]
                     log.level = row[colindex["Level"]]
                     log.log_name = row[colindex["ProviderName"]]
-                    log.time = row[colindex["TimeCreated"]]
+                    log.time = row[colindex["TimeCreated"]].replace('.',':')
                     log.save()
         os.remove(receivedfile)
         print ("Elaborazione completata %s" % receivedfile)

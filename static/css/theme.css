@@ -2,19 +2,30 @@ body {
     padding-top: 70px;
 }
 .navbar {
-    background-color: #DDDDDD;
+    background-color: #efefef;
 }
+
+.alert > h1 {
+    font-size: 40px;
+    margin: 0px;
+}
+
 .bg-primary, .bg-warning, .bg-info, .bg-danger {
     margin-right: 10px;
     padding: 10px;
     border-radius: 5px;
 }
+
 pre {
     margin-right: 11px;
 }
 
 .calendar_day {
     vertical-align: top;
+}
+
+.calendar_now {
+    background-color: lightblue;
 }
 
 .overmonth {
@@ -30,11 +41,12 @@ pre {
 }
 
 .calendar_day > div {
-    height: 90px;
+    height: 80px;
     float: right;
     margin-right: 7px;
-    width: 95px;
+    width: 90%;
     font-size: 70%;
+    overflow: auto;
 }
 
 .calendar_week {
@@ -57,8 +69,8 @@ pre {
     margin-left: 0px;
     margin-top: 0px;
     padding: 5px;
-    border: 1px solid #9999FF;
-    background-color: #9999FF;
+    border: 1px solid #FF890A;
+    background-color: #FF890A;
     border-radius: 5px;
     color: #FFFFFF
 }
@@ -69,7 +81,7 @@ pre {
     margin-left: 0px;
     margin-top: 0px;
     padding: 5px;
-    border: 1px solid #9999FF;
+    border: 1px solid #FF890A;
     border-radius: 5px;
     font-weight: bold;
     text-align: center;

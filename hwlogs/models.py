@@ -13,24 +13,20 @@ class HwLog(models.Model):
         ordering = ['-time']
 
     ERROR_LEVELS = [
-        ('0',	'Emergency'),
-        ('1',	'Alert'),
-        ('2',	'Critical'),
-        ('3',	'Error'),
-        ('4',	'Warning'),
-        ('5',	'Notice'),
-        ('6',	'Informational'),
-        ('7',	'Debug'),
+        ('0',	'Undefinited'),
+        ('1',	'Critical'),
+        ('2',	'Error'),
+        ('3',	'Warning'),
+        ('4',	'Informational'),
+        ('5',	'Verbose'),
     ]
     ERROR_LEVELS_ICONS = {
         0:	'exclamation-sign',
         1:	'exclamation-sign',
-        2:	'warning-sign',
+        2:	'exclamation-sign',
         3:	'warning-sign',
-        4:	'warning-sign',
+        4:	'info-sign',
         5:	'info-sign',
-        6:	'info-sign',
-        7:	'question-sign'
     }
     hardwareobject = models.ForeignKey(HardwareObject, related_name="systemlogs")
     message = models.TextField("Messaggio")
