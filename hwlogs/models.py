@@ -56,7 +56,7 @@ class LogFilter(models.Model):
     name = models.CharField("Nome", max_length=25)
     OPERATION_CHOICE = (
         (0, "Visualizza"),
-        (1, "Non importa, cancella"),
+        (1, "Non importare, cancella"),
         (2, "Notifica via email"),
         (3, "Segna come importante"),
     )
@@ -71,7 +71,10 @@ class LogFilter(models.Model):
         vals = self.filters.all()
         for val in vals:
             kwargs = {val.value_field+val.val_op: val.value}
-            queryset = queryset.filter(**kwargs)
+            if val.exclude_value == 0:
+                queryset = queryset.filter(**kwargs)
+            else:
+                queryset = queryset.exclude(**kwargs)
         return queryset
 
 
@@ -79,6 +82,7 @@ class LogFilterValues(models.Model):
     class Meta():
         verbose_name = "Valore di filtro"
         verbose_name_plural = "Valori di filtro"
+        ordering = ['weight']
 
     logfilter = models.ForeignKey(LogFilter, related_name="filters", verbose_name="Filtro")
 
@@ -118,3 +122,11 @@ class LogFilterValues(models.Model):
 
     val_op = property(_val_op)
 
+    weight = models.IntegerField("Ordine",default=1)
+
+    INCLUDE_CHOICES = (
+        (0, "Includi"),
+        (1, "Escludi")
+    )
+
+    exclude_value = models.IntegerField("Escludi valori", default=0, choices=INCLUDE_CHOICES)
