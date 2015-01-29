@@ -28,4 +28,3 @@ pymssql # apt-get install freetds-dev
 django-templated-email
 django_mailbox
 django-ftpserver
-django-uuidfield
