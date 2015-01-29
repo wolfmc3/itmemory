@@ -4,7 +4,6 @@ from django.utils.datetime_safe import datetime
 from customers.models import WorkSite
 from simplecrypt import encrypt, decrypt
 from itmemory import settings as django_setting
-from uuidfield import UUIDField
 
 
 def newToken():
