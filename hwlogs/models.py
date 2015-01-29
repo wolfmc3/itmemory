@@ -134,10 +134,7 @@ class LogFilterValues(models.Model):
     exclude_value = models.IntegerField("Escludi valori", default=0, choices=INCLUDE_CHOICES)
 
 def LogsFromFile(receivedfile):
-        print ("Ricevuto il file %s" % receivedfile)
         info = os.stat(receivedfile)
-        print ("Dimensione file %s" % info[ST_SIZE])
-
         filedata = receivedfile.split("-")
         objid = filedata[1]
         obj = None
@@ -160,4 +157,3 @@ def LogsFromFile(receivedfile):
                     log.time = row[colindex["TimeCreated"]].replace('.',':')
                     log.save()
         os.remove(receivedfile)
-        print ("Elaborazione completata %s" % receivedfile)
