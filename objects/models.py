@@ -4,7 +4,13 @@ from django.utils.datetime_safe import datetime
 from customers.models import WorkSite
 from simplecrypt import encrypt, decrypt
 from itmemory import settings as django_setting
+from uuidfield import UUIDField
 
+
+def newToken():
+    from django.utils import crypto
+    token = crypto.get_random_string(30)
+    return token
 
 
 
@@ -28,6 +34,8 @@ class HardwareObject(models.Model):
         return self.tasks.filter(done=False, laststart__lte=datetime.now)
 
     taskstodo = property(_taskstodo)
+
+    remote_token = models.CharField(default=newToken, max_length=32)
 
     def __str__(self):
         return self.name + "  [" + self.serial + "] " + str(self.worksite)
