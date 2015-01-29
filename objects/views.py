@@ -20,8 +20,6 @@ class IndexView(generic.ListView):
         return self.get(self, request, *args, **kwargs)
 
     def get_queryset(self):
-        # import pdb
-        # pdb.set_trace()
         items = HardwareObject.objects.all()
         if 'obj_name' in self.request.POST.keys() and self.request.POST['obj_name']:
             return items.filter(name__icontains=self.request.POST['obj_name'])
