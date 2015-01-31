@@ -75,6 +75,31 @@ pre {
     color: #FFFFFF
 }
 
+.setting-box > h1,
+.setting-box > h2,
+.setting-box > h3,
+.setting-box > h4 {
+    border: 1px solid #CC0000;
+    background-color: #FF6347;
+}
+
+.password-box > h1,
+.password-box > h2,
+.password-box > h3,
+.password-box > h4 {
+    border: 1px solid #228b22;
+    background-color: #00CC99;
+}
+
+.info-box > h1,
+.info-box > h2,
+.info-box > h3,
+.info-box > h4 {
+    border: 1px solid #FF00FF;
+    background-color: #F984E5;
+}
+
+
 .round-box > h5,
 .round-box > h6 {
     margin: 0 0 10px 10px;
