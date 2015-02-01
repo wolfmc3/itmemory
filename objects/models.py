@@ -1,4 +1,5 @@
 # coding=utf-8
+
 from django.db import models
 from django.utils.datetime_safe import datetime
 from customers.models import WorkSite
@@ -6,11 +7,10 @@ from simplecrypt import encrypt, decrypt
 from itmemory import settings as django_setting
 
 
-def newToken():
+def new_token():
     from django.utils import crypto
     token = crypto.get_random_string(30)
     return token
-
 
 
 class HardwareObject(models.Model):
@@ -34,7 +34,7 @@ class HardwareObject(models.Model):
 
     taskstodo = property(_taskstodo)
 
-    remote_token = models.CharField(default=newToken, max_length=32)
+    remote_token = models.CharField(default=new_token, max_length=32)
 
     def __str__(self):
         return self.name + "  [" + self.serial + "] " + str(self.worksite)

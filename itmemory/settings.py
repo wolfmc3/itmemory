@@ -32,9 +32,6 @@ ALLOWED_HOSTS = ['*']
 
 INSTALLED_APPS = (
     'admin_tools',
-    #'admin_tools.theming',
-    #'admin_tools.menu',
-    #'admin_tools.dashboard',
     'grappelli.dashboard',
     'grappelli',
     'django.contrib.admin',
@@ -82,7 +79,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'itmemory',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': 'password',
         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
         'PORT': '3306',
     },
@@ -156,3 +153,8 @@ EMAIL_SENDER = 'mail@example.com'
 TASK_REMIND_DAYS = 2
 TASK_EXPIRED_DAYS = 2
 TASK_PRE_EXPIRED_DAYS = 1
+
+try:
+    from settings_local import *
+except ImportError:
+    pass
