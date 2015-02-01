@@ -1,7 +1,10 @@
 import os
 from stat import ST_SIZE
+import datetime
+from django.conf import settings
 from django.contrib.auth.models import User, Group
 from django.db import models
+from templated_email import send_templated_mail
 from objects.models import HardwareObject
 
 # Windows Event Columns
@@ -30,6 +33,16 @@ class HwLog(models.Model):
         4:	'info-sign',
         5:	'info-sign',
     }
+
+    ERROR_LEVELS_COLORS = {
+        0:	'#BEBD7F',
+        1:	'#FF6347',
+        2:	'#FF6347',
+        3:	'#7fff00',
+        4:	'#BEBD7F',
+        5:	'#BEBD7F',
+    }
+
     hardwareobject = models.ForeignKey(HardwareObject, related_name="systemlogs")
     message = models.TextField("Messaggio")
     event_id = models.IntegerField("Id evento")
@@ -46,7 +59,33 @@ class HwLog(models.Model):
     def _level_icon(self):
         return self.ERROR_LEVELS_ICONS[int(self.level)]
 
+    def _level_color(self):
+        return self.ERROR_LEVELS_COLORS[int(self.level)]
+
     level_icon = property(_level_icon)
+    level_color = property(_level_color)
+    important = models.BooleanField("Importante", default=False)
+    notify_count = models.IntegerField("Notifiche inviate", default=0)
+
+
+def today():
+    return datetime.datetime.now()
+
+
+def add_hour(date, hour):
+    return date + datetime.timedelta(days=hour)
+
+
+def add_minute(date, minute):
+    return date + datetime.timedelta(minutes=minute)
+
+
+def add_day(date, days):
+    return date + datetime.timedelta(days=days)
+
+
+def add_month(date, months):
+    return date + datetime.timedelta(months=months)
 
 
 class LogFilter(models.Model):
@@ -55,7 +94,7 @@ class LogFilter(models.Model):
         verbose_name_plural = "Filtri log"
         ordering = ['-name']
 
-    name = models.CharField("Nome", max_length=25)
+    name = models.CharField("Nome/Oggetto", max_length=125)
     OPERATION_CHOICE = (
         (0, "Visualizza"),
         (1, "Non importare, cancella"),
@@ -72,7 +111,11 @@ class LogFilter(models.Model):
     def apply_filter(self, queryset):
         vals = self.filters.all()
         for val in vals:
-            kwargs = {val.value_field+val.val_op: val.value}
+            filtervalue = val.value.encode('ascii','ignore')
+            if filtervalue.startswith("{") and filtervalue.endswith("}"):
+                filtervalue = filtervalue.replace("import", "").strip("{}")
+                filtervalue = eval(filtervalue)
+            kwargs = {val.value_field+val.val_op: filtervalue}
             if val.exclude_value == 0:
                 queryset = queryset.filter(**kwargs)
             else:
@@ -124,7 +167,7 @@ class LogFilterValues(models.Model):
 
     val_op = property(_val_op)
 
-    weight = models.IntegerField("Ordine",default=1)
+    weight = models.IntegerField("Ordine", default=1)
 
     INCLUDE_CHOICES = (
         (0, "Includi"),
@@ -133,7 +176,8 @@ class LogFilterValues(models.Model):
 
     exclude_value = models.IntegerField("Escludi valori", default=0, choices=INCLUDE_CHOICES)
 
-def LogsFromFile(receivedfile):
+
+def logsfromfile(receivedfile):
         info = os.stat(receivedfile)
         filedata = receivedfile.split("-")
         objid = filedata[1]
@@ -157,3 +201,21 @@ def LogsFromFile(receivedfile):
                     log.time = row[colindex["TimeCreated"]].replace('.',':')
                     log.save()
         os.remove(receivedfile)
+        from django.core.management import call_command
+        call_command('logrotate')
+
+
+def send_mail_log(logs, subject, user, template):
+    if user.email is None:
+        return
+    return send_templated_mail(
+        template_name=template,
+        from_email=settings.EMAIL_SENDER,
+        recipient_list=[user.email],
+        context={
+            'subject': subject,
+            'username': user.username,
+            'full_name': user.get_full_name(),
+            'logs': logs
+        },
+    )

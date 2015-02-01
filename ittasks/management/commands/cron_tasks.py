@@ -1,13 +1,11 @@
 from datetime import datetime
-
-
 from django.core.management.base import BaseCommand
 from ittasks.models import Task, send_mail_user
 
 
 class Command(BaseCommand):
     args = ''
-    help = 'Esegue il cron'
+    help = 'Esegue il cron per i task'
 
     def handle(self, *args, **options):
         tasks = Task.objects.filter(done=False)
@@ -19,7 +17,6 @@ class Command(BaseCommand):
                 ), ending=' '
             )
             if task.send_reminder:
-                # TODO: Send mail reminder
                 user_list = []
 
                 if task.user is not None:

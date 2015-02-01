@@ -4,8 +4,7 @@ from stat import ST_SIZE
 from django_ftpserver import utils
 from django_ftpserver.management.commands import ftpserver
 from pyftpdlib.handlers import FTPHandler
-from hwlogs.models import LogsFromFile
-
+from hwlogs.models import logsfromfile
 
 
 class Command(ftpserver.Command):
@@ -35,4 +34,4 @@ class FtpHandler(FTPHandler):
     # def __init__(self):
 
     def on_file_received(self, receivedfile):
-        LogsFromFile(receivedfile)
+        logsfromfile(receivedfile)
