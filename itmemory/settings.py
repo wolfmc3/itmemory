@@ -48,6 +48,8 @@ INSTALLED_APPS = (
     'django_mailbox',
     'jquery',
     'crispy_forms',
+    'dbbackup',
+    'cron',
     'djfrontend',
     'djfrontend.skeleton',
     'home',
@@ -78,7 +80,7 @@ WSGI_APPLICATION = 'itmemory.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'itmemory_devel',
+        'NAME': 'itmemory',
         'USER': 'root',
         'PASSWORD': 'root',
         'HOST': 'localhost',  # Or an IP Address that your DB is hosted on
@@ -144,8 +146,9 @@ MAGONETDB = {
 
 #MAIL TEPLATED
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
-EMAIL_HOST = '192.168.5.248'
+EMAIL_HOST = '127.0.0.1'
 EMAIL_PORT = 25
+EMAIL_SENDER = 'marco.camplese.mc@gmail.com'
 
 #IMPOSTAZIONI NOTIFICA TASK
 TASK_REMIND_DAYS = 2
