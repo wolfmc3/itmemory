@@ -148,7 +148,9 @@ MAGONETDB = {
 TEMPLATED_EMAIL_BACKEND = 'templated_email.backends.vanilla_django.TemplateBackend'
 EMAIL_HOST = '127.0.0.1'
 EMAIL_PORT = 25
-EMAIL_SENDER = 'marco.camplese.mc@gmail.com'
+EMAIL_SENDER = 'mail@example.com'
+
+
 
 #IMPOSTAZIONI NOTIFICA TASK
 TASK_REMIND_DAYS = 2
