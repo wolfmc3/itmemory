@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='hardwareobject',
             name='remote_token',
-            field=models.CharField(default=objects.models.newToken, max_length=32),
+            field=models.CharField(default=objects.models.new_token, max_length=32),
             preserve_default=True,
         ),
     ]

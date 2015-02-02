@@ -205,7 +205,7 @@ def send_mail_user(task, user, template):
         return
     return send_templated_mail(
         template_name=template,
-        from_email='ced@globit.it',
+        from_email=settings.EMAIL_SENDER,
         recipient_list=[user.email],
         context={
             'username': user.username,

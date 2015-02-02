@@ -1,4 +1,6 @@
 from django.contrib import admin
+from cron.management.commands.cron import cronregistry
+from ittasks.management.commands.cron_tasks import Command
 from ittasks.models import Task, TaskCheck, TaskCheckTemplate, TaskTemplate
 
 
@@ -22,3 +24,4 @@ class TaskTemplateAdmin(admin.ModelAdmin):
 
 admin.site.register(Task, TaskAdmin)
 admin.site.register(TaskTemplate, TaskTemplateAdmin)
+cronregistry.register(Command())
