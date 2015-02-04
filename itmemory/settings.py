@@ -54,6 +54,7 @@ INSTALLED_APPS = (
     'objects',
     'ittasks',
     'hwlogs',
+    'hpilo',
 )
 
 MIDDLEWARE_CLASSES = (

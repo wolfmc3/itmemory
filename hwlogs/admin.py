@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+
 from cron.management.commands.cron import cronregistry
 from hwlogs.management.commands.cron_hwlogs import Command
 from hwlogs.models import HwLog, LogFilter, LogFilterValues

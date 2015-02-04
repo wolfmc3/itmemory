@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block body_contents %}
+<div class="row">
+
+    <div class="round-box col-md-4">
+        <h3>File da caricare</h3>
+        <div>
+            <form action="" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="file" name="file" />
+                <input type="submit" value="Carica">
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body_contents %}

@@ -178,7 +178,6 @@ class LogFilterValues(models.Model):
 
 
 def logsfromfile(receivedfile):
-        info = os.stat(receivedfile)
         filedata = receivedfile.split("-")
         objid = filedata[1]
         obj = None
