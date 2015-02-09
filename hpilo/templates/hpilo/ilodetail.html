@@ -1,0 +1,8 @@
+{% load hpilo_tags %}
+<div style="margin-left: 20px">
+{% for obj in objs %}
+    {% ifchanged obj.component %}<h6><strong>{{ obj.component }}</strong></h6>{% endifchanged %}
+    {% iloled obj.name obj.status "" obj %}
+{% endfor %}
+<hr />
+</div>

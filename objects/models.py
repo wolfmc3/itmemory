@@ -1,4 +1,5 @@
 # coding=utf-8
+from django.core.urlresolvers import reverse
 
 from django.db import models
 from django.utils.datetime_safe import datetime
@@ -35,6 +36,10 @@ class HardwareObject(models.Model):
     taskstodo = property(_taskstodo)
 
     remote_token = models.CharField(default=new_token, max_length=32)
+
+    @property
+    def get_upload_url(self):
+        return reverse("hpilo:hpiloupload", kwargs={"hwid": str(self.id), "hwtoken": self.remote_token})
 
     def __str__(self):
         return self.name + "  [" + self.serial + "] " + str(self.worksite)

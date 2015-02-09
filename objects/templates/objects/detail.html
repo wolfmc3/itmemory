@@ -2,13 +2,13 @@
 {% load staticfiles %}
 {% load objects_tags %}
 {% load itmemory_tags %}
-
+{% load hpilo_tags %}
+{% block title %}{{ obj.name }} sn. {{ obj.serial }} {% endblock title %}
 {% block custom_page_scripts %}
-<script src="{% static 'objects-detail.js' %}"></script>
+<script src="{% static '/static/objects/objects-detail.js' %}"></script>
 <script>
     pwd_req_url = '{% url 'objects:getpassword' 0 %}'
     csrfmiddlewaretoken = '{{ csrf_token }}'
-
 </script>
 {% endblock custom_page_scripts %}
 
@@ -130,6 +130,19 @@
                         {% css_icon "lock" %} Aggiungi password
                     </a>
                 </p>
+            </div>
+        </div>
+        <div class="col-lg-12 round-box coll_box">
+            <h4>Hardware Status <img class="pull-right" style="height: 22px;" src="{% static "hplogo.png" %}"></h4>
+            <div>
+                {% ilostatus obj %}
+                <a class="btn btn-xs btn-primary" href="{{ obj.get_upload_url }}">
+                    Upload manuale...
+                </a>
+                <a class="btn btn-xs btn-primary" href="{% url 'hpilo:createpack' obj.id %}">
+                    Crea pacchetto monitoraggio...
+                </a>
+                <br />&nbsp;
             </div>
         </div>
         <div class="col-lg-12 round-box coll_box">

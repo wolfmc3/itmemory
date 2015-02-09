@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block custom_page_scripts %}
+<script src="{% static 'objects/createpack.js' %}"></script>
+{% endblock custom_page_scripts %}
+
+
+{% block body_contents %}
+<div class="row">
+
+    <div class="round-box col-md-offset-3 col-md-6">
+        <h3>Crea pacchetto di monitoraggio</h3>
+        <div>
+            <form action="" class="form-horizontal" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <div class="form-group">
+                    <label for="iloen" class="col-sm-4 control-label">Abilita HP ILO</label>
+                    <div class="col-sm-6">
+                      <input type="checkbox" id="iloen" name="iloenabled" >
+                    </div>
+                </div>
+                <div id="ilogroup" class="col-md-11 col-md-offset-1">
+                    <div class="form-group">
+                        <label for="iloip" class="col-sm-4 control-label">Indirizzo IP ILO</label>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="iloip" name="iloip" placeholder="Inserire indirizzo Scheda ILO">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ilouser" class="col-sm-4 control-label">Nome utente ILO</label>
+                        <div class="col-sm-6">
+                          <input type="text" class="form-control" id="ilouser" name="ilouser" value="Administrator" placeholder="Nome utente">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ilopassword" class="col-sm-4 control-label">Password ILO</label>
+                        <div class="col-sm-6">
+                          <input type="password" class="form-control" id="ilopassword" name="ilopassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="ilosetup" class="col-sm-4 control-label">Includi HP ILO Cmdlet Setup</label>
+                        <div class="col-sm-6">
+                          <input type="checkbox" id="ilosetup" name="ilosetup" >
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="scheduler" class="col-sm-4 control-label">Includi XML scheduler</label>
+                    <div class="col-sm-6">
+                      <input type="checkbox" id="scheduler" name="scheduler" >
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-4 col-sm-6">
+                        <button type="submit" class="btn btn-info">Crea pacchetto</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock body_contents %}

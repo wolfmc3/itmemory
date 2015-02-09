@@ -1,0 +1,29 @@
+{% load hpilo_tags %}
+{% load itmemory_tags %}
+{% load humanize %}
+
+{% if obj %}
+{% css_icon "time" %} Ultimo aggiornamento {{ obj.time|naturaltime }}
+{% iloled "Stato ILO" obj.status %}
+{% iloled "Bios" obj.bios %}
+{% iloled "Ventole" obj.fans "fans_detail" %}
+<div id="fans_detail" style="display: none">
+    {% ilodetail obj "FAN" %}
+</div>
+{% iloled "Memoria" obj.memory %}
+{% iloled "Processore" obj.processor %}
+{% iloled "Archiviazione" obj.storage "storage_detail" %}
+<div id="storage_detail" style="display: none">
+    {% ilodetail obj "LOGICAL_DRIVE" %}
+    {% ilodetail obj "PHYSICAL_DRIVE" %}
+</div>
+{% iloled "Temperature" obj.temperature "temp_detail" %}
+<div id="temp_detail" style="display: none">
+    {% ilodetail obj "TEMP" %}
+</div>
+{% else %}
+    <p>
+    Nessun monitoraggio disponibile
+    </p>
+{% endif %}
+<br />&nbsp;
