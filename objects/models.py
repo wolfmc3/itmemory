@@ -41,7 +41,7 @@ class HardwareObject(models.Model):
     def get_upload_url(self):
         return reverse("hpilo:hpiloupload", kwargs={"hwid": str(self.id), "hwtoken": self.remote_token})
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name + "  [" + self.serial + "] " + str(self.worksite)
 
 
@@ -61,7 +61,7 @@ class SettingGroup(models.Model):
 
     firstsetting = property(_firstsetting)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 
@@ -77,7 +77,7 @@ class SettingsType(models.Model):
     group = models.ForeignKey(SettingGroup, related_name='settings', verbose_name="Gruppo impostazioni")
     activatetask = models.ForeignKey(TaskTemplate, null=True, blank=True, verbose_name="Task da attivare")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.group.name + "/" + self.name
 
 
@@ -96,7 +96,7 @@ class Settings(models.Model):
 
     activatetask = property(_activatetask)
 
-    def __str__(self):
+    def __unicode__(self):
         return str(self.hardwareobject) + " - " + self.type.name
 
 
@@ -129,6 +129,6 @@ class SoftwarePassword(models.Model):
             self.password = "{encrypted}"
         super(SoftwarePassword, self).save(force_insert, force_update, using, update_fields)
 
-    def __str__(self):
-        return str(self.hardwareobject) + " - " + self.settingtype.name + ": " + str(self.username)
+    def __unicode__(self):
+        return str(self.hardwareobject) + " - " + self.settingtype.name + ": " + unicode(self.username)
 

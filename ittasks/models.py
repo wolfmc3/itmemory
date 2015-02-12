@@ -34,7 +34,7 @@ class TaskTemplate(models.Model):
                                               related_name="template_exp_to_notify",
                                               verbose_name="Gruppo notifiche scadenze")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 
@@ -48,7 +48,7 @@ class TaskCheckTemplate(models.Model):
     name = models.CharField(max_length=100, verbose_name="Nome del controllo")
     description = models.TextField(max_length=1000, verbose_name="Descrizione dell'operazione da eseguire")
 
-    def __str__(self):
+    def __unicode__(self):
         return self.tasktemplate.name + " " + self.name
 
 
@@ -159,7 +159,7 @@ class Task(models.Model):
         old_value = self.__class__._default_manager.filter(pk=self.pk).values(field).get()[field]
         return old_value
 
-    def __str__(self):
+    def __unicode__(self):
         return self.hardwareobject.name + " -> " + self.template.name
 
 
@@ -196,7 +196,7 @@ class TaskCheck(models.Model):
     cssresult = property(_cssresult)
     note = models.TextField(max_length=1000, null=True, blank=True, verbose_name="Note sul controllo")
 
-    def __str__(self):
+    def __unicode__(self):
         return str(self.task) + " " + self.checktemplate.name + " " + (self.get_result_display())
 
 

@@ -105,7 +105,7 @@ class LogFilter(models.Model):
     group = models.ForeignKey(Group, null=True, blank=True, related_name="logfilters", verbose_name="Destinatari mail")
     operation = models.IntegerField("Operazione", choices=OPERATION_CHOICE)
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
     def apply_filter(self, queryset):

@@ -61,7 +61,7 @@ class IloStatusDetail(models.Model):
     um = models.CharField("Unita", max_length=255, default="", null=True)  # CURRENTREADING | SPEED -> SPLIT(" ")[1]
     status = StatusCharField("Stato", json="STATUS", blank=True, null=True)  # STATUS
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
 
 

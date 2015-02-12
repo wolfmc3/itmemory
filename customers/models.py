@@ -23,8 +23,9 @@ class CustomerBase(models.Model):
             self.reference_person + "\n" + \
             self.email
 
-    def __str__(self):
+    def __unicode__(self):
         return self.name
+
 
 
 class Customer(CustomerBase):
@@ -64,5 +65,5 @@ class WorkSite(CustomerBase):
             self.reference_person + "\n" + \
             self.email + "\n"
 
-    def __str__(self):
-        return "{0} ({1})".format(self.name, self.customer.name)
+    def __unicode__(self):
+        return u"{0} ({1})".format(self.name, self.customer.name)
