@@ -64,7 +64,8 @@ def iloled(text, status, detail=None, extrainfo=None):
         icon,
         text,
         detail,
-        extrainfo_html
+        extrainfo_html,
+        status
     )
     return html
 

@@ -1,5 +1,6 @@
 {% extends 'objects/index.html' %}
 {% load itmemory_tags %}
+{% block title %}{{ obj.name }}{% endblock title %}
 {% block body_contents %}
 <div class="row">
     <div class="row col-lg-12">
@@ -9,6 +10,10 @@
                     {{ obj.name }}
                     <a target="_blank" class="btn btn-info btn-xs pull-right" href="{% url 'admin:customers_worksite_add'  %}?customer={{ obj.id }}">
                         {% css_icon "plus" %} Aggiungi sede
+                    </a>
+
+                    <a class="btn btn-xs btn-info pull-right" href="{% url 'admin:customers_customer_change' obj.id %}">
+                        {% css_icon "pencil" %} Modifica
                     </a>
                 </h3>
 

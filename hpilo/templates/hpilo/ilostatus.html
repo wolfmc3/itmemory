@@ -7,10 +7,10 @@
 {% iloled "Stato ILO" obj.status %}
 {% iloled "Bios" obj.bios %}
 {% iloled "Ventole" obj.fans "fans_detail" %}
-{% iloled "Alimentazione" obj.power %}
 <div id="fans_detail" style="display: none">
     {% ilodetail obj "FAN" %}
 </div>
+{% iloled "Alimentazione" obj.power %}
 {% iloled "Memoria" obj.memory %}
 {% iloled "Processore" obj.processor %}
 {% iloled "Archiviazione" obj.storage "storage_detail" %}

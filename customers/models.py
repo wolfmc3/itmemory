@@ -16,12 +16,15 @@ class CustomerBase(models.Model):
     reference_person = models.CharField("Persona di riferimento", max_length=255, null=True, blank=True)
 
     def fulltext(self):
-        return self.name + "\n" + \
-            self.address + "\n" + \
-            self.city + "\n" + \
-            self.telephone + "\n" + \
-            self.reference_person + "\n" + \
-            self.email
+        return u"\n".join([
+            self.name,
+            self.address if self.address else "",
+            self.city if self.city else "",
+            self.telephone if self.telephone else "",
+            self.reference_person if self.reference_person else "",
+            self.email if self.email else "",
+            ""
+        ])
 
     def __unicode__(self):
         return self.name
@@ -58,12 +61,15 @@ class WorkSite(CustomerBase):
     customer = models.ForeignKey(Customer, related_name="Worksites")
 
     def fulltext(self):
-        return self.name + "\n" + \
-            self.address + "\n" + \
-            self.city + "\n" + \
-            self.telephone + "\n" + \
-            self.reference_person + "\n" + \
-            self.email + "\n"
+        return u"\n".join([
+            self.name,
+            self.address if self.address else "",
+            self.city if self.city else "",
+            self.telephone if self.telephone else ( self.customer.telephone if self.customer.telephone else ""),
+            self.reference_person if self.reference_person else (self.customer.reference_person if self.customer.reference_person else ""),
+            self.email if self.email else (self.customer.email if self.customer.email else ""),
+            ""
+        ])
 
     def __unicode__(self):
         return u"{0} ({1})".format(self.name, self.customer.name)
