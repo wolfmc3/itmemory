@@ -60,7 +60,12 @@ def iloled(text, status, detail=None, extrainfo=None):
                 &nbsp;{0} {1}&nbsp;
             </span>
             """.format(extrainfo.value, extrainfo.um)
-    html = "<div><img src='{0}' />&nbsp;&nbsp;{1}{2}{3}</div>".format(icon, text, detail, extrainfo_html)
+    html = "<div title='Status: {4}'><img src='{0}' />&nbsp;&nbsp;{1}{2}{3}</div>".format(
+        icon,
+        text,
+        detail,
+        extrainfo_html
+    )
     return html
 
 
