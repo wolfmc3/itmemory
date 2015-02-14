@@ -26,7 +26,7 @@ def toactivatetask(context, hwobject):
         if stask.tasks.filter(hardwareobject=hwobject).count() == 0:
             html += "<p><a class='btn btn-xs btn-success' href='act_task/{0}'>{2} Attiva {1}</a></p>".format(
                 stask.id,
-                str(stask),
+                unicode(stask),
                 render_to_string("icon.html", {'iconname': "plus-sign"})
             )
     if not html:

@@ -197,7 +197,7 @@ class TaskCheck(models.Model):
     note = models.TextField(max_length=1000, null=True, blank=True, verbose_name="Note sul controllo")
 
     def __unicode__(self):
-        return str(self.task) + " " + self.checktemplate.name + " " + (self.get_result_display())
+        return unicode(self.task) + " " + self.checktemplate.name + " " + (self.get_result_display())
 
 
 def send_mail_user(task, user, template):

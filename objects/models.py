@@ -97,7 +97,7 @@ class Settings(models.Model):
     activatetask = property(_activatetask)
 
     def __unicode__(self):
-        return str(self.hardwareobject) + " - " + self.type.name
+        return unicode(self.hardwareobject) + " - " + self.type.name
 
 
 class SoftwarePassword(models.Model):
@@ -130,5 +130,5 @@ class SoftwarePassword(models.Model):
         super(SoftwarePassword, self).save(force_insert, force_update, using, update_fields)
 
     def __unicode__(self):
-        return str(self.hardwareobject) + " - " + self.settingtype.name + ": " + unicode(self.username)
+        return unicode(self.hardwareobject) + " - " + self.settingtype.name + ": " + unicode(self.username)
 
