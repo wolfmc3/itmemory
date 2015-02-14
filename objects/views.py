@@ -130,9 +130,6 @@ class SettingCreate(CreateView):
         form = super(SettingCreate, self).get_form(form_class=form_class)
         form.fields['hardwareobject'].widget.attrs['readonly'] = True
         form.fields['hardwareobject'].widget.attrs['disabled'] = True
-
-        # import pdb
-        # pdb.set_trace()
         return form
 
 

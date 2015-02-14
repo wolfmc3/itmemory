@@ -42,7 +42,7 @@ class HardwareObject(models.Model):
         return reverse("hpilo:hpiloupload", kwargs={"hwid": str(self.id), "hwtoken": self.remote_token})
 
     def __unicode__(self):
-        return self.name + "  [" + self.serial + "] " + str(self.worksite)
+        return self.name + "  [" + self.serial + "] " + unicode(self.worksite)
 
 
 class SettingGroup(models.Model):
