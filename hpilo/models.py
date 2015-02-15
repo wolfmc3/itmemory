@@ -1,6 +1,8 @@
 # coding=utf-8
 import datetime
+from django.contrib.auth.models import User, Group
 from django.db import models
+from django.db.models import Q
 from objects.models import HardwareObject
 
 
@@ -9,6 +11,7 @@ class StatusCharField(models.CharField):
 
     def __init__(self, verbose_name=None, json=None, *args, **kwargs):
         kwargs['max_length'] = 125
+        kwargs['verbose_name'] = verbose_name
         self.json = json
         super(StatusCharField, self).__init__(*args, **kwargs)
 
@@ -26,6 +29,14 @@ class StatusCharField(models.CharField):
 
         if self.json:
             setattr(cls, 'get_%s_json' % self.name, self._get_FIELD_json)
+
+    def to_python(self, value):
+        topython = super(StatusCharField, self).to_python(value)
+        return topython
+
+    def get_prep_value(self, value):
+        getprepvalue = super(StatusCharField, self).get_prep_value(value)
+        return getprepvalue
 
 
 class IloStatus(models.Model):
@@ -45,7 +56,31 @@ class IloStatus(models.Model):
     storage = StatusCharField("Archiviazione", json="STORAGE_STATUS")  # STORAGE_STATUS
     temperature = StatusCharField("Temperature", json="TEMPERATURE_STATUS")  # TEMPERATURE_STATUS
     source = models.CharField("Sorgente", max_length=255, default="", null=True, blank=True)
+    history = models.BooleanField("Stato storico", default=False)
     time = models.DateTimeField("Rilevamento")
+
+    def save(self, force_insert=False, force_update=False, using=None, update_fields=None):
+        if self.id is None:
+            IloStatus.objects.filter(hardwareobject=self.hardwareobject, history=False).update(history=True)
+        super(IloStatus, self).save()
+
+    def _not_ok(self):
+        fields = status_fields()
+        errors = list()
+        for field in fields:
+            field_val = getattr(self, field)
+            if field_val != "OK":
+                errors.append({
+                    "label": field.title(),
+                    "value": field_val
+                })
+        return errors
+    not_ok = property(_not_ok)
+
+
+def status_fields():
+    fields = IloStatus._meta.concrete_fields
+    return [v.name for v in fields if isinstance(v, StatusCharField)]
 
 
 class IloStatusDetail(models.Model):
@@ -178,3 +213,53 @@ def _finditem(key, obj, notfound="ND"):
             res = [x for x in res if x != "OK"]
             return " ".join(res)
     return notfound
+
+
+class IloNotifySetting(models.Model):
+    class Meta():
+        verbose_name = "Impostazione notifica HP Ilo"
+        verbose_name_plural = "Impostazioni notifica HP Ilo"
+        ordering = ['name']
+        unique_together = ('type', 'search_value', 'hardwareobject')
+
+    name = models.CharField("Nome", max_length=255)
+    user = models.ForeignKey(User, null=True, blank=True, related_name="hpilosetting",
+                             verbose_name="Destinatario mail")
+    group = models.ForeignKey(Group, null=True, blank=True, related_name="hpilosetting",
+                              verbose_name="Destinatari mail")
+    TYPE_CHOICES = (
+        ("exclude/*__contains", "Stato sensori diverso da"),
+        ("filter/*__contains", "Stato sensori uguale a"),
+        ("exclude/temperature__contains", "Stato sensore TEMP diverso da"),
+        ("exclude/storage__contains", "Stato sensore dischi diverso da"),
+        ("filter/source__contains", "Sorgente contiene"),
+    )
+
+    hardwareobject = models.ForeignKey(HardwareObject, verbose_name="Server", blank=True, null=True)
+
+    type = models.CharField("Tipo", max_length=255, choices=TYPE_CHOICES, default="exclude/*")
+
+    search_value = models.CharField("Valore filtro", default="OK", max_length=255)
+
+    include_all_data = models.BooleanField("Includi tutti i dati", default=True)
+
+    def apply_filter(self, queryset):
+        filter_type, fieldname = self.type.split("/")
+
+        if fieldname.startswith("*"):
+            fields = [fieldname.replace("*", f) for f in status_fields()]
+        else:
+            fields = [fieldname]
+
+        qfilter = Q()
+
+        for field in fields:
+            kwargs = {field: self.search_value}
+            if filter_type == "exclude":
+                qfilter |= ~Q(**kwargs)
+            else:
+                qfilter |= Q(**kwargs)
+        return queryset.filter(Q(qfilter) & Q(history=False))
+
+    def __unicode__(self):
+        return self.name

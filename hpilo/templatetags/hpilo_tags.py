@@ -77,3 +77,17 @@ def ilodetail(ilostatusobj, section):
         'objs': ilostatusdetails,
     }
     return retcontext
+
+
+@register.inclusion_tag("hpilo/iloerrors.html")
+def iloerrors():
+    from hpilo.models import IloNotifySetting, IloStatus
+    ilostatusdetails = list()
+    for iloset in IloNotifySetting.objects.all():
+        subset = iloset.apply_filter(IloStatus.objects.all())
+        print subset.query
+        ilostatusdetails.append({
+            'name': iloset,
+            'subset': subset
+        })
+    return {'objs': ilostatusdetails}

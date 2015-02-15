@@ -20,8 +20,17 @@ pre {
     margin-right: 11px;
 }
 
+.day {
+    padding: 6px;
+}
+
+.info {
+    font-size: 10px;
+}
+
 .calendar_day {
     vertical-align: top;
+    padding: 0px !important;
 }
 
 .calendar_now {
@@ -32,15 +41,13 @@ pre {
     opacity: 0.3;
 }
 
-.calendar_day > h1 {
-    font-size: 30px;
+.calendar_day > .day {
+    text-align: center;
+    font-size: 15px;
     margin: 0px;
-    padding: 0px;
-    opacity: 0.6;
-    float: left;
 }
 
-.calendar_day > div {
+.calendar_day > .info {
     height: 80px;
     float: right;
     margin-right: 7px;
@@ -48,6 +55,21 @@ pre {
     font-size: 70%;
     overflow: auto;
 }
+
+.cal_w_task {
+    position: absolute;
+    font-size: 0px; line-height: 0%; width: 0px;
+    border-top: 10px solid #FFBF00;
+    border-right: 10px solid transparent;
+}
+
+.cal_w_p_task {
+    position: absolute;
+    font-size: 0px; line-height: 0%; width: 0px;
+    border-top: 10px solid #007fff;
+    border-right: 10px solid transparent;
+}
+
 
 .calendar_week {
 

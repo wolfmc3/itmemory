@@ -1,5 +1,5 @@
+# coding=utf-8
 import os
-from stat import ST_SIZE
 import datetime
 from django.conf import settings
 from django.contrib.auth.models import User, Group
@@ -111,7 +111,7 @@ class LogFilter(models.Model):
     def apply_filter(self, queryset):
         vals = self.filters.all()
         for val in vals:
-            filtervalue = val.value.encode('ascii','ignore')
+            filtervalue = val.value.encode('ascii', 'ignore')
             if filtervalue.startswith("{") and filtervalue.endswith("}"):
                 filtervalue = filtervalue.replace("import", "").strip("{}")
                 filtervalue = eval(filtervalue)

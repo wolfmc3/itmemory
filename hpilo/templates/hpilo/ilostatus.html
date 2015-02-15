@@ -6,6 +6,7 @@
 {% css_icon "time" %} Ultimo aggiornamento {{ obj.time|naturaltime }}
 {% iloled "Stato ILO" obj.status %}
 {% iloled "Bios" obj.bios %}
+{% iloled "Rete" obj.network %}
 {% iloled "Ventole" obj.fans "fans_detail" %}
 <div id="fans_detail" style="display: none">
     {% ilodetail obj "FAN" %}

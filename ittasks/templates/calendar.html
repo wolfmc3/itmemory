@@ -1,6 +1,6 @@
 {% load itmemory_tags %}
 <div id="calendar">
-    <table class="table table-bordered">
+    <table class="table table-bordered" cellpadding="0" cellspacing="0">
         <thead>
         <tr>
             <td colspan="1">
@@ -34,10 +34,19 @@
             {% for day in dates %}
             {% if day.date.weekday == 0 %}<tr class="calendar_week">{% endif %}
             <td class="calendar_day{% if day.overmonth %} overmonth{% endif %}{% if day.date == now.date %} calendar_now{% endif %}">
-                <h1>{{ day.date.day }}</h1>
-                <div>
+                {% if day.events %}
+                <div class="cal_w_task"></div>
+                <div class="day">
+                    <a href="javascript:false" role="button" data-toggle="popover" data-trigger="focus" title="Eventi">{{ day.date.day }}</a>
+                </div>
+                {% else %}
+                <div class="day">
+                    {{ day.date.day }}
+                </div>
+                {% endif %}
+                <div style="display: none">
                     {% for task in day.events %}
-                    <p>
+                    <p class="info">
                         {% if task.done %}{% css_icon "ok" %}{% endif %}
                         <a href="{% url 'ittasks:detail' task.id %}">
                         {{ task }}
@@ -69,3 +78,8 @@
         </tbody>
     </table>
 </div>
+<script language="JavaScript">
+    if (typeof loadpopover == 'function'){
+      loadpopover()
+    }
+</script>

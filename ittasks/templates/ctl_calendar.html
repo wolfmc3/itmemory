@@ -1,6 +1,13 @@
 <script>
-    function AjaxCalendar(anchor) {
-        alert(this)
-        ;
+    function loadpopover() {
+        $(function () {
+            $('[data-toggle="popover"]').popover({
+                html: true,
+                content: function(){
+                    return $(this).parent().next().html()
+                }
+            });
+        })
     }
+    loadpopover();
 </script>

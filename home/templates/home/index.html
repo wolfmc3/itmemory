@@ -1,34 +1,42 @@
 {% extends 'base.html' %}
 {% load tasks_calendar %}
 {% load itmemory_tags %}
+{% load hpilo_tags %}
 
 {% block body_contents %}
 <div class="row">
-    {% for stat in stats %}
-    <div class="round-box col-md-4">
-        <div class="alert alert-info text-center" role="alert">
-        <h1>{% css_icon stat.icon %} {{ stat.value}}</h1>
-        <p>{{ stat.label }}</p>
+    <div class="row col-md-9">
+        <div class="round-box col-md-6">
+            <h3>Operazioni da fare</h3>
+            {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
+        </div>
+        <div class="round-box col-md-6">
+            <h3>Operazioni assegnate a te</h3>
+            {% include "ittasks/tasklist.html" with tasks_toread=usertasks %}
         </div>
     </div>
-    {% endfor %}
-
-    <div class="round-box col-md-4">
-        <h3>Operazioni da fare</h3>
-        {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
-    </div>
-    <div class="round-box col-md-4">
-        <h3>Operazioni assegnate a te</h3>
-        {% include "ittasks/tasklist.html" with tasks_toread=usertasks %}
-    </div>
-    <div class="round-box col-md-4">
-        <h3>Ultimi report</h3>
-        {% include "ittasks/tasklist.html" with tasks_toread=recentclosedtasks %}
-    </div>
-    <div class="round-box col-md-12">
-        <h3>Calendario</h3>
-        {% taskcalendar %}
-        {% ctl_calendar %}
+    <div class="row col-md-3">
+        <div class="round-box col-md-12">
+            <h3>Errori hardware</h3>
+            {% iloerrors %}
+        </div>
+        <div class="round-box col-md-12">
+            <h3>Ultimi report</h3>
+            {% include "ittasks/tasklist.html" with tasks_toread=recentclosedtasks %}
+        </div>
+        {% for stat in stats %}
+        <div class="round-box col-md-6">
+            <div class="alert alert-info text-center" role="alert" style="min-height: 120px">
+            <h1>{% css_icon stat.icon %} {{ stat.value}}</h1>
+            <p>{{ stat.label }}</p>
+            </div>
+        </div>
+        {% endfor %}
+        <div class="round-box col-md-12">
+            <h3>Calendario</h3>
+            {% taskcalendar %}
+            {% ctl_calendar %}
+        </div>
     </div>
 </div>
 {% endblock body_contents %}
