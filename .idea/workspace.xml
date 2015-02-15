@@ -2,13 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="60728673-1930-48c0-9944-ece1ae5c3472" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hpilo/migrations/0009_ilonotifysetting_hardwareobject.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hpilo/migrations/0010_auto_20150214_1820.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hpilo/migrations/0012_auto_20150214_2204.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hpilo/migrations/0013_auto_20150215_0156.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hpilo/migrations/0014_auto_20150215_1924.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hpilo/migrations/0015_auto_20150215_2231.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/hpilo/migrations/0016_auto_20150215_2238.py" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="itmemory.iws" />
@@ -740,12 +733,6 @@
       <option name="number" value="Default" />
       <updated>1418849000948</updated>
     </task>
-    <task id="LOCAL-00023" summary="Reconfigure Customers app&#10;&quot;Create Task&quot; link in HardwareObject&#10;">
-      <created>1420162250069</created>
-      <option name="number" value="00023" />
-      <option name="project" value="LOCAL" />
-      <updated>1420162250069</updated>
-    </task>
     <task id="LOCAL-00024" summary="Reconfigure Customers app&#10;&quot;Create Task&quot; link in HardwareObject&#10;">
       <created>1420162284424</created>
       <option name="number" value="00024" />
@@ -1034,7 +1021,13 @@
       <option name="project" value="LOCAL" />
       <updated>1424044507739</updated>
     </task>
-    <option name="localTasksCounter" value="72" />
+    <task id="LOCAL-00072" summary="Hpilo Notify in home page &amp; Hpilo notify settings">
+      <created>1424044558872</created>
+      <option name="number" value="00072" />
+      <option name="project" value="LOCAL" />
+      <updated>1424044558872</updated>
+    </task>
+    <option name="localTasksCounter" value="73" />
     <servers />
   </component>
   <component name="TodoView" selected-index="0">
