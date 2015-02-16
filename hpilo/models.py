@@ -30,14 +30,6 @@ class StatusCharField(models.CharField):
         if self.json:
             setattr(cls, 'get_%s_json' % self.name, self._get_FIELD_json)
 
-    def to_python(self, value):
-        topython = super(StatusCharField, self).to_python(value)
-        return topython
-
-    def get_prep_value(self, value):
-        getprepvalue = super(StatusCharField, self).get_prep_value(value)
-        return getprepvalue
-
 
 class IloStatus(models.Model):
     class Meta():
@@ -71,7 +63,7 @@ class IloStatus(models.Model):
             field_val = getattr(self, field)
             if field_val != "OK":
                 errors.append({
-                    "label": field.title(),
+                    "label": self._meta.get_field(field).verbose_name,
                     "value": field_val
                 })
         return errors
