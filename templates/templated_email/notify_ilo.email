@@ -1,0 +1,44 @@
+{% block subject %}{{ subject }}{% endblock %}
+{% block plain %}
+Ciao {{full_name}},
+Alcuni server notificano problemi hardware:
+{% for status in subset %}
+Server:{{ status.hardwareobject }} Ora:{{ status.time }}
+  - Stato generale: {{ status.status }}
+  - Bios: {{ status.bios }}
+  - Ventole: {{ status.fans }}
+  - Memoria: {{ status.memory }}
+  - Rete: {{ status.network }}
+  - Alimentazione: {{ status.power }}
+  - Processore: {{ status.processor }}
+  - Archiviazione: {{ status.storage }}
+  - Temperature: {{ status.temperature }}
+{% endfor %}
+
+
+Buon Lavoro
+{% endblock %}
+
+{% block html %}
+    <div style='font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; font-size: 12px;'>
+<p>Ciao {{full_name}},<br>Alcuni server notificano problemi hardware:</p>
+
+{% for status in subset %}
+    <h3>Server:{{ status.hardwareobject }} Ora:{{ status.time }}</h3>
+    <ul>
+        <li>Stato generale: {{ status.status }}</li>
+        <li>Bios: {{ status.bios }}</li>
+        <li>Ventole: {{ status.fans }}</li>
+        <li>Memoria: {{ status.memory }}</li>
+        <li>Rete: {{ status.network }}</li>
+        <li>Alimentazione: {{ status.power }}</li>
+        <li>Processore: {{ status.processor }}</li>
+        <li>Archiviazione: {{ status.storage }}</li>
+        <li>Temperature: {{ status.temperature }}</li>
+    </ul>
+
+{% endfor %}
+
+<p>Buon Lavoro</p>
+    </div>
+{% endblock %}

@@ -4,7 +4,7 @@
 
 {% for obj in objs %}
     <div style="margin-left: 10px">
-    <h6>{{ obj.name }}</h6>
+    <h6>{{ obj.notifygroup }}</h6>
     {% for stat in obj.subset %}
         {% ifchanged stat %}
             <h5>{% css_icon "warning-sign" %} <a href="{%  url "objects:detail" stat.hardwareobject.id %}">{{ stat.hardwareobject.name }}</a>&nbsp;<small>{{ stat.time|naturaltime }}</small></h5>

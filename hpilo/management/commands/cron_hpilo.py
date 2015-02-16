@@ -1,5 +1,8 @@
 from datetime import datetime
+from django.conf import settings
 from django.core.management.base import BaseCommand
+from templated_email import send_templated_mail
+from hpilo.templatetags.hpilo_tags import iloerrors
 from ittasks.models import Task, send_mail_user
 
 
@@ -8,38 +11,44 @@ class Command(BaseCommand):
     help = 'Esegue il cron per i task'
 
     def handle(self, *args, **options):
-        tasks = Task.objects.filter(done=False)
-        for task in tasks:
-            self.stdout.write("Task {0}:\tR:{1}\tE:{2}\t".format(
-                task.id,
-                str(task.send_reminder),
-                str(task.send_expiration),
-                ), ending=' '
-            )
-            if task.send_reminder:
-                user_list = []
+        objs = iloerrors()
+        objs = objs["objs"]
+        maildests = dict()
 
-                if task.user is not None:
-                    user_list.append(task.user)
-                elif task.template.send_reminder_group is not None:
-                    user_list.extend(task.template.send_reminder_group.user_set.all())
-                for mail_user in user_list:
-                    self.stdout.write("\tSended reminder to " + mail_user.email)
-                    send_mail_user(task, mail_user, "reminder_task")
-                self.stdout.write("Sended reminder", ending='\t')
-                task.reminder_send_date = datetime.now()
-                task.save()
-            if task.send_expiration:
-                user_list = []
-                if task.template.send_reminder_group is not None:
-                    user_list.extend(task.template.send_reminder_group.user_set.all())
-                if task.user is not None and task.user not in user_list:
-                    user_list.append(task.user)
-                for mail_user in user_list:
-                    send_mail_user(task, mail_user, "expired_task")
-                    self.stdout.write("\tSended expiration reminder to " + mail_user.email)
-                self.stdout.write("Sended expiration reminder", ending='')
-                task.expired_send_date = datetime.now()
-                task.save()
-            self.stdout.write(".")
+        for slog in objs:
+            notify, subset = slog["notifygroup"], slog["subset"]
+            self.stdout.write("Ilo error processing {0} filter".format(notify.name))
+            subset = subset.filter(notified=False)
+            if subset and (notify.user or notify.group):
+                dests = set()
+                if notify.user:
+                    dests = dests | {notify.user}
+                if notify.group:
+                    dests = dests | set(list(notify.group.user_set.all()))
+                for dest in dests:
+                    if dest.email not in maildests:
+                        maildests[dest.email] = {'user': dest, 'objects': [], 'filters': []}
+                    maildests[dest.email]['objects'] += subset
+                    maildests[dest.email]['filters'] += [notify.name]
+                subset.update(notified=True)
 
+        for mail, data in maildests.iteritems():
+            self.stdout.write("Send iloerrors to " + mail + " {0} log".format(len(data['objects'])))
+            subject = "HP ILO: " + (', '.join(data['filters']))
+            send_mail_errors(data['objects'], subject, data['user'], "notify_ilo")
+
+
+def send_mail_errors(subset, subject, user, template):
+    if user.email is None:
+        return
+    return send_templated_mail(
+        template_name=template,
+        from_email=settings.EMAIL_SENDER,
+        recipient_list=[user.email],
+        context={
+            'subject': subject,
+            'username': user.username,
+            'full_name': user.get_full_name(),
+            'subset': subset
+        },
+    )

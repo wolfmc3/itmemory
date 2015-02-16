@@ -49,6 +49,7 @@ class IloStatus(models.Model):
     temperature = StatusCharField("Temperature", json="TEMPERATURE_STATUS")  # TEMPERATURE_STATUS
     source = models.CharField("Sorgente", max_length=255, default="", null=True, blank=True)
     history = models.BooleanField("Stato storico", default=False)
+    notified = models.BooleanField("Notificato", default=False)
     time = models.DateTimeField("Rilevamento")
 
     def save(self, force_insert=False, force_update=False, using=None, update_fields=None):

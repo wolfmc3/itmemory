@@ -85,9 +85,8 @@ def iloerrors():
     ilostatusdetails = list()
     for iloset in IloNotifySetting.objects.all():
         subset = iloset.apply_filter(IloStatus.objects.all())
-        print subset.query
         ilostatusdetails.append({
-            'name': iloset,
+            'notifygroup': iloset,
             'subset': subset
         })
     return {'objs': ilostatusdetails}
