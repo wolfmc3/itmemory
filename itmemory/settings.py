@@ -10,6 +10,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 import os
+from os.path import join
 
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
@@ -155,6 +156,31 @@ HPILO_OLD_STATUS = 7
 TASK_REMIND_DAYS = 2
 TASK_EXPIRED_DAYS = 2
 TASK_PRE_EXPIRED_DAYS = 1
+
+if not os.path.exists(join(BASE_DIR, "logs")):
+    os.makedirs(join(BASE_DIR, "logs"))
+
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'handlers': {
+        'file': {
+            'level': 'ERROR',
+            'filename': join(BASE_DIR, "logs/logs.log"),
+            'class': 'logging.handlers.TimedRotatingFileHandler',
+            'when': 'D',
+            'interval': 1,
+            'backupCount': 0,
+        },
+    },
+    'loggers': {
+        'django.request': {
+            'handlers': ['file'],
+            'level': 'ERROR',
+            'propagate': True,
+        },
+    },
+}
 
 try:
     from settings_local import *

@@ -11,8 +11,8 @@ from django.db.models.signals import pre_save
 
 class TaskTemplate(models.Model):
     class Meta():
-        verbose_name = "Modello attività"
-        verbose_name_plural = "Modelli attività"
+        verbose_name = u"Modello attività"
+        verbose_name_plural = u"Modelli attività"
 
     name = models.CharField(max_length=100, verbose_name="Nome")
 
@@ -54,8 +54,8 @@ class TaskCheckTemplate(models.Model):
 
 class Task(models.Model):
     class Meta():
-        verbose_name = "Attività"
-        verbose_name_plural = "Attività"
+        verbose_name = u"Attività"
+        verbose_name_plural = u"Attività"
 
     template = models.ForeignKey(TaskTemplate, related_name='tasks', verbose_name="Modello di task")
     hardwareobject = models.ForeignKey(HardwareObject, related_name='tasks',
