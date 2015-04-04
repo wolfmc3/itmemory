@@ -44,6 +44,7 @@ INSTALLED_APPS = (
     'django.contrib.humanize',
     'django_ftpserver',
     'django_mailbox',
+    'chartit',
     'jquery',
     'crispy_forms',
     'dbbackup',

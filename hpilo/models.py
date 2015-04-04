@@ -81,6 +81,7 @@ class IloStatusDetail(models.Model):
         verbose_name = "Dettaglio Stato HP Ilo"
         verbose_name_plural = "Dettagli Stato HP Ilo"
         ordering = ['item', 'component']
+
     ilostatus = models.ForeignKey(IloStatus, related_name="statusdetails")
     item = models.CharField("Oggetto", max_length=255)  # TEMP, FANS, STORAGE
     name = models.CharField("Nome", max_length=255, default="", blank=True, null=True)  # LABEL

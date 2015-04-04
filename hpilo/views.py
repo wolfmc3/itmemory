@@ -1,14 +1,16 @@
 # coding=utf-8
 import codecs
+from datetime import datetime
 import unicodedata
 
 from django.core.files.base import ContentFile
 from django.core.files.storage import default_storage
 from django.http.response import HttpResponse, HttpResponseNotFound
 from django.views import generic
-from django.shortcuts import get_object_or_404
+from django.shortcuts import get_object_or_404, render_to_response
+import time
 
-from hpilo.models import importfromjson
+from hpilo.models import importfromjson, IloStatusDetail
 from itmemory import settings
 from objects.models import HardwareObject
 
@@ -17,7 +19,7 @@ class UploadView(generic.TemplateView):
     template_name = 'hpilo/upload.html'
 
     def post(self, request, *args, **kwargs):
-        obj = get_object_or_404(HardwareObject, pk=kwargs.get("hwid",0))
+        obj = get_object_or_404(HardwareObject, pk=kwargs.get("hwid", 0))
         if obj.remote_token == kwargs.get("hwtoken", "not provided"):
             fl = request.FILES['file']
             path = default_storage.save('upload/' + fl.name, ContentFile(fl.read()))
@@ -28,12 +30,67 @@ class UploadView(generic.TemplateView):
             return HttpResponseNotFound('False')
 
 
+def sensorchart(request, detailid):
+    from chartit import DataPool, Chart
+    ref = IloStatusDetail.objects.get(id=detailid)
+    sensors = DataPool(
+        series=[
+            {
+                'options': {
+                    'source': IloStatusDetail.objects.filter(
+                        ilostatus__hardwareobject=ref.ilostatus.hardwareobject,
+                        item=ref.item,
+                        component=ref.component,
+                        name=ref.name
+                    ).all()[:40]
+                },
+                'terms': [
+                    ('ilostatus__time', lambda d: time.mktime(d.timetuple())),
+                    'value'
+                ]
+            }
+        ])
+
+    # Step 2: Create the Chart object
+    cht = Chart(
+        datasource=sensors,
+        series_options=[{
+            'options': {
+                'type': 'line',
+                'stacking': False
+            },
+            'terms': {
+                'ilostatus__time': [
+                    'value'
+                ]}
+        }],
+        chart_options=
+        {
+            'title': {'text': 'Valori sensore ' + ref.name + " - " + unicode(ref.ilostatus.hardwareobject)},
+            'xAxis': {
+                'title': {
+                    'text': 'Giorno'
+                }
+            },
+            'yAxis': {
+                'title': {
+                    'text': ref.um
+                }
+            }
+        },
+        x_sortf_mapf_mts=(None, lambda i: datetime.fromtimestamp(i).strftime("%d %b %H:%M"), False)
+    )
+
+    return render_to_response('hpilo/sensorgraph.html', {'sensorgraph': cht})
+
+
 class CreatePack(generic.TemplateView):
     template_name = 'hpilo/createpack.html'
 
     def post(self, request, *args, **kwargs):
         import zipfile
         import os
+
         root = os.path.join(settings.BASE_DIR, 'hpilo/static/pack/')
         obj = get_object_or_404(HardwareObject, pk=kwargs.get("hwid", 0))
         postr = request.POST

@@ -29,3 +29,4 @@ django-templated-email
 django_mailbox
 django-ftpserver
 django-dbbackup
+simplejson

@@ -1,0 +1,11 @@
+{% load staticfiles %}
+{% load djfrontend %}
+<head>
+    {% djfrontend_jquery %}
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    {% load chartit %}
+    {{ sensorgraph|load_charts:"container" }}
+</head>
+<body>
+    <div id='container'> Attendere... </div>
+</body>

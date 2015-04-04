@@ -42,7 +42,12 @@ def iloled(text, status, detail=None, extrainfo=None):
             <span class="badge pull-right">
                 &nbsp;{0} &deg;&nbsp;
             </span>
-            """.format(extrainfo.value, long(float(extrainfo.value-15)/70*100))
+            <span class="pull-right">
+                &nbsp;<a href="/hpilo/chart/{2}" target="_blank">
+                    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                </a>&nbsp;
+            </span>
+            """.format(extrainfo.value, long(float(extrainfo.value-15)/70*100), extrainfo.id)
         if extrainfo.item == "FAN":
             extrainfo_html = """
             <div class="progress pull-right" style="display: inline-block; width: 50%; height: 17px; margin:0px; ">
@@ -53,7 +58,12 @@ def iloled(text, status, detail=None, extrainfo=None):
             <span class="pull-right">
                 &nbsp;{0} %&nbsp;
             </span>
-            """.format(extrainfo.value, "progress-bar-info" if extrainfo.value < 80 else "progress-bar-warning")
+            <span class="pull-right">
+                &nbsp;<a href="/hpilo/chart/{2}" target="_blank">
+                    <span class="glyphicon glyphicon-stats" aria-hidden="true"></span>
+                </a>&nbsp;
+            </span>
+            """.format(extrainfo.value, "progress-bar-info" if extrainfo.value < 80 else "progress-bar-warning", extrainfo.id)
         if extrainfo.item in ["LOGICAL_DRIVE", "PHYSICAL_DRIVE"]:
             extrainfo_html = """
             <span class="badge pull-right">
