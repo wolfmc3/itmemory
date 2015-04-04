@@ -17,7 +17,7 @@ class Command(BaseCommand):
 
         for slog in objs:
             notify, subset = slog["notifygroup"], slog["subset"]
-            self.stdout.write("Ilo error processing {0} filter".format(notify.name))
+            # self.stdout.write("Ilo error processing {0} filter".format(notify.name))
             subset = subset.filter(notified=False)
             if subset and (notify.user or notify.group):
                 dests = set()
@@ -33,7 +33,7 @@ class Command(BaseCommand):
                 subset.update(notified=True)
 
         for mail, data in maildests.iteritems():
-            self.stdout.write("Send iloerrors to " + mail + " {0} log".format(len(data['objects'])))
+            # self.stdout.write("Send iloerrors to " + mail + " {0} log".format(len(data['objects'])))
             subject = "HP ILO: " + (', '.join(data['filters']))
             send_mail_errors(data['objects'], subject, data['user'], "notify_ilo")
 

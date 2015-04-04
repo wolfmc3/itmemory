@@ -10,15 +10,18 @@ class CronRegisterHelper(object):
 
     def execute(self, *args, **options):
         for func in self._commandlist:
-            print "START %s" % func.__module__
+            # print func.__module__
+
             try:
                 func.execute(*args, **options)
             except Exception as err:
-                print "\n\nError!!:"
+                print func.__module__
+                print "\nError!!:"
                 print err
-            else:
+            ''' else:
                 print "\nOK!"
             print "END %s" % func.__module__
+            '''
 
 
 cronregistry = CronRegisterHelper()

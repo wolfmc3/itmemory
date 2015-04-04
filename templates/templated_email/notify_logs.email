@@ -14,13 +14,14 @@ Buon Lavoro
 {% block html %}
 <p>Ciao {{full_name}},<br>Sono stati generati dei log che richiedono attenzione:</p>
 <table align="center" border="1" cellpadding="5" cellspacing="0" width="100%">
-<tr><th>Livello</th><th>Disp.</th><th>Log</th><th>Messaggio</th></tr>
+<tr><th>Livello</th><th>Disp.</th><th>Log</th><th>Messaggio</th><th>Data</th></tr>
 {% for log in logs %}
 <tr>
 <td style="background-color:{{ log.level_color }}">{{ log.get_level_display }}</td>
 <td><strong>{{ log.hardwareobject.name }}</strong><br><small>{{ log.hardwareobject.worksite }}</small></td>
 <td>{{ log.log_name }}</td>
 <td>{{ log.message }}</td>
+<td>{{ log.time }}</td>
 </tr>
 {% endfor %}
 </table>
