@@ -42,7 +42,7 @@ def sensorchart(request, detailid):
                         item=ref.item,
                         component=ref.component,
                         name=ref.name
-                    ).all()[:40]
+                    ).order_by("-id").all()[:96]
                 },
                 'terms': [
                     ('ilostatus__time', lambda d: time.mktime(d.timetuple())),
