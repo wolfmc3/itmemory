@@ -6,10 +6,13 @@
 {% block toggle_login %}{% endblock %}
 
 {% block body_contents %}
+    <div class="col-lg-offset-4 col-lg-4">
+    <br/><br/>
 <form action="{% url 'mysite_login' %}" method="post" accept-charset="utf-8">
 {{ form|crispy }}
 {% csrf_token %}
 <input type="hidden" name="next" value="{{ next }}"/>
 <input class="btn btn-default" type="submit" value="Login"/>
 </form>
+    </div>
 {% endblock %}

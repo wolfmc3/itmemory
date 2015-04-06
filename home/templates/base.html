@@ -1,7 +1,8 @@
-{% extends 'djfrontend/skeleton.html' %}
+{% extends 'sbadmin2/base.html' %}
 {% load staticfiles %}
 {% load djfrontend %}
 {% load itmemory_tags %}
+{% load sbadmin_tags %}
 
 {% block title %}Gestione assistenza tecnica{% endblock title %}
 {% block body_id %}mysite_body{% endblock body_id %}
@@ -13,7 +14,14 @@
 {% block custom_page_scripts %}
 {% endblock custom_page_scripts %}
 {% endblock head_css %}
-{% block body_content %}
+
+{%  block links %}
+    <li class="{% active_page request 'home' %}"><a class="{% active_page request 'home' %}" href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
+    <li class="{% active_page request 'customers' %}"><a class="{% active_page request 'customers' %}" href="{% url 'customers:index'  %}">{% fa_icon 'group' %} Clienti</a></li>
+    <li class="{% active_page request 'objects' %}"><a class="{% active_page request 'objects' %}" href="{% url 'objects:index'  %}">{% fa_icon 'desktop' %} Dispositivi</a></li>
+    <li><a href="{% url 'admin:index'  %}">{% fa_icon 'wrench' %} Impostazioni</a></li>
+{%  endblock %}
+
 {% block nav_bar %}
 <nav class="navbar navbar-default navbar-fixed-top" role="navigation">
     <!--<div class="container">-->
@@ -25,14 +33,12 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
+            {% block nav_bar_brand %}
             <a class="navbar-brand" href="/"><img style="max-width:180px; margin-top: -15px;" src="{% static "itmemory.png" %}"></a>
+            {% endblock nav_bar_brand %}
         </div>
         <div id="navbar" class="navbar-collapse collapse">
             <ul class="nav navbar-nav">
-                <li class="{% active_page request 'home' %}"><a href="/">Home</a></li>
-                <li class="{% active_page request 'objects' %}"><a href="{% url 'objects:index'  %}">Hardware</a></li>
-                <li class="{% active_page request 'customers' %}"><a href="{% url 'customers:index'  %}">Clienti</a></li>
-                <li><a href="{% url 'admin:index'  %}">Amministrazione</a></li>
             </ul>
             {% block toggle_login %}
             {% include "toggle_login.html" %}
@@ -42,14 +48,5 @@
     <!--</div>-->
 </nav>
 {% endblock nav_bar %}
-{% block body_container %}
-<div class="container-fluid">
-    {% block body_contents %}
-    {% endblock body_contents %}
-</div>
-<div>
-    <br /><br />
-</div>
-{% endblock body_container %}
 
-{% endblock body_content %}
+

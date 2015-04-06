@@ -4,24 +4,28 @@
 {% block title %}Lista Hardware{% endblock title %}
 {% block body_contents %}
 <div class="row">
-    <div class="col-md-12 round-box bg-info">
-        <form action="" method="post" class="form-inline">
-            {% csrf_token %}
-            <div class="form-group">
-                <label class="sr-only" for="obj_name">Nome prodotto</label>
-                <input placeholder="Oggetto" class="form-control"
-                       id="obj_name" type="text" name="obj_name" value="{{ request.POST.obj_name }}"/>
-                <label class="sr-only" for="obj_serial">Seriale</label>
-                <input placeholder="Seriale" class="form-control"
-                       type="text" id="obj_serial" name="obj_serial" value="{{ request.POST.obj_serial }}"/>
-                <label class="sr-only" for="cust_name">Cliente</label>
-                <input placeholder="Cliente o sede" class="form-control"
-                       id="cust_name" type="text" name="cust_name" value="{{ request.POST.cust_name }}"/>
+    <div class="col-md-12 text-center">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <form action="" method="post" class="form-inline">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="sr-only" for="obj_name">Nome prodotto</label>
+                        <input placeholder="Oggetto" class="form-control"
+                               id="obj_name" type="text" name="obj_name" value="{{ request.POST.obj_name }}"/>
+                        <label class="sr-only" for="obj_serial">Seriale</label>
+                        <input placeholder="Seriale" class="form-control"
+                               type="text" id="obj_serial" name="obj_serial" value="{{ request.POST.obj_serial }}"/>
+                        <label class="sr-only" for="cust_name">Cliente</label>
+                        <input placeholder="Cliente o sede" class="form-control"
+                               id="cust_name" type="text" name="cust_name" value="{{ request.POST.cust_name }}"/>
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" value="Cerca">
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input class="btn btn-success" type="submit" value="Cerca">
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 <div class="table-responsive">

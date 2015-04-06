@@ -45,6 +45,7 @@ INSTALLED_APPS = (
     'django_ftpserver',
     'django_mailbox',
     'chartit',
+    'sbadmin2',
     'jquery',
     'crispy_forms',
     'dbbackup',

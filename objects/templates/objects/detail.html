@@ -5,7 +5,7 @@
 {% load hpilo_tags %}
 {% block title %}{{ obj.name }} sn. {{ obj.serial }} {% endblock title %}
 {% block custom_page_scripts %}
-<script src="{% static '/static/objects/objects-detail.js' %}"></script>
+<script src="{% static 'objects/objects-detail.js' %}"></script>
 <script>
     pwd_req_url = '{% url 'objects:getpassword' 0 %}'
     csrfmiddlewaretoken = '{{ csrf_token }}'
@@ -13,8 +13,90 @@
 {% endblock custom_page_scripts %}
 
 {% block body_contents %}
+    <div class="row">
+    <div class="panel panel-green">
+        <div class="panel-heading">
+                {{ obj.name }}
+        </div>
+        <div class="panel-body">
+            {% if obj.image %}
+                <div class="col-md-3">
+                    <p class="text-center">
+                    <img style="max-height: 150px;" src="{{ obj.image.url }}" alt="{{ obj.name }}"
+                         class="img-thumbnail">
+                    </p>
+                </div>
+            {% endif %}
+            <div class="col-md-3">
+                <p>
+                    <strong>Seriale</strong>: {{ obj.serial }}<br />
+                    <strong>Part:</strong> {{ obj.item }}<br />
+                    <strong>IP:</strong> {{ obj.primary_ip }}<br />
+                    <strong>Ubicazione</strong>: {{ obj.location }}<br/>
+                    {% if obj.parentobject %}
+                    <strong>Dipende da:</strong>
+                    <a href="{% url 'objects:detail' obj.parentobject.id %}">
+                        {{ obj.parentobject.name }}
+                    </a>
+                    {% endif %}
+                </p>
+            </div>
+            <div class="col-md-3">
+                <address>
+                    <strong>
+                        <a href="{% url 'customers:detail' obj.worksite.customer.id %}#worksite{{ obj.worksite.id }} ">
+                        {{ obj.worksite.customer.name }}
+                        </a>
+                    </strong><br/>
+                    {{ obj.worksite.fulltext|linebreaksbr }}
+                </address>
+            </div>
+            <div class="col-md-3">
+                <table class="table">
+                {% for hwobj in obj.worksite.hardwareobjects.all %}
+                <tr class='{% ifequal obj.id hwobj.id %}success{% endifequal %}'>
+                    <td>
+                        {% css_icon "hdd" %} <a title="{{ hwobj.location }}"
+                                               href="{% url 'objects:detail' hwobj.id %}">{{ hwobj.name }}</a>
+                    </td>
+                    <td>
+                        {{ hwobj.serial }}
+                    </td>
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="2">
+                        Nessun hardware
+                    </td>
+                </tr>
+                {% endfor %}
+                </table>
+            </div>
+        </div>
+    <div class="panel-footer">
+                    <a style="color:#ffffff" class="btn btn-success btn-xs ajax_get " href="{% url 'objects:addsetting' obj.id %}">
+                        {% css_icon "cog" %} Aggiungi impostazione
+                    </a>
+                    <a style="color:#ffffff" class="btn btn-success btn-xs ajax_get " href="{% url 'objects:addpassword' obj.id %}">
+                        {% css_icon "lock" %} Aggiungi password
+                    </a>
+                    <a style="color:#ffffff" class="btn btn-xs btn-primary " href="{% url 'admin:objects_hardwareobject_change' obj.id %}">
+                        {% css_icon "pencil" %} Modifica dati
+                    </a>
+    </div>
+    </div>
+</div>
+
 <div class="row">
-    <div class="row col-lg-8">
+<ul class="nav nav-tabs">
+    <li><a href="#panel_password" data-toggle="tab" aria-expanded="false">Password</a></li>
+    <li><a href="#panel_settings" data-toggle="tab" aria-expanded="false">Impostazioni</a></li>
+    <li><a href="#panel_activity" data-toggle="tab" aria-expanded="false">Attività</a></li>
+    <li><a href="#panel_logs" data-toggle="tab" aria-expanded="false">Eventi e log</a></li>
+    <li><a href="#panel_hardware" data-toggle="tab" aria-expanded="false">Hardware</a></li>
+</ul>
+<div class="tab-content">
+    <div class="tab-pane fade" id="panel_password">
         {% regroup obj.softwarepasswords.all by settingtype.group as group_list %}
         {% for groupitem in group_list %}
         <div class="col-lg-6 round-box password-box">
@@ -59,6 +141,9 @@
             {% endfor %}
         </div>
         {% endfor %}
+
+    </div>
+    <div class="tab-pane fade" id="panel_settings">
         {% regroup obj.settings.all by type.group as setting_list %}
         {% for setitem in setting_list %}
         <div class="col-lg-6 round-box setting-box">
@@ -84,56 +169,25 @@
             {% endfor %}
         </div>
         {% endfor %}
-        <div class="col-lg-12 round-box info-box">
-            <h4>{% css_icon "list" %} System Log</h4>
-            <div class="col-lg-12">
-            {% hwlogs obj 25 %}
-            </div>
-        </div>
+
     </div>
+    <div class="tab-pane fade" id="panel_activity">
+            <div class="" style="min-height:450px;">
+                {% toactivatetask obj %}
+                <h4 class="well well-sm">Da eseguire</h4>
+                {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
 
-    <div class="row col-lg-4 round-box">
-        <div class="col-lg-12 round-box coll_box">
-            <h4>
-                {{ obj.name }}
-                <a class="btn btn-xs btn-primary pull-right" href="{% url 'admin:objects_hardwareobject_change' obj.id %}">
-                    {% css_icon "pencil" %}
-                </a>
-            </h4>
-
-            <div>
-                {% if obj.image %}
-                <p class="text-center">
-                <img style="max-height: 150px;" src="{{ obj.image.url }}" alt="{{ obj.name }}" class="img-thumbnail">
-                </p>
-                {% endif %}
-                <p>
-                    <strong>S/N:</strong> {{ obj.serial }}<br />
-                    <strong>P/N:</strong> {{ obj.item }}<br />
-                    <strong>IP:</strong> {{ obj.primary_ip }}<br />
-                    {% if obj.parentobject %}
-                    <strong>Dipende da:</strong>
-                    <a href="{% url 'objects:detail' obj.parentobject.id %}">
-                        {{ obj.parentobject.name }}
-                    </a>
-                    {% endif %}
-                </p>
-
-                <p>
-                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addsetting' obj.id %}">
-                        {% css_icon "cog" %} Aggiungi impostazione
-                    </a><br/>
-                </p>
-
-                <p>
-                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addpassword' obj.id %}">
-                        {% css_icon "lock" %} Aggiungi password
-                    </a>
-                </p>
+                <h4 class="well well-sm">Eseguite</h4>
+                {% include "ittasks/tasklist.html" with tasks_toread=closedtasks %}
             </div>
-        </div>
-        <div class="col-lg-12 round-box coll_box">
-            <h4>Hardware Status <img class="pull-right" style="height: 22px;" src="{% static "hplogo.png" %}"></h4>
+
+    </div>
+    <div class="tab-pane fade" id="panel_logs">
+            {% hwlogs obj 25 %}
+
+    </div>
+    <div class="tab-pane fade" id="panel_hardware">
+            <strong>Hardware Status <img class="pull-right" style="height: 22px;" src="{% static "hplogo.png" %}"></strong>
             <div>
                 {% ilostatus obj %}
                 <a class="btn btn-xs btn-primary" href="{{ obj.get_upload_url }}">
@@ -144,58 +198,10 @@
                 </a>
                 <br />&nbsp;
             </div>
-        </div>
-        <div class="col-lg-12 round-box coll_box">
-            <h4>{{ obj.worksite.customer.name }}
-                <a class="btn btn-xs btn-primary pull-right"
-                   href="{% url 'customers:detail' obj.worksite.customer.id %}#worksite{{ obj.worksite.id }} ">
-                    {% css_icon 'search' %}
-                </a>
 
-
-
-            </h4>
-
-            <p>
-                {{ obj.worksite.fulltext|linebreaksbr }}
-                {{ obj.location }}
-            <table class="table">
-                {% for hwobj in obj.worksite.hardwareobjects.all %}
-            <tr class='{% ifequal obj.id hwobj.id %}success{% endifequal %}'>
-                    <td>
-                        {% css_icon "hdd" %}<a title="{{ hwobj.location }}"
-                                               href="{% url 'objects:detail' hwobj.id %}">{{ hwobj.name }}</a>
-                    </td>
-                    <td>
-                        {{ hwobj.serial }}
-                    </td>
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="2">
-                        Nessun hardware
-                    </td>
-                </tr>
-                {% endfor %}
-            </table>
-
-            </p>
-        </div>
-
-        <div class="col-lg-12 round-box">
-            <h4>Attività</h4>
-
-            <div class="" style="min-height:450px;">
-                {% toactivatetask obj %}
-                <h4 class="well well-sm">Da eseguire</h4>
-                {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
-
-                <h4 class="well well-sm">Eseguite</h4>
-                {% include "ittasks/tasklist.html" with tasks_toread=closedtasks %}
-            </div>
-        </div>
     </div>
 
+</div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
