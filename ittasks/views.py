@@ -1,3 +1,4 @@
+# coding=utf-8
 from django.core.urlresolvers import reverse
 from django.http import HttpResponse, JsonResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
@@ -57,6 +58,7 @@ def setenabledtask(request, pk):
     else:
         return HttpResponse("invalid data or error")
 
+
 def calendar(request, month, year):
     if request.user.is_authenticated() :
         return TemplateResponse(request,"ajax_calendar.html",{'month':month,'year': year})
@@ -65,6 +67,7 @@ def calendar(request, month, year):
 
 
 class IndexView(generic.ListView):
+    # TODO: Da inserire lista attività e gestione
     template_name = 'ittasks/index.html'
     context_object_name = 'objects_list'
 

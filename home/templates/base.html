@@ -19,6 +19,7 @@
     <li class="{% active_page request 'home' %}"><a class="{% active_page request 'home' %}" href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
     <li class="{% active_page request 'customers' %}"><a class="{% active_page request 'customers' %}" href="{% url 'customers:index'  %}">{% fa_icon 'group' %} Clienti</a></li>
     <li class="{% active_page request 'objects' %}"><a class="{% active_page request 'objects' %}" href="{% url 'objects:index'  %}">{% fa_icon 'desktop' %} Dispositivi</a></li>
+    <li class="{% active_page request 'ittasks' %}"><a class="{% active_page request 'ittasks' %}" href="{% url 'ittasks:index'  %}">{% fa_icon 'tasks' %} Attivit&agrave;</a></li>
     <li><a href="{% url 'admin:index'  %}">{% fa_icon 'wrench' %} Impostazioni</a></li>
 {%  endblock %}
 
