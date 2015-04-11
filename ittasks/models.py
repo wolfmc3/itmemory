@@ -3,6 +3,7 @@ from datetime import datetime, timedelta
 from django.conf import settings
 from django.contrib.auth.models import User, Group
 from django.db import models
+from django.db.models.query_utils import Q
 from templated_email import send_templated_mail
 from objects.models import HardwareObject
 from dateutil.relativedelta import relativedelta
@@ -143,6 +144,13 @@ class Task(models.Model):
     updatechecks = property(_updatechecks)
     send_reminder = property(_send_reminder)
     send_expiration = property(_send_expiration)
+
+    def _progress(self):
+        ok = self.tasks.exclude(result=0).count()
+        total = self.tasks.count()
+        return int((float(ok) / float(total)) * 100)
+
+    progress = property(_progress)
 
     def has_changed(self, field):
         if not self.pk:

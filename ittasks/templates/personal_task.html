@@ -1,0 +1,24 @@
+<!-- tasks -->
+{% for task in user_tasks %}
+<li>
+    <a href="/ittasks/{{ task.id }}">
+        <div>
+            <div>
+                <strong title="{{ task.hardwareobject }}">{{ task.template.name }}</strong>
+                <span class="pull-right text-muted">{{ task.progress }}%</span><br/>
+                <span class="text-muted" style="font-size: 60%">{{ task.hardwareobject }}</span>
+            </div>
+            <div class="progress progress-striped active">
+                <div class="progress-bar progress-bar-info" role="progressbar" aria-valuenow="{{ task.progress }}" aria-valuemin="0" aria-valuemax="100" style="width: {{ task.progress }}%">
+                    <span class="sr-only">{{ task.progress }}% Complete (success)</span>
+                </div>
+            </div>
+        </div>
+    </a>
+</li>
+
+    {% if not forloop.last %}
+<li class="divider"></li>
+    {% endif %}
+{% endfor %}
+<!-- /tasks -->

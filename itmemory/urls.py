@@ -2,13 +2,16 @@ from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from django.conf import settings
 from django.conf.urls.static import static
+from django.contrib.auth.decorators import login_required
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from home.views import Search
 
 admin.autodiscover()
 
 urlpatterns = patterns(
     '',
     url(r'^$', include('home.urls', namespace="home")),
+    url(r'^search', login_required(Search.as_view()), name='index'),
     url(r'^objects/', include('objects.urls', namespace="objects")),
     url(r'^ittasks/', include('ittasks.urls', namespace="ittasks")),
     url(r'^customers/', include('customers.urls', namespace="customers")),

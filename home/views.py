@@ -1,9 +1,53 @@
+# coding=utf-8
 import calendar
 from datetime import datetime, date
+from django.db.models.query_utils import Q
 from django.views import generic
-from customers.models import Customer
+from docutils.nodes import field_name
 from ittasks.models import Task
-from objects.models import HardwareObject
+from django.db.models.loading import get_model
+from django.db import models
+
+SEARCH_MODELS = [
+    ("objects.HardwareObject", ["remote_token"], "/objects/{0}/"),
+    ("customers.Customer", [], "/customers/{0}/"),
+]
+
+REPLACES = {
+    "[": "<strong>",
+    "]": "</strong>",
+    "(": """<br><small><span class="text-muted">""",
+    ")": "</span></small>",
+    }
+
+
+class Search(generic.TemplateView):
+    template_name = "home/search.html"
+
+    def get_context_data(self, **kwargs):
+        res = list()
+        search_text = self.request.GET["q"]
+        if search_text == "":
+            search_text = "£$%&"
+        for sitem in SEARCH_MODELS:
+            model = get_model(sitem[0])
+            query = Q()
+            for field in model._meta.fields:
+
+                if field.name not in sitem[1] and isinstance(field, (models.CharField, models.TextField)):
+                    query |= Q(**{'{0}__icontains'.format(field.name): search_text})
+
+            search_result = model.objects.filter(query).all()
+            for model_item in search_result:
+                label = unicode(model_item)
+                for i, j in REPLACES.iteritems():
+                    label = label.replace(i, j)
+                res.append({
+                    "model": model._meta.verbose_name_plural,
+                    "label": label,
+                    "url": sitem[2].format(model_item.id)
+                })
+        return {"results": res}
 
 
 class IndexView(generic.ListView):

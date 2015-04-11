@@ -2,6 +2,7 @@
 {% load staticfiles %}
 {% load djfrontend %}
 {% load itmemory_tags %}
+{% load tasks_calendar %}
 {% load sbadmin_tags %}
 
 {% block title %}Gestione assistenza tecnica{% endblock title %}
@@ -48,4 +49,7 @@
 </nav>
 {% endblock nav_bar %}
 
+{% block dropdown_tasks %}
+    {% personal_tasks %}
+{% endblock %}
 

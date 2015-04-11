@@ -13,7 +13,8 @@ $(function() {
             txt.data("viewtimeout",txt.data("viewtimeout")-1)
             if (next) window.setTimeout(check_time, 1000, btn, true);
         } else {
-            btn.fadeIn()
+            btn.removeAttr("disabled");
+            btn.next().remove()
             txt.parent().fadeOut()
             txt.val("")
             txt.next().text("...")
@@ -32,13 +33,16 @@ $(function() {
 
     $(".btn-password").click(function() {
         btn = $(this);
-        btn.fadeOut()
+        btn.attr("disabled", "disabled");
+        btn.after("<img class='pull-right' style='padding-right:15px;' src='/static/img/ldr_bar.gif' />");
+        btn.after("<img src='/static/img/ldr_bar.gif' />");
         $.post(
             pwd_req_url.replace("0",btn.data("id")),
              { 'csrfmiddlewaretoken': csrfmiddlewaretoken },
              function(data) {
                 if (data.password) {
                     txt = $("#"+btn.data("target"))
+                    btn.next().remove()
                     txt.val(data.password)
                     txt.data("view-sec", 15)
                     txt.parent().fadeIn()

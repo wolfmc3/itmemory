@@ -13,6 +13,7 @@ from django.db.models import Q
 class IndexView(generic.ListView):
     template_name = 'objects/index.html'
     context_object_name = 'objects_list'
+    paginate_by = 15
 
     def post(self, request, *args, **kwargs):
 
