@@ -6,14 +6,12 @@
 
 {% block title %}Gestione assistenza tecnica{% endblock title %}
 {% block body_id %}mysite_body{% endblock body_id %}
-{% block head_css %}
-{{ block.super }}
-<link rel="stylesheet" type="text/css" href="{% static 'css/theme.css' %}"/>
 {% djfrontend_jquery %}
 {% djfrontend_normalize %}
 {% block custom_page_scripts %}
+{{ block.super }}
+
 {% endblock custom_page_scripts %}
-{% endblock head_css %}
 
 {%  block links %}
     <li class="{% active_page request 'home' %}"><a class="{% active_page request 'home' %}" href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>

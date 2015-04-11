@@ -90,11 +90,15 @@ def ilodetail(ilostatusobj, section):
 
 
 @register.inclusion_tag("hpilo/iloerrors.html")
-def iloerrors():
+def iloerrors(hwid=None):
     from hpilo.models import IloNotifySetting, IloStatus
     ilostatusdetails = list()
-    for iloset in IloNotifySetting.objects.all():
+    ilosets = IloNotifySetting.objects.all()
+
+    for iloset in ilosets:
         subset = iloset.apply_filter(IloStatus.objects.all())
+        if hwid is not None:
+            subset = subset.filter(hardwareobject__id=hwid)
         ilostatusdetails.append({
             'notifygroup': iloset,
             'subset': subset

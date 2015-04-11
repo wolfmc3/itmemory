@@ -1,14 +1,162 @@
 {% extends 'objects/index.html' %}
-{% from objects.models import Setting %]
+
 {% load itmemory_tags %}
-{% block head_css %}
-{{ block.super }}
+{% load sbadmin_tags %}
+{% load staticfiles %}
+
+{% block body_contents %}
+<div class="row">
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            {% fa_icon "info-circle" %} {{ obj.template.name }}
+        </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    {% if obj.hardwareobject.image %}
+                    <p class="text-center">
+                    <img style="max-height: 100px;max-width: 220px; margin-right:22px;" src="{{ obj.hardwareobject.image.url }}" alt="{{ obj.hardwareobject.name }}" class="img-thumbnail pull-left">
+                    </p>
+                    {% endif %}
+                    <p>
+                        {{ obj.hardwareobject.name }}
+                         <a class="btn btn-xs btn-primary pull-right"
+                           href="{% url 'objects:detail' obj.hardwareobject.id %}">
+                            {% css_icon 'search' %}
+                         </a>
+                    </p>
+                    <p>{{ obj.hardwareobject.worksite.customer.name }}
+                        <a class="btn btn-xs btn-primary pull-right"
+                           href="{% url 'customers:detail' obj.hardwareobject.worksite.customer.id %}">
+                            {% css_icon 'search' %}
+                        </a>
+                    </p>
+                    <p>{{ obj.hardwareobject.worksite.name }}
+                        <a class="btn btn-xs btn-primary pull-right"
+                           href="{% url 'customers:detail' obj.hardwareobject.worksite.customer.id %}#worksite{{ obj.hardwareobject.worksite.id }} ">
+                            {% css_icon 'search' %}
+                        </a>
+
+                    </p>
+                </div>
+                <div class="col-md-6">
+        <p>
+            Esecuzione: {{ obj.laststart }} {% if not obj.done %}
+            (<span id="taskstatus">{{ obj.enabled|yesno:"abilitato,disabilitato,mai" }}</span>)
+            <button style="width:65px;" class="btn btn-info btn-xs" id="enabletask" class="button">
+                {{ obj.enabled|yesno:"disabilita,abilita,mai" }}
+            </button>
+            {% endif %}
+        </p>
+        <p>Completato: {{ obj.done|yesno:"si,no,mai" }}</p>
+        {% if not obj.done %}
+        <p>Prossima: {{ obj.nextstart }}</p>
+        {% for formuser in formsetuser %}
+        <p>Utente assegnato: {{ formuser.user }}</p>
+        {% endfor %}
+        {% else %}
+        <p>Operatore: {{ obj.user.get_full_name }}</p>
+        {% endif %}
+
+                </div>
+            </div>
+
+        </div>
+        {% if not obj.done %}
+        <div class="panel-footer text-right">
+            <a class="btn btn-info" href="{% url 'ittasks:updatechecks' obj.id %}">{% css_icon "refresh" %} Aggiorna i controlli</a>
+            <button id="closebtn2" class="btn btn-primary">Completa e chiudi</button>
+        </div>
+        {% endif %}
+
+    </div>
+</div>
+<div class="row">
+    <div class="panel panel-info">
+    <div class="panel-heading">
+        {% if not obj.done %}
+            Controlli da eseguire
+        {% else %}
+            Controlli eseguiti
+        {% endif %}
+    </div>
+    <div class="panel-body">
+        <form method="post" action="">
+            {% csrf_token %}
+            {{ formset.management_form }}
+            <table class="table table-bordered">
+                <tr>
+                    <th>Nome</th>
+                    <th>Data esecuzione</th>
+                    <th>Esito</th>
+                    <th colspan="2">Annotazioni</th>
+                </tr>
+                {% for form in formset %}
+                <tr>
+                    <td>
+                        <dl>
+                            <dt>{{ form.instance.checktemplate.name }}</dt>
+                            <dd>{{ form.instance.checktemplate.description }}</dd>
+                        </dl>
+                    </td>
+                    <td>
+                        {{ form.instance.exectime }}
+                        {{ form.id }}
+                        {{ form.task }}
+                        {{ form.checktemplate }}
+                        {{ form.exectime }}
+                    </td>
+                    {% if not obj.done %}
+                    <td>
+                        {{ form.result }}
+                    </td>
+                    <td>
+                        {{ form.note }}
+                    </td>
+                    <td style="text-align:center;vertical-align: middle;">
+                        <input class="btn btn-primary" type="submit" value="Salva"/>
+                    </td>
+                    {% else %}
+                    <td>
+                        <p class="bg-{{ form.instance.cssresult }}">{{ form.instance.get_result_display }}</p>
+                    </td>
+                    <td colspan="2">
+                        {{ form.instance.note }}
+                    </td>
+                    {% endif %}
+                </tr>
+                {% empty %}
+                <tr>
+                    <td colspan="5">Nessun controllo visibile prova ad aggiornare la lista dei controlli</td>
+                </tr>
+                {% endfor %}
+
+            </table>
+        </form>
+    </div>
+        {% if not obj.done %}
+        <div class="panel-footer text-right">
+            <a class="btn btn-info" href="{% url 'ittasks:updatechecks' obj.id %}">{% css_icon "refresh" %} Aggiorna i controlli</a>
+            <button id="closebtn" class="btn btn-primary">Completa e chiudi</button>
+        </div>
+        {% endif %}
+</div>
+    </div>
+
 <script>
                 chusricon = null;
                 $(document).ready(function() {
                     addenabledfunc($("#enabletask"))
                     addclosefunc($("#closebtn"))
+                    addclosefunc($("#closebtn2"))
                     addchangeuserfunc($("#id_form-0-user"))
+
+                    $("[id^=id_form-][id$=-result]").change(
+                        function() {
+                            $(this).after("<img src='{% static "img/ldr.gif" %}' />")
+                            $("form").submit()
+                        })
+
                 });
                 function addchangeuserfunc(ctl) {
                     ctl.after('&nbsp;&nbsp;{% css_icon 'ok' %}');
@@ -61,137 +209,6 @@
 
 
 </script>
-{% endblock head_css %}
-{% block body_contents %}
-<div class="row">
-        <div class="col-lg-6 round-box">
-            <h3>{{ obj.template.name }}</h3>
-
-            {% if obj.hardwareobject.image %}
-            <p class="text-center">
-            <img style="max-height: 100px;max-width: 220px; margin-right:22px;" src="{{ obj.hardwareobject.image.url }}" alt="{{ obj.hardwareobject.name }}" class="img-thumbnail pull-left">
-            </p>
-            {% endif %}
-            <p>
-                {{ obj.hardwareobject.name }}
-                 <a class="btn btn-xs btn-primary pull-right"
-                   href="{% url 'objects:detail' obj.hardwareobject.id %}">
-                    {% css_icon 'search' %}
-                 </a>
-            </p>
-            <p>{{ obj.hardwareobject.worksite.customer.name }}
-                <a class="btn btn-xs btn-primary pull-right"
-                   href="{% url 'customers:detail' obj.hardwareobject.worksite.customer.id %}">
-                    {% css_icon 'search' %}
-                </a>
-            </p>
-            <p>{{ obj.hardwareobject.worksite.name }}
-                <a class="btn btn-xs btn-primary pull-right"
-                   href="{% url 'customers:detail' obj.hardwareobject.worksite.customer.id %}#worksite{{ obj.hardwareobject.worksite.id }} ">
-                    {% css_icon 'search' %}
-                </a>
-
-            </p>
-        </div>
-    <div class="col-lg-6 round-box">
-        <h3>Dati attivit&agrave;</h3>
-
-        <p>
-            Esecuzione: {{ obj.laststart }} {% if not obj.done %}
-            (<span id="taskstatus">{{ obj.enabled|yesno:"abilitato,disabilitato,mai" }}</span>)
-            <button style="width:65px;" class="btn btn-info btn-xs" id="enabletask" class="button">
-                {{ obj.enabled|yesno:"disabilita,abilita,mai" }}
-            </button>
-            {% endif %}
-        </p>
-        <p>Completato: {{ obj.done|yesno:"si,no,mai" }}</p>
-        {% if not obj.done %}
-        <p>Prossima: {{ obj.nextstart }}</p>
-        {% for formuser in formsetuser %}
-        <p>Utente assegnato: {{ formuser.user }}</p>
-        {% endfor %}
-        <p class="text-right">
-            <button id="closebtn" class="btn btn-primary">Completa e chiudi</button>
-        </p>
-        {% else %}
-        <p>Operatore: {{ obj.user.get_full_name }}</p>
-        {% endif %}
-    </div>
-    </div>
-<div class="row">
-    <div class="col-lg-12 round-box">
-        {% if not obj.done %}
-        <h3>Controlli da eseguire
-            <small>
-                <a class="btn btn-sm btn-info pull-right" href="{% url 'ittasks:updatechecks' obj.id %}">{% css_icon "refresh" %} Aggiorna i controlli</a>
-            </small>
-            {% else %}
-            <h3>Controlli eseguiti
-            {% endif %}
-        </h3>
-        <form method="post" action="">
-            {% csrf_token %}
-            {{ formset.management_form }}
-            <table class="table table-bordered">
-                <tr>
-                    <th>Nome</th>
-                    <th>Data esecuzione</th>
-                    <th>Esito</th>
-                    <th colspan="2">Annotazioni</th>
-                </tr>
-                {% for form in formset %}
-                <tr>
-                    <td>
-                        <dl>
-                            <dt>{{ form.instance.checktemplate.name }}</dt>
-                            <dd>{{ form.instance.checktemplate.description }}</dd>
-                        </dl>
-                    </td>
-                    <td>
-                        {{ form.instance.exectime }}
-                        {{ form.id }}
-                        {{ form.task }}
-                        {{ form.checktemplate }}
-                        {{ form.exectime }}
-                    </td>
-                    {% if not obj.done %}
-                    <td>
-                        {{ form.result }}
-                    </td>
-                    <td>
-                        {{ form.note }}
-                    </td>
-                    <td style="text-align:center;vertical-align: middle;">
-                        <input class="btn btn-primary" type="submit" value="Salva"/>
-                    </td>
-                    {% else %}
-                    <td>
-                        <p class="bg-{{ form.instance.cssresult }}">{{ form.instance.get_result_display }}</p>
-                    </td>
-                    <td colspan="2">
-                        {{ form.instance.note }}
-                    </td>
-                    {% endif %}
-                </tr>
-                {% empty %}
-                <tr>
-                    <td colspan="5">Nessun controllo visibile prova ad aggiornare la lista dei controlli</td>
-                </tr>
-                {% endfor %}
-
-            </table>
-            <script>
-                    $("[id^=id_form-][id$=-result]").change(
-                                function() {
-                                    $("form").submit()
-                                })
-
-            </script>
-
-        </form>
-
-    </div>
-</div>
 
 {% endblock body_contents %}
 

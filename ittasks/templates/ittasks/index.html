@@ -1,1 +1,14 @@
 {% extends 'base.html' %}
+{% load tasks_calendar %}
+{% block title %}Attività{% endblock title %}
+{% block body_contents %}
+
+<div class="row">
+        <div class="col-md-6 col-md-offset-3">
+            <h1>Calendario</h1>
+            {% taskcalendar %}
+            {% ctl_calendar %}
+        </div>
+</div>
+
+{% endblock %}

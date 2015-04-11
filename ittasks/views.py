@@ -66,13 +66,9 @@ def calendar(request, month, year):
         return HttpResponse("invalid data or error")
 
 
-class IndexView(generic.ListView):
+class IndexView(generic.TemplateView):
     # TODO: Da inserire lista attività e gestione
     template_name = 'ittasks/index.html'
-    context_object_name = 'objects_list'
-
-    def get_queryset(self):
-        return Task.objects.all()
 
 
 class DetailView(generic.DetailView):

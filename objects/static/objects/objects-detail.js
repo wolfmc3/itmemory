@@ -52,4 +52,16 @@ $(function() {
         event.preventDefault()
 
     });
+    var url = document.location.toString();
+    if (url.match('#')) {
+        $('.nav-tabs a[href=#'+url.split('#')[1]+']').tab('show') ;
+    } else {
+        $('.nav-tabs a[href=#panel_password]').tab('show') ;
+    }
+
+    // Change hash for page-reload
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        window.location.hash = e.target.hash;
+        window.scrollTo(0, 0)
+    })
 })
