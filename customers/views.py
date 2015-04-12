@@ -8,6 +8,7 @@ from customers.models import Customer
 class IndexView(generic.ListView):
     template_name = 'customers/index.html'
     context_object_name = 'objects_list'
+    paginate_by = 15
 
     def post(self, request, *args, **kwargs):
         return self.get(self, request, *args, **kwargs)

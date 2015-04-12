@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load itmemory_tags %}
+
+{% block body_contents %}
+    {% for item in results %}
+        {% ifchanged item.model %}
+        <h2>{{ item.model }}</h2>
+        {% endifchanged %}
+        <a href="{{ item.url }}">{% autoescape off %} {{ item.label }}{% endautoescape %}</a><hr />
+    {% empty %}
+        <h1>Nessun risultato</h1>
+        <script>
+        window.setTimeout(function(){history.go(-1);},1500)
+        </script>
+    {% endfor %}
+{% endblock body_contents %}

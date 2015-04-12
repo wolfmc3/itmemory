@@ -4,34 +4,55 @@
 {% load hpilo_tags %}
 
 {% block body_contents %}
+    <h2>Dashboard</h2>
 <div class="row">
-    <div class="row col-md-9">
-        <div class="round-box col-md-6">
-            <h3>Operazioni da fare</h3>
-            {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
-        </div>
-        <div class="round-box col-md-6">
-            <h3>Operazioni assegnate a te</h3>
-            {% include "ittasks/tasklist.html" with tasks_toread=usertasks %}
-        </div>
+    <div class="row col-md-12">
+    <div class="row">
+        {% iloerrors %}
     </div>
-    <div class="row col-md-3">
-        <div class="round-box col-md-12">
-            <h3>Errori hardware</h3>
-            {% iloerrors %}
-        </div>
-        <div class="round-box col-md-12">
-            <h3>Ultimi report</h3>
-            {% include "ittasks/tasklist.html" with tasks_toread=recentclosedtasks %}
-        </div>
+    <div class="row">
         {% for stat in stats %}
-        <div class="round-box col-md-6">
-            <div class="alert alert-info text-center" role="alert" style="min-height: 120px">
-            <h1>{% css_icon stat.icon %} {{ stat.value}}</h1>
-            <p>{{ stat.label }}</p>
+            <div class="col-lg-3 col-md-6">
+                <div class="panel panel-{{ stat.color }}">
+                    <div class="panel-heading">
+                        <div class="row">
+                            <div class="col-xs-3">
+                                <span class="fa-3x">{% css_icon stat.icon %}</span>
+                            </div>
+                            <div class="col-xs-9 text-right">
+                                <div class="huge">{{ stat.value}}</div>
+                            </div>
+                            <div class="col-xs-12">
+                                <div>{{ stat.label }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+        <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Operazioni da fare</div>
+                <div class="panel-body">
+                    {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
+                </div>
+        </div>
+        </div>
+        <div class="col-md-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">Operazioni assegnate a te</div>
+                <div class="panel-body">
+                    {% include "ittasks/tasklist.html" with tasks_toread=usertasks %}
+                    </div>
+
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-heading">Ultimi report</div>
+            <div class="panel-body">
+            {% include "ittasks/tasklist.html" with tasks_toread=recentclosedtasks %}
             </div>
         </div>
-        {% endfor %}
         <div class="round-box col-md-12">
             <h3>Calendario</h3>
             {% taskcalendar %}

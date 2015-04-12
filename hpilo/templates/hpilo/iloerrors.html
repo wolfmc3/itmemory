@@ -3,20 +3,28 @@
 {% load humanize %}
 
 {% for obj in objs %}
-    <div style="margin-left: 10px">
-    <h6>{{ obj.notifygroup }}</h6>
     {% for stat in obj.subset %}
-        {% ifchanged stat %}
-            <h5>{% css_icon "warning-sign" %} <a href="{%  url "objects:detail" stat.hardwareobject.id %}">{{ stat.hardwareobject.name }}</a>&nbsp;<small>{{ stat.time|naturaltime }}</small></h5>
-        {% endifchanged %}
-        <div style="margin-left: 20px">
-        {% for err in stat.not_ok %}
-            {% iloled err.label err.value %}
-        {% endfor %}
-        <p>&nbsp;</p>
+        <div class="col-lg-4">
+            <div class="panel panel-red">
+                <div class="panel-heading">
+                    {% css_icon "warning-sign" %} {{ obj.notifygroup }}
+                </div>
+                <div class="panel-body">
+                    <p>
+                    {{ stat.hardwareobject.name }}
+                    {% for err in stat.not_ok %}
+                        {% iloled err.label err.value %}
+                    {% endfor %}
+                    <small class="pull-right text-muted">
+                        <i class="fa fa-clock-o fa-fw"></i>
+                        {{ stat.time|naturaltime }}
+                    </small>
+                    </p>
+                </div>
+                <div class="panel-footer">
+                    <a href="{%  url "objects:detail" stat.hardwareobject.id %}">Dettagli...</a>
+                </div>
+            </div>
         </div>
-    {% empty %}
-        <h5>Tutto regolare</h5>
     {% endfor %}
-    </div>
 {% endfor %}

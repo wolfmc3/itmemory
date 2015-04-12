@@ -4,11 +4,11 @@
         <div>
             <ul class="nav nav-pills" role="tablist">
                 <li role="presentation" class="{% if active_filter == -1 %}active{% endif %}">
-                    <a class="btn" href=".">Tutti</a>
+                    <a class="btn" href=".#panel_logs">Tutti</a>
                 </li>
                 {% for slog in group_logs %}
                 <li role="presentation" class="{% if slog.active %}active{% endif %}">
-                    <a class="btn" href="?filter_log={{ slog.id }}">{{ slog.name }} <span class="badge">{{ slog.count }}</span></a>
+                    <a class="btn" href="?filter_log={{ slog.id }}#panel_logs">{{ slog.name }} <span class="badge">{{ slog.count }}</span></a>
                 </li>
                 {% endfor %}
             </ul>

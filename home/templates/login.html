@@ -1,15 +1,24 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+{% load staticfiles %}
 
 {% block title %}Login{% endblock %}
 
 {% block toggle_login %}{% endblock %}
 
+{% block custom_page_scripts %}
+{{ block.super }}
+        <link href="{%  static 'css/login.css' %}" rel="stylesheet">
+
+{% endblock custom_page_scripts %}
+
 {% block body_contents %}
-<form action="{% url 'mysite_login' %}" method="post" accept-charset="utf-8">
-{{ form|crispy }}
-{% csrf_token %}
-<input type="hidden" name="next" value="{{ next }}"/>
-<input class="btn btn-default" type="submit" value="Login"/>
-</form>
+    <div class="col-lg-offset-4 col-lg-4 back-notransp">
+        <form action="{% url 'mysite_login' %}" method="post" accept-charset="utf-8">
+        {{ form|crispy }}
+        {% csrf_token %}
+        <input type="hidden" name="next" value="{{ next }}"/>
+        <input class="btn btn-info pull-right" type="submit" value="Login"/>
+        </form>
+    </div>
 {% endblock %}

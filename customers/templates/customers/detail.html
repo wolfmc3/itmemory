@@ -1,95 +1,106 @@
 {% extends 'objects/index.html' %}
 {% load itmemory_tags %}
+{% load sbadmin_tags %}
 {% block title %}{{ obj.name }}{% endblock title %}
 {% block body_contents %}
 <div class="row">
-    <div class="row col-lg-12">
-        <div class="col-lg-8 round-box">
-            <div class="col-lg-12 round-box">
-                <h3>
-                    {{ obj.name }}
-                    <a target="_blank" class="btn btn-info btn-xs pull-right" href="{% url 'admin:customers_worksite_add'  %}?customer={{ obj.id }}">
+    <div class="row">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                {% fa_icon "info-circle" %} {{ obj.name }}
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-md-8">
+                        <p><strong>Indirizzo:</strong> {{ obj.address }}</p>
+                        <p><strong>Città:</strong> {{ obj.city }}</p>
+                        <p><strong>Telefono:</strong> {{ obj.telephone }}</p>
+                        <p><strong>Persona di riferimento:</strong> {{ obj.reference_person }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="panel-footer">
+                    <a target="_blank" class="btn btn-info btn-xs" href="{% url 'admin:customers_worksite_add'  %}?customer={{ obj.id }}">
                         {% css_icon "plus" %} Aggiungi sede
                     </a>
-
-                    <a class="btn btn-xs btn-info pull-right" href="{% url 'admin:customers_customer_change' obj.id %}">
+                    <a class="btn btn-xs btn-info" href="{% url 'admin:customers_customer_change' obj.id %}">
                         {% css_icon "pencil" %} Modifica
                     </a>
-                </h3>
-
-                <p><strong>Indirizzo:</strong> {{ obj.address }}</p>
-
-                <p><strong>Città:</strong> {{ obj.city }}</p>
-
-                <p><strong>Telefono:</strong> {{ obj.telephone }}</p>
-
-                <p><strong>Persona di riferimento:</strong> {{ obj.reference_person }}</p>
             </div>
-            {% for branch in obj.Worksites.all %}
-            <div class="col-lg-offset-1 col-lg-11 round-box">
-                <h4>
-                    <a name="worksite{{ branch.id }}" id="anchor_worksite{{ branch.id }}"></a>{{ branch.name }}
+        </div>
+    </div>
+    <div class="row">
+        {% for branch in obj.Worksites.all %}
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    {% css_icon "home" %} <a name="worksite{{ branch.id }}" id="anchor_worksite{{ branch.id }}"></a>{{ branch.name }}
                     <a target="_blank" class="btn btn-info btn-xs pull-right" href="{% url 'admin:objects_hardwareobject_add'  %}?worksite={{ branch.id }}">
                         {% css_icon "plus" %} Aggiungi dispositivo
                     </a>
-                </h4>
-
-                <div class="col-lg-6">
-                    <p><strong>Indirizzo:</strong> {{ branch.address }}</p>
-
-                    <p><strong>Città:</strong> {{ branch.city }}</p>
-
-                    <p><strong>Telefono:</strong> {{ branch.telephone }}</p>
-
-                    <p><strong>Persona di riferimento:</strong> {{ branch.reference_person }}</p>
                 </div>
-                <div class="col-lg-6">
-                    <table class="table">
-                        {% for hwobj in branch.hardwareobjects.all %}
-                        <tr>
-                            <td>
-                                {% css_icon "hdd" %}
-                                <a title="{{ hwobj.location }}"
-                                   href="{% url 'objects:detail' hwobj.id %}" >
-                                    {{ hwobj.name }}
-                                </a>
-                            </td>
-                            <td>
-                                {{ hwobj.serial }}
-                            </td>
-                        </tr>
-                        {% empty %}
-                        <tr>
-                            <td colspan="2">
-                                Nessun hardware
-                            </td>
-                        </tr>
-                        {% endfor %}
-                    </table>
+                <div class="panel-body">
+                    <div class="col-lg-6">
+                        <p><strong>Indirizzo:</strong> {{ branch.address }}</p>
+                        <p><strong>Città:</strong> {{ branch.city }}</p>
+                        <p><strong>Telefono:</strong> {{ branch.telephone }}</p>
+                        <p><strong>Persona di riferimento:</strong> {{ branch.reference_person }}</p>
+                    </div>
+                    <div class="col-lg-6">
+                        <table class="table">
+                            {% for hwobj in branch.hardwareobjects.all %}
+                            <tr>
+                                <td>
+                                    {% css_icon "hdd" %}
+                                    <a title="{{ hwobj.location }}"
+                                       href="{% url 'objects:detail' hwobj.id %}" >
+                                        {{ hwobj.name }}
+                                    </a>
+                                </td>
+                                <td>
+                                    {{ hwobj.serial }}
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="2">
+                                    Nessun hardware
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </table>
+                    </div>
                 </div>
             </div>
-            {% endfor %}
-        </div>
-        <div class="col-lg-4 round-box">
-            <h3>Attivit&agrave;</h3>
-
-            <p>
-                <h5>Da eseguire</h5>
-                {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
-                <hr/>
-                <h5>Eseguite</h5>
-                {% include "ittasks/tasklist.html" with tasks_toread=closedtasks %}
-
-            </p>
-        </div>
-
+        {% endfor %}
     </div>
-    <script>
-        var url = document.location.href;
-        var hash = url.substring(url.indexOf("#")+1);
-        var obj = $("#anchor_"+ hash )
-        if (obj) {
-            obj.parent().prepend('{% css_icon "arrow-right"|escape %}')
-        }
-    </script>
-    {% endblock body_contents %}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Attivit&agrave; da eseguire
+                </div>
+                <div class="panel-body">
+                    {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    Storico attivit&agrave;
+                </div>
+                <div class="panel-body">
+                    {% include "ittasks/tasklist.html" with tasks_toread=closedtasks %}
+                </div>
+            </div>
+        </div>
+    </div>
+<script>
+    var url = document.location.href;
+    var hash = url.substring(url.indexOf("#")+1);
+    var obj = $("#anchor_"+ hash )
+    if (obj) {
+        obj.parent().prepend('{% css_icon "arrow-right"|escape %}')
+    }
+</script>
+{% endblock body_contents %}

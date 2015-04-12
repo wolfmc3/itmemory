@@ -1,36 +1,41 @@
 {% extends 'base.html' %}
 {% load staticfiles %}
+{% load itmemory_tags %}
 {% block title %}Lista Clienti{% endblock title %}
 {% block body_contents %}
 
 <div class="row">
-    <div class="col-md-12 text-center round-box bg-info">
-        <form action="" method="post" class="form-inline">
-            {% csrf_token %}
-            <div class="form-group">
-                <label class="sr-only" for="cust_name">Cliente</label>
-                <input placeholder="Cliente o sede"
-                       class="form-control" id="cust_name"
-                       type="text" name="cust_name"
-                       value="{{ request.POST.cust_name }}"/>
-                <label class="sr-only" for="obj_name">Nome prodotto</label>
-                <input placeholder="Oggetto"
-                       class="form-control" id="obj_name"
-                       type="text" name="obj_name"
-                       value="{{ request.POST.obj_name }}"/>
-                <label class="sr-only" for="obj_serial">Seriale</label>
-                <input placeholder="Seriale" class="form-control"
-                       type="text" id="obj_serial"
-                       name="obj_serial"
-                       value="{{ request.POST.obj_serial }}" />
+    <div class="col-md-12 text-center">
+        <div class="panel panel-info">
+            <div class="panel-heading">
+                <form action="" method="post" class="form-inline">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label class="sr-only" for="cust_name">Cliente</label>
+                        <input placeholder="Cliente o sede"
+                               class="form-control" id="cust_name"
+                               type="text" name="cust_name"
+                               value="{{ request.POST.cust_name }}"/>
+                        <label class="sr-only" for="obj_name">Nome prodotto</label>
+                        <input placeholder="Oggetto"
+                               class="form-control" id="obj_name"
+                               type="text" name="obj_name"
+                               value="{{ request.POST.obj_name }}"/>
+                        <label class="sr-only" for="obj_serial">Seriale</label>
+                        <input placeholder="Seriale" class="form-control"
+                               type="text" id="obj_serial"
+                               name="obj_serial"
+                               value="{{ request.POST.obj_serial }}" />
+                    </div>
+                    <div class="form-group">
+                        <input class="btn btn-success" type="submit" value="Cerca">
+                    </div>
+                    <div class="form-group">
+                        <a class="btn btn-default btn-xs pull-right" href="{% url 'customers:import' %}">Importa da magonet..</a>
+                    </div>
+                </form>
             </div>
-            <div class="form-group">
-                <input class="btn btn-success" type="submit" value="Cerca">
-            </div>
-            <div class="form-group">
-                <a class="btn btn-default btn-xs pull-right" href="{% url 'customers:import' %}">Importa da magonet..</a>
-            </div>
-        </form>
+        </div>
     </div>
 </div>
 
@@ -42,9 +47,9 @@
         <td scope="row">
             <a class="btn btn-default" href="{% url 'customers:detail' obj.id %}" role="button">Apri</a>
         </td>
-        <td>{{ obj.name }}</td>
-        <td>{{ obj.telephone }}</td>
-        <td>{{ obj.email }}</td>
+        <td>{{ obj.name }}&nbsp;</td>
+        <td>{{ obj.telephone }}&nbsp;</td>
+        <td>{{ obj.email }}&nbsp;</td>
     </tr>
     {% empty %}
     <tr>
@@ -53,6 +58,25 @@
         </td>
     </tr>
     {% endfor %}
+                    <tr>
+                <td colspan="5" class="text-right">
+                    {% if is_paginated %}
+        <ul class="pagination pagination-centered">
+            {% if page_obj.has_previous %}
+                <li><a href="?page={{ page_obj.previous_page_number }}">{% css_icon "chevron-left" %}</a></li>
+            {% endif %}
+
+            {% for i in paginator.page_range %}
+                <li {% if page_obj.number == i %} class="active" {% endif %}><a href="?page={{i}}">{{i}}</a></li>
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+                <li><a href="?page={{ page_obj.next_page_number }}">{% css_icon "chevron-right" %}</a></li>
+            {% endif %}
+        </ul>
+    {% endif %}
+                </td>
+            </tr>
         </tbody>
     </table>
 </div>

@@ -30,7 +30,6 @@ class CustomerBase(models.Model):
         return self.name
 
 
-
 class Customer(CustomerBase):
     class Meta():
         verbose_name = "Cliente"

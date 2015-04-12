@@ -68,3 +68,11 @@ def taskcalendar(month=None, year=None):
         'start_day': start_day - timedelta(days=1),
         'end_day': end_day + timedelta(days=1)
     }
+
+
+@register.inclusion_tag("personal_task.html", takes_context=True)
+def personal_tasks(context):
+    user = context['user']
+    tasks = user.assigned_tasks.filter(done=False).order_by("laststart")
+    return {"user_tasks": tasks}
+

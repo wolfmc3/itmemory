@@ -2,10 +2,11 @@
 {% load staticfiles %}
 {% load objects_tags %}
 {% load itmemory_tags %}
+{% load sbadmin_tags %}
 {% load hpilo_tags %}
 {% block title %}{{ obj.name }} sn. {{ obj.serial }} {% endblock title %}
 {% block custom_page_scripts %}
-<script src="{% static '/static/objects/objects-detail.js' %}"></script>
+<script src="{% static 'objects/objects-detail.js' %}" defer></script>
 <script>
     pwd_req_url = '{% url 'objects:getpassword' 0 %}'
     csrfmiddlewaretoken = '{{ csrf_token }}'
@@ -13,104 +14,34 @@
 {% endblock custom_page_scripts %}
 
 {% block body_contents %}
-<div class="row">
-    <div class="row col-lg-8">
-        {% regroup obj.softwarepasswords.all by settingtype.group as group_list %}
-        {% for groupitem in group_list %}
-        <div class="col-lg-6 round-box password-box">
-            <h4>{% css_icon "lock" %} {{ groupitem.grouper }}
-                <a class="ajax_get btn btn-xs btn-primary pull-right"
-                   href="{% url 'objects:addpassword' obj.id %}?grp={{ groupitem.grouper.firstsetting.id }}">
-                    {% css_icon "plus" %}
-                </a>
-            </h4>
-            {% regroup groupitem.list by settingtype as type_list %}
-            {% for setitem in type_list %}
-            <h5>
-                {{ setitem.grouper.name }}
-                <a class="pull-right ajax_get"
-                   href="{% url 'objects:addpassword' obj.id %}?grp={{ setitem.grouper.id }}">
-                    {% css_icon "plus-sign" %}
-                </a>
-
-            </h5>
-            {% for val in setitem.list %}
-            <p>
-                <a href="{% url 'objects:password' obj.id val.id %}" class="btn btn-xs ajax_get">
-                    {% css_icon "pencil" %}</a>
-                {% if val.url %}
-                <a href="{{ val.url }}" target="_blank">{% css_icon "link" %}</a>
-                {% endif %}
-                <strong>{{ val.username }}</strong>&nbsp;&nbsp;&nbsp;
-                <button type="button" data-target="pwd-{{ val.id }}" data-id="{{ val.id }}"
-                        class="btn btn-warning btn-xs btn-password pull-right">
-                    {% css_icon 'eye-close' %} Vedi password
-                </button>
-            <div class="input-group input-sm" style="display:none;">
-                <div class="input-group-addon"><a class="copyclipboard" href="#">{% css_icon "paperclip" %}</a></div>
-                <input class="form-control " type="text" data-viewtimeout="15" value="" id="pwd-{{ val.id }}"
-                       readonly="1">
-
-                <div class="input-group-addon">...</div>
-            </div>
-
-            </p>
-            {% endfor %}
-            {% endfor %}
-        </div>
-        {% endfor %}
-        {% regroup obj.settings.all by type.group as setting_list %}
-        {% for setitem in setting_list %}
-        <div class="col-lg-6 round-box setting-box">
-            <h4>{% css_icon "cog" %} {{ setitem.grouper }}
-                <a class="ajax_get btn btn-xs btn-primary pull-right"
-                      href="{% url 'objects:addsetting' obj.id %}?grp={{ setitem.grouper.firstsetting.id }}">
-                    {% css_icon "plus" %}</a></h4>
-            {% for val in setitem.list %}
-            <div class="col-lg-12" style="border-bottom: 1px solid #DDDDDD">
-                <div class="col-lg-1">
-                    <a href="{% url 'objects:setting' obj.id val.id %}"
-                      class="btn btn-xs ajax_get">
-                    {% css_icon "pencil" %}
-                    </a>&nbsp;
-                </div>
-                <div class="col-lg-4">
-                    <strong>{{ val.type.name }}</strong>
-                </div>
-                <div class="col-lg-6">
-                    {{ val.value|linebreaksbr }}
-                </div>
-            </div>
-            {% endfor %}
-        </div>
-        {% endfor %}
-        <div class="col-lg-12 round-box info-box">
-            <h4>{% css_icon "list" %} System Log</h4>
-            <div class="col-lg-12">
-            {% hwlogs obj 25 %}
-            </div>
-        </div>
+    <div class="row">
+        {% iloerrors obj.id %}
     </div>
-
-    <div class="row col-lg-4 round-box">
-        <div class="col-lg-12 round-box coll_box">
-            <h4>
-                {{ obj.name }}
-                <a class="btn btn-xs btn-primary pull-right" href="{% url 'admin:objects_hardwareobject_change' obj.id %}">
-                    {% css_icon "pencil" %}
-                </a>
-            </h4>
-
-            <div>
-                {% if obj.image %}
-                <p class="text-center">
-                <img style="max-height: 150px;" src="{{ obj.image.url }}" alt="{{ obj.name }}" class="img-thumbnail">
-                </p>
-                {% endif %}
+    {% if obj.parentobject %}
+    <div class="row">
+        {% iloerrors obj.parentobject.id %}
+    </div>
+    {% endif %}
+    <div class="row">
+    <div class="panel panel-hover panel-info">
+        <div class="panel-heading">
+            {% fa_icon "info-circle" %} {{ obj.name }}
+        </div>
+        <div class="panel-body">
+            {% if obj.image %}
+                <div class="col-md-3">
+                    <p class="text-center">
+                    <img style="max-height: 150px;" src="{{ obj.image.url }}" alt="{{ obj.name }}"
+                         class="img-thumbnail">
+                    </p>
+                </div>
+            {% endif %}
+            <div class="col-md-3">
                 <p>
-                    <strong>S/N:</strong> {{ obj.serial }}<br />
-                    <strong>P/N:</strong> {{ obj.item }}<br />
+                    <strong>Seriale</strong>: {{ obj.serial }}<br />
+                    <strong>Part:</strong> {{ obj.item }}<br />
                     <strong>IP:</strong> {{ obj.primary_ip }}<br />
+                    <strong>Ubicazione</strong>: {{ obj.location }}<br/>
                     {% if obj.parentobject %}
                     <strong>Dipende da:</strong>
                     <a href="{% url 'objects:detail' obj.parentobject.id %}">
@@ -118,52 +49,23 @@
                     </a>
                     {% endif %}
                 </p>
-
-                <p>
-                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addsetting' obj.id %}">
-                        {% css_icon "cog" %} Aggiungi impostazione
-                    </a><br/>
-                </p>
-
-                <p>
-                    <a class="btn btn-success btn-xs ajax_get" href="{% url 'objects:addpassword' obj.id %}">
-                        {% css_icon "lock" %} Aggiungi password
-                    </a>
-                </p>
             </div>
-        </div>
-        <div class="col-lg-12 round-box coll_box">
-            <h4>Hardware Status <img class="pull-right" style="height: 22px;" src="{% static "hplogo.png" %}"></h4>
-            <div>
-                {% ilostatus obj %}
-                <a class="btn btn-xs btn-primary" href="{{ obj.get_upload_url }}">
-                    Upload manuale...
-                </a>
-                <a class="btn btn-xs btn-primary" href="{% url 'hpilo:createpack' obj.id %}">
-                    Crea pacchetto monitoraggio...
-                </a>
-                <br />&nbsp;
+            <div class="col-md-3">
+                <address>
+                    <strong>
+                        <a href="{% url 'customers:detail' obj.worksite.customer.id %}#worksite{{ obj.worksite.id }} ">
+                        {{ obj.worksite.customer.name }}
+                        </a>
+                    </strong><br/>
+                    {{ obj.worksite.fulltext|linebreaksbr }}
+                </address>
             </div>
-        </div>
-        <div class="col-lg-12 round-box coll_box">
-            <h4>{{ obj.worksite.customer.name }}
-                <a class="btn btn-xs btn-primary pull-right"
-                   href="{% url 'customers:detail' obj.worksite.customer.id %}#worksite{{ obj.worksite.id }} ">
-                    {% css_icon 'search' %}
-                </a>
-
-
-
-            </h4>
-
-            <p>
-                {{ obj.worksite.fulltext|linebreaksbr }}
-                {{ obj.location }}
-            <table class="table">
+            <div class="col-md-3">
+                <table class="table">
                 {% for hwobj in obj.worksite.hardwareobjects.all %}
-            <tr class='{% ifequal obj.id hwobj.id %}success{% endifequal %}'>
+                <tr class='{% ifequal obj.id hwobj.id %}success{% endifequal %}'>
                     <td>
-                        {% css_icon "hdd" %}<a title="{{ hwobj.location }}"
+                        {% css_icon "hdd" %} <a title="{{ hwobj.location }}"
                                                href="{% url 'objects:detail' hwobj.id %}">{{ hwobj.name }}</a>
                     </td>
                     <td>
@@ -177,25 +79,172 @@
                     </td>
                 </tr>
                 {% endfor %}
-            </table>
-
-            </p>
-        </div>
-
-        <div class="col-lg-12 round-box">
-            <h4>Attività</h4>
-
-            <div class="" style="min-height:450px;">
-                {% toactivatetask obj %}
-                <h4 class="well well-sm">Da eseguire</h4>
-                {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
-
-                <h4 class="well well-sm">Eseguite</h4>
-                {% include "ittasks/tasklist.html" with tasks_toread=closedtasks %}
+                </table>
             </div>
         </div>
+    <div class="panel-footer">
+                    <a style="color:#ffffff" class="btn btn-success btn-xs ajax_get " href="{% url 'objects:addsetting' obj.id %}">
+                        {% css_icon "cog" %} Aggiungi impostazione
+                    </a>
+                    <a style="color:#ffffff" class="btn btn-success btn-xs ajax_get " href="{% url 'objects:addpassword' obj.id %}">
+                        {% css_icon "lock" %} Aggiungi password
+                    </a>
+                    <a style="color:#ffffff" class="btn btn-xs btn-primary " href="{% url 'admin:objects_hardwareobject_change' obj.id %}">
+                        {% css_icon "pencil" %} Modifica dati
+                    </a>
     </div>
+    </div>
+</div>
 
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li><a href="#panel_password" data-toggle="tab" aria-expanded="true">Password</a></li>
+        <li><a href="#panel_settings" data-toggle="tab" aria-expanded="false">Impostazioni</a></li>
+        <li><a href="#panel_activity" data-toggle="tab" aria-expanded="false">Attività</a></li>
+        <li><a href="#panel_logs" data-toggle="tab" aria-expanded="false">Eventi e log</a></li>
+        <li><a href="#panel_hardware" data-toggle="tab" aria-expanded="false">Hardware</a></li>
+    </ul>
+    <div class="tab-content" style="margin-top: 15px;">
+        <div class="tab-pane fade" id="panel_password">
+        <div class="row">
+            {% regroup obj.softwarepasswords.all by settingtype.group as group_list %}
+            {% for groupitem in group_list %}
+
+                <div class="col-md-4">
+                    <div class="panel panel-red">
+                        <div class="panel-heading">
+                                {% css_icon "lock" %} {{ groupitem.grouper }}
+                                <a class="ajax_get btn btn-xs btn-primary pull-right"
+                                href="{% url 'objects:addpassword' obj.id %}?grp={{ groupitem.grouper.firstsetting.id }}">
+                                    {% css_icon "plus" %}
+                                </a>
+                        </div>
+                        <div class="panel-body">
+                            {% regroup groupitem.list by settingtype as type_list %}
+                            {% for setitem in type_list %}
+                                <h5>
+                                    {{ setitem.grouper.name }}
+                                    <a class="pull-right ajax_get"
+                                       href="{% url 'objects:addpassword' obj.id %}?grp={{ setitem.grouper.id }}">
+                                        {% css_icon "plus-sign" %}
+                                    </a>
+                                </h5>
+                                {% for val in setitem.list %}
+                                <div>
+                                    <a href="{% url 'objects:password' obj.id val.id %}" class="btn btn-xs ajax_get">
+                                        {% css_icon "pencil" %}</a>
+                                    {% if val.url %}
+                                    <a href="{{ val.url }}" target="_blank">{% css_icon "link" %}</a>
+                                    {% endif %}
+                                    <strong>{{ val.username }}</strong>&nbsp;&nbsp;&nbsp;
+                                    <button type="button" data-target="pwd-{{ val.id }}" data-id="{{ val.id }}"
+                                            class="btn btn-warning btn-xs btn-password pull-right">
+                                        {% css_icon 'eye-close' %} Vedi password
+                                    </button>
+                                    <div class="input-group input-sm" style="display:none;">
+                                        <div class="input-group-addon">
+                                            <a class="copyclipboard" href="#">
+                                                {% css_icon "paperclip" %}
+                                            </a>
+                                        </div>
+                                        <input class="form-control " style="font-family: monospace" type="text" data-viewtimeout="15" value="" id="pwd-{{ val.id }}"
+                                               readonly="1">
+                                        <div class="input-group-addon">...</div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+        </div>
+
+
+        <div class="tab-pane fade" id="panel_settings">
+            <div class="row">
+                {% regroup obj.settings.all by type.group as setting_list %}
+                {% for setitem in setting_list %}
+                    <div class="col-md-4">
+                        <div class="panel panel-success">
+                            <div class="panel-heading">
+
+                            {% css_icon "cog" %} {{ setitem.grouper }}
+                                <a class="ajax_get btn btn-xs btn-primary pull-right"
+                                      href="{% url 'objects:addsetting' obj.id %}?grp={{ setitem.grouper.firstsetting.id }}">
+                                    {% css_icon "plus" %}</a>
+                            </div>
+                            <div class="panel-body">
+                                {% for val in setitem.list %}
+                                <div class="col-lg-12" style="border-bottom: 1px solid #DDDDDD">
+                                    <div class="col-lg-1">
+                                        <a href="{% url 'objects:setting' obj.id val.id %}"
+                                          class="btn btn-xs ajax_get">
+                                        {% css_icon "pencil" %}
+                                        </a>&nbsp;
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <strong>{{ val.type.name }}</strong>
+                                    </div>
+                                    <div class="col-lg-6">
+                                        {{ val.value|linebreaksbr }}
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="tab-pane fade" id="panel_activity">
+                <div class="" style="min-height:450px;">
+                    {% toactivatetask obj %}
+                    <h4 class="well well-sm">Da eseguire</h4>
+                    {% include "ittasks/tasklist.html" with tasks_toread=openedtasks %}
+
+                    <h4 class="well well-sm">Eseguite</h4>
+                    {% include "ittasks/tasklist.html" with tasks_toread=closedtasks %}
+                </div>
+
+        </div>
+        <div class="tab-pane fade" id="panel_logs">
+                {% hwlogs obj 25 %}
+
+        </div>
+        <div class="tab-pane fade" id="panel_hardware">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Hardware Status <img class="pull-right" style="height: 22px;" src="{% static "hplogo.png" %}">
+                        </div>
+                        <div class="panel-body">
+                            {% ilostatus obj %}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-2">
+                    <div class="panel panel-green">
+                        <div class="panel-heading">
+                            Strumenti
+                        </div>
+                        <div class="panel-body">
+                            <a class="btn btn-xs btn-primary" href="{{ obj.get_upload_url }}">
+                            Upload manuale...
+                            </a>
+                            <a class="btn btn-xs btn-primary" href="{% url 'hpilo:createpack' obj.id %}">
+                            Crea pacchetto monitoraggio...
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
 </div>
 <!-- Modal -->
 <div class="modal fade" id="modalForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
