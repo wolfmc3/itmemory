@@ -9,10 +9,6 @@
 {% block body_id %}mysite_body{% endblock body_id %}
 {% djfrontend_jquery %}
 {% djfrontend_normalize %}
-{% block custom_page_scripts %}
-{{ block.super }}
-
-{% endblock custom_page_scripts %}
 
 {%  block links %}
     <li class="{% active_page request 'home' %}"><a class="{% active_page request 'home' %}" href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>

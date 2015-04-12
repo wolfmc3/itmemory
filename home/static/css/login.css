@@ -1,0 +1,53 @@
+
+body {
+    background-color: #000000;
+    background: url("/static/img/home_gb.jpg") no-repeat center center fixed !important;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+#page-wrapper {
+    margin: 0 !important;
+}
+
+div {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+nav {
+    background-color: transparent !important;
+    border-color: transparent !important;
+}
+
+.navbar-brand {
+    background-color: rgba(255,255,255,0.9) !important;
+    position: fixed;
+    bottom: 32px;
+    right: 32px;
+    padding: 13px !important;
+    height: auto !important;
+    border-radius: 7px;
+    box-shadow: 5px 12px 18px rgba(0, 0, 0, 0.7);
+}
+
+.navbar-brand > img {
+    margin: 0 !important;
+    padding: 0 !important;
+}
+
+.back-notransp {
+    background-color: rgba(0,0,0,0.6) !important;
+    margin: 50px;
+    padding: 25px;
+    border-radius: 7px;
+    box-shadow: -5px 12px 18px rgba(0, 0, 0, 0.7);
+}
+
+label {
+    color: #ffffff;
+}
+
+
