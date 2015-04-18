@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/1.7/ref/settings/
 import os
 from os.path import join
 
+
 BASE_DIR = os.path.dirname(os.path.dirname(__file__))
 
 
@@ -73,10 +74,6 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'itmemory.urls'
 
 WSGI_APPLICATION = 'itmemory.wsgi.application'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -186,5 +183,9 @@ LOGGING = {
 
 try:
     from settings_local import *
+except ImportError:
+    pass
+try:
+    from settings_ldap import *
 except ImportError:
     pass
