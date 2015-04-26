@@ -9,7 +9,10 @@
 {% block body_id %}mysite_body{% endblock body_id %}
 {% djfrontend_jquery %}
 {% djfrontend_normalize %}
-
+{% block custom_page_scripts %}
+    {{ block.super }}
+    <script src="{% static 'js/tables.js' %}" defer></script>
+{% endblock %}
 {%  block links %}
     <li class="{% active_page request 'home' %}"><a class="{% active_page request 'home' %}" href="/"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a></li>
     <li class="{% active_page request 'customers' %}"><a class="{% active_page request 'customers' %}" href="{% url 'customers:index'  %}">{% fa_icon 'group' %} Clienti</a></li>

@@ -28,7 +28,7 @@
         </div>
     </div>
 </div>
-<div class="table-responsive">
+<div >
     <table class="table table-condensed">
         <tbody>
         {% for obj in object_list %}
@@ -36,11 +36,14 @@
             <td scope="row">
                 <a class="btn btn-default" href="{% url 'objects:detail' obj.id %}" role="button">Apri</a>
             </td>
-            <td>{{ obj.name }}</td>
-            <td>{{ obj.worksite|linebreaksbr }}</td>
-            <td>{{ obj.serial }}</td>
             <td>
-
+                <strong>{{ obj.name }}</strong>
+                <small class="visible-xs-block visible-sm-block">{{ obj.serial }}</small>
+                <small class="visible-xs-block">{{ obj.worksite|linebreaksbr }}</small>
+            </td>
+            <td class="hidden-xs">{{ obj.worksite|linebreaksbr }}</td>
+            <td class="hidden-xs hidden-sm">{{ obj.serial }}</td>
+            <td  class="hidden-xs hidden-sm">
                 {% if obj.tasks.count %}{% css_icon 'calendar' %}{{ obj.tasks.count }}
                 {% if obj.taskstodo.count %}
                 <span class="label label-danger">{% css_icon 'fire' %}{{ obj.taskstodo.count }}</span>

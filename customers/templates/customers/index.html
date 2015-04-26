@@ -47,9 +47,13 @@
         <td scope="row">
             <a class="btn btn-default" href="{% url 'customers:detail' obj.id %}" role="button">Apri</a>
         </td>
-        <td>{{ obj.name }}&nbsp;</td>
-        <td>{{ obj.telephone }}&nbsp;</td>
-        <td>{{ obj.email }}&nbsp;</td>
+        <td>
+            <strong>{{ obj.name }}</strong>
+            <small class="visible-xs-block visible-sm-block">{{ obj.telephone }}</small>
+            <small class="visible-xs-block">{{ obj.email }}</small>
+        </td>
+        <td class="hidden-xs hidden-sm">{{ obj.telephone }}</td>
+        <td class="hidden-xs">{{ obj.email }}</td>
     </tr>
     {% empty %}
     <tr>
