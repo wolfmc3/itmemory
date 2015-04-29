@@ -33,9 +33,9 @@ ALLOWED_HOSTS = ['*']
 # Application definition
 
 INSTALLED_APPS = (
-    'admin_tools',
-    'grappelli.dashboard',
-    'grappelli',
+    # 'admin_tools',
+    # 'grappelli.dashboard',
+    # 'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -111,13 +111,20 @@ STATIC_ROOT = os.path.join(BASE_DIR, "static")
 TEMPLATE_CONTEXT_PROCESSORS = (
     "django.core.context_processors.request",
     "django.contrib.auth.context_processors.auth",
-    "django.core.context_processors.tz"
+    "django.core.context_processors.tz",
 )
+
 
 TEMPLATE_DIRS = [os.path.join(BASE_DIR, 'templates')]
 # STATICFILES_DIRS = (
 #    os.path.join(BASE_DIR, "static"),
 #)
+
+TEMPLATE_LOADERS = (
+    'apptemplates.Loader',
+    'django.template.loaders.filesystem.Loader',
+    'django.template.loaders.app_directories.Loader',
+)
 
 DJFRONTEND_STATIC_URL = '/static/'
 
@@ -129,8 +136,8 @@ LOGIN_REDIRECT_URL = '/'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap3'
 
-GRAPPELLI_INDEX_DASHBOARD = 'custom_dashboard.CustomIndexDashboard'
-GRAPPELLI_ADMIN_TITLE = "It Memory Administration"
+#GRAPPELLI_INDEX_DASHBOARD = 'custom_dashboard.CustomIndexDashboard'
+#GRAPPELLI_ADMIN_TITLE = "It Memory Administration"
 
 #MAGONET IMPORTER
 

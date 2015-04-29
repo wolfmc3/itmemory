@@ -1,27 +1,19 @@
-body {
-    padding-top: 70px;
-}
-.navbar {
-    background-color: #efefef;
-}
-
-.alert > h1 {
-    font-size: 40px;
-    margin: 0px;
-}
-
-.bg-primary, .bg-warning, .bg-info, .bg-danger {
-    margin-right: 10px;
-    padding: 10px;
-    border-radius: 5px;
-}
 
 pre {
     margin-right: 11px;
 }
 
+.day {
+    padding: 6px;
+}
+
+.info {
+    font-size: 10px;
+}
+
 .calendar_day {
     vertical-align: top;
+    padding: 0px !important;
 }
 
 .calendar_now {
@@ -32,15 +24,13 @@ pre {
     opacity: 0.3;
 }
 
-.calendar_day > h1 {
-    font-size: 30px;
+.calendar_day > .day {
+    text-align: center;
+    font-size: 15px;
     margin: 0px;
-    padding: 0px;
-    opacity: 0.6;
-    float: left;
 }
 
-.calendar_day > div {
+.calendar_day > .info {
     height: 80px;
     float: right;
     margin-right: 7px;
@@ -49,57 +39,36 @@ pre {
     overflow: auto;
 }
 
+.cal_w_task {
+    position: absolute;
+    font-size: 0px; line-height: 0%; width: 0px;
+    border-top: 10px solid #FFBF00;
+    border-right: 10px solid transparent;
+}
+
+.cal_w_p_task {
+    position: absolute;
+    font-size: 0px; line-height: 0%; width: 0px;
+    border-top: 10px solid #007fff;
+    border-right: 10px solid transparent;
+}
+
+
 .calendar_week {
 
 }
 
-.round-box {
-
+.panel-hover > .panel-body {
+    max-height: 0;
+    transition: max-height 0.4s ease-in 1s,padding 0.4s ease-out 1s ;
+    overflow: hidden;
+    padding: 0;
 }
-
-.round-box > .input-group {
-    padding: 0 15px 0px 15px;
+.panel-hover > .panel-heading {
+    font-size: 122%;
 }
-
-.round-box > h1,
-.round-box > h2,
-.round-box > h3,
-.round-box > h4 {
-
-    margin-left: 0px;
-    margin-top: 0px;
-    padding: 5px;
-    border: 1px solid #FF890A;
-    background-color: #FF890A;
-    border-radius: 5px;
-    color: #FFFFFF
+.panel-hover > .panel-heading:hover+.panel-body, .panel-hover > .panel-body:hover {
+    max-height: 500px;
+    transition: max-height 0.5s ease-out 0.25s,padding 0.5s ease-out 0.25s ;
+    padding: 15px;
 }
-
-.round-box > h5,
-.round-box > h6 {
-    margin: 0 0 10px 10px;
-    margin-left: 0px;
-    margin-top: 0px;
-    padding: 5px;
-    border: 1px solid #FF890A;
-    border-radius: 5px;
-    font-weight: bold;
-    text-align: center;
-    color: #999999;
-}
-
-.round-box > p {
-    margin: 0 10px 0 10px;
-    padding-bottom: 10px;
-}
-
-
-
-.btnyesno {
-    list-style-type: none;
-}
-
-.btnyesno > li {
-    list-style-type: none;
-}
-
