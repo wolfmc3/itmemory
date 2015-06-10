@@ -57,8 +57,8 @@ class IndexView(generic.ListView):
     def get_context_data(self, **kwargs):
         context = super(IndexView, self).get_context_data(**kwargs)
         now = datetime.now()
-        daystart, dayend = calendar.monthrange(now.year, now.month)
-        monthstart = date(day=daystart, month=now.month, year=now.year)
+        void, dayend = calendar.monthrange(now.year, now.month)
+        monthstart = date(day=1, month=now.month, year=now.year)
         monthend = date(day=dayend, month=now.month, year=now.year)
         openedthismonth = Task.objects.filter(laststart__gte=monthstart, laststart__lte=monthend, done=False).count()
         closedthismonth = Task.objects.filter(laststart__gte=monthstart, laststart__lte=monthend, done=True).count()
